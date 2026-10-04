@@ -76,6 +76,9 @@ See `docs/segregation-of-duties.md` for workflow rules and migration phases.
 - `docs/contribution-guide.md`: role-based guide for developers and policy/budget/econ contributors
 - `docs/segregation-of-duties.md`: ownership and integration contract for policy vs engineering edits
 - `docs/beta-readiness-checklist.md`: beta test gate and smoke-test protocol
+- `docs/github-pages-deployment.md`: setup guide for zero-cost hosting on GitHub Pages
+- `index.html`: root entry point for GitHub Pages
+- `.nojekyll`: disables Jekyll processing for static asset fidelity
 - `README.md`: project overview and contributor guidance
 - `LICENSE`: licence information for the repository
 
@@ -100,6 +103,18 @@ This checks:
 - policy content keys against HTML element IDs
 
 See `docs/beta-readiness-checklist.md` for the full beta test gate.
+
+## GitHub Pages hosting
+
+The repository includes a GitHub Actions workflow for zero-cost Pages hosting.
+
+- Workflow file: `.github/workflows/deploy-pages.yml`
+- Deploy trigger: push to `dev`
+- Target URL on Sarika account: `https://sarikawarusavitarana.github.io/sl-budget-game/`
+
+Note: GitHub Pages URLs always use the repository owner name. If this repository remains under `sarikawarusavitarana-hash`, the live URL will stay under that owner.
+
+See `docs/github-pages-deployment.md` for account-specific setup and troubleshooting.
 
 ## Contributing
 

@@ -45,5 +45,5 @@ This project now separates policy content from implementation logic so that:
 
 - Phase 2: externalise all remaining policy copy (tooltips, option descriptions, result text).
 - Phase 3: add comprehensive schema validation for policy and model JSON in CI.
-- Phase 4: split into module-based front-end structure with tests.
-- Phase 5: split into module-based front-end structure with tests.
+- Phase 4: add automated regression and smoke tests for key gameplay paths.
+- Phase 5: split into a module-based front-end structure with maintainable test coverage.

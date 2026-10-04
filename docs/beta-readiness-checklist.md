@@ -5,6 +5,8 @@
 - Serve the game over HTTP(S) for beta testing (not file://), so JSON loaders can fetch content and model parameters.
 - Confirm `scripts/model-config-loader.js` and `scripts/policy-content-loader.js` load successfully in browser dev tools.
 - Confirm fallback behaviour: if either JSON file is unavailable, the game still loads with in-code defaults and inline text.
+- If using GitHub Pages, confirm the repository root URL loads and redirects to `budget_game_fixed.html`.
+- If using GitHub Pages, confirm there are no fetch failures for `content/` and `scripts/` resources.
 
 ## Content and model governance
 
@@ -42,3 +44,5 @@ Expected output:
 
 - This is still a static single-file app with inline game logic.
 - Advanced module bundling, automated UI tests, and telemetry are not yet implemented.
+
+For account-specific GitHub Pages setup and troubleshooting, see `docs/github-pages-deployment.md`.

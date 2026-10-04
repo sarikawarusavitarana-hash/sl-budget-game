@@ -74,13 +74,13 @@
 
     function getPath(value, path) {
         return path.split(".").reduce(function (current, key) {
-            return current && current[key];
+            return current?.[key];
         }, value);
     }
 
     function validateRange(config, path, includesZero) {
         const range = getPath(config, path);
-        if (!isObject(range) || !(range.min < range.max)) {
+        if (!isObject(range) || range.min >= range.max) {
             throw new Error(path + " must have min less than max");
         }
         if (includesZero && !(range.min <= 0 && range.max >= 0)) {
@@ -95,7 +95,7 @@
 
         NUMBER_PATHS.forEach(function (path) {
             if (typeof getPath(config, path) !== "number" || !Number.isFinite(getPath(config, path))) {
-                throw new Error(path + " must be a finite number");
+                throw new TypeError(path + " must be a finite number");
             }
         });
 
