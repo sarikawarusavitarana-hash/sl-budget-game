@@ -44,6 +44,6 @@ This project now separates policy content from implementation logic so that:
 ## Next migration phases
 
 - Phase 2: externalise all remaining policy copy (tooltips, option descriptions, result text).
-- Phase 3: externalise simulation assumptions and calibration values into a governed config file.
-- Phase 4: add schema validation for policy JSON in CI.
+- Phase 3: add comprehensive schema validation for policy and model JSON in CI.
+- Phase 4: split into module-based front-end structure with tests.
 - Phase 5: split into module-based front-end structure with tests.
