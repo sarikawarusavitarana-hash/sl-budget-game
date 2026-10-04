@@ -7,32 +7,72 @@
   <title>Sri Lanka Budget Game</title>
 
   <style>
+    :root {
+      --bg-canvas: #f2eee7;
+      --bg-panel: #fffdf9;
+      --bg-muted: #f4eee5;
+      --text-primary: #172033;
+      --text-muted: #3b465c;
+      --accent-ink: #152645;
+      --accent-coral: #c44f2a;
+      --accent-gold: #8b6a1f;
+      --border-soft: #d8cfc0;
+      --focus-ring: #0068d6;
+    }
+
     html {
       overflow-x: hidden;
+      scroll-behavior: smooth;
     }
 
     body {
-      font-family: Georgia, serif;
-      font-size: 14px;
-      background: #fff7ef;
+      font-family: "Avenir Next", "Segoe UI Variable Text", "Segoe UI", "Helvetica Neue", sans-serif;
+      font-size: 16px;
+      color: var(--text-primary);
+      background:
+        radial-gradient(1200px 480px at 100% -10%, #e8dfd2 0%, transparent 60%),
+        radial-gradient(800px 360px at -10% 0%, #f8f3ea 0%, transparent 55%),
+        var(--bg-canvas);
       margin: 0;
       /* --header-h is measured from the real fixed header by syncHeaderSpace() in
      the script, so the gap under the header is always exact (no guessing). */
       padding-top: var(--header-h, 115px);
       overflow-x: hidden;
       max-width: 100%;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #ffffff;
+      color: var(--accent-ink);
+      border: 2px solid var(--focus-ring);
+      border-radius: 8px;
+      padding: 8px 12px;
+      transform: translateY(-200%);
+      z-index: 5000;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
     }
 
     .subtitle {
-      color: #555;
+      color: var(--text-muted);
       margin-bottom: 20px;
     }
 
     .data-note {
       font-size: 14px;
-      color: #444;
-      background: #f4f0ea;
-      border-left: 4px solid #7e57c2;
+      color: var(--text-primary);
+      background: var(--bg-muted);
+      border-left: 4px solid #385f9e;
       padding: 12px 16px;
       margin: 18px 0;
       line-height: 1.6;
@@ -43,7 +83,7 @@
       gap: 20px;
       padding: 20px;
       border-left: 6px solid;
-      background: #f4f4f4;
+      background: var(--bg-muted);
       margin-bottom: 25px;
     }
 
@@ -86,8 +126,9 @@
     #headlineBox {
       margin-top: 20px;
       padding: 20px;
-      background: #1a1a1a;
+      background: var(--accent-ink);
       color: white;
+      border-radius: 8px;
     }
 
     #headlineBox h3 {
@@ -103,7 +144,8 @@
       margin-top: 20px;
       padding: 15px;
       border-left: 6px solid #ccc;
-      background: #f4f4f4;
+      background: var(--bg-muted);
+      border-radius: 6px;
     }
 
     #imfStatus {
@@ -122,7 +164,7 @@
     }
 
     .rules-header {
-      background: #1a1a1a;
+      background: var(--accent-ink);
       color: #fff7ef;
       padding: 10px 14px;
       font-weight: bold;
@@ -144,10 +186,10 @@
 
     .rules-row-head {
       font-weight: bold;
-      font-size: 11px;
+      font-size: 12px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      color: #4b4b4b;
+      color: var(--text-muted);
       background: #faf6f0;
     }
 
@@ -171,7 +213,7 @@
 
     .rules-footnote {
       padding: 8px 14px;
-      font-size: 11px;
+      font-size: 12px;
       color: #5f5f5f;
       background: #faf6f0;
       border-top: 1px solid #eee;
@@ -232,7 +274,9 @@
       top: 0;
       left: 0;
       width: 100%;
-      background: #f5f5f5;
+      background: rgba(253, 250, 245, 0.98);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid #dfd6c7;
       padding: 5px 12px;
       z-index: 1000;
     }
@@ -271,15 +315,15 @@
       height: 11px;
       border-radius: 50%;
       background: #fff;
-      border: 2px solid #bbb;
+      border: 2px solid #7a8190;
       display: block;
       margin-bottom: 2px;
       transition: background 0.2s, border-color 0.2s;
     }
 
     .tracker-label {
-      font-size: 9px;
-      color: #999;
+      font-size: 11px;
+      color: #596179;
       white-space: nowrap;
       line-height: 1.1;
     }
@@ -287,21 +331,21 @@
     .tracker-line {
       flex: 0 0 12px;
       height: 2px;
-      background: #ccc;
+      background: #8c93a5;
       margin-top: 5px;
     }
 
     .tracker-line-dotted {
       background: none;
-      border-top: 2px dotted #ccc;
+      border-top: 2px dotted #8c93a5;
       height: 0;
       margin-top: 5px;
     }
 
     .tracker-step.completed .tracker-dot,
     .tracker-step.current .tracker-dot {
-      background: #1a1a1a;
-      border-color: #1a1a1a;
+      background: var(--accent-ink);
+      border-color: var(--accent-ink);
     }
 
     .tracker-step.current .tracker-dot {
@@ -325,7 +369,7 @@
     #fiscalDashboard {
       margin-top: 4px;
       font-family: 'Courier New', Courier, monospace;
-      background: #fff7ef;
+      background: #fffaf2;
       color: #1a1a1a;
       border: 1px solid #1a1a1a;
       border-radius: 3px;
@@ -337,11 +381,11 @@
       display: flex;
       align-items: center;
       padding: 2px 8px;
-      background: #1a1a1a;
+      background: var(--accent-ink);
       color: #fff7ef;
       border-bottom: 1px solid #1a1a1a;
       font-weight: bold;
-      font-size: 8px;
+      font-size: 9px;
       letter-spacing: 0.5px;
     }
 
@@ -379,14 +423,14 @@
     }
 
     .fiscal-label {
-      font-size: 8px;
-      color: #8a7f6e;
+      font-size: 10px;
+      color: #6f6556;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
 
     .fiscal-value {
-      font-size: 10px;
+      font-size: 12px;
       font-weight: bold;
       margin-top: 0px;
       color: #1a1a1a;
@@ -418,9 +462,11 @@
     .box {
       max-width: 900px;
       width: 100%;
-      background: white;
+      background: var(--bg-panel);
       padding: 30px 40px;
-      border-top: 6px solid black;
+      border-top: 6px solid var(--accent-ink);
+      border-radius: 0 0 12px 12px;
+      box-shadow: 0 10px 26px rgba(22, 34, 56, 0.12);
       max-height: calc(100vh - var(--header-h, 115px) - 40px);
       overflow-y: auto;
     }
@@ -428,24 +474,42 @@
     /* TEXT */
     p {
       line-height: 1.6;
+      color: var(--text-primary);
     }
 
     h2 {
-      font-size: 1.45em;
+      font-family: "Iowan Old Style", "Palatino Linotype", Palatino, serif;
+      font-size: 1.68em;
+      letter-spacing: 0.2px;
+      margin-top: 0;
+      color: #0f1b31;
     }
 
     h3 {
-      font-size: 1.1em;
+      font-family: "Iowan Old Style", "Palatino Linotype", Palatino, serif;
+      font-size: 1.2em;
+      color: #12233f;
     }
 
     /* BUTTONS */
     button {
-      padding: 10px 16px;
-      font-size: 13px;
-      background: black;
+      padding: 11px 17px;
+      font-size: 14px;
+      font-weight: 600;
+      background: var(--accent-ink);
       color: white;
-      border: none;
+      border: 1px solid var(--accent-ink);
+      border-radius: 8px;
       cursor: pointer;
+      transition: background-color 0.15s ease, transform 0.1s ease;
+    }
+
+    button:hover {
+      background: #213c66;
+    }
+
+    button:active {
+      transform: translateY(1px);
     }
 
     /* STACK QUESTION BUTTONS */
@@ -458,7 +522,7 @@
 
     .impact-tag {
       font-weight: bold;
-      color: #ffd54f;
+      color: #ffec98;
       font-size: 13px;
     }
 
@@ -473,7 +537,10 @@
 
     /* SELECTED */
     .selected {
-      background: red !important;
+      background: var(--accent-coral) !important;
+      border-color: #9f3e1f !important;
+      color: #fff !important;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
     }
 
     /* SLIDER */
@@ -485,7 +552,6 @@
       height: 8px;
       border-radius: 4px;
       background: #e0e0e0;
-      outline: none;
       cursor: pointer;
     }
 
@@ -603,7 +669,7 @@
       display: flex;
       justify-content: space-between;
       font-size: 12px;
-      color: #666;
+      color: #4c566c;
       margin-top: 26px;
       line-height: 1.4;
     }
@@ -624,9 +690,9 @@
       gap: 5px;
       padding: 4px 10px;
       border-radius: 12px;
-      background: #f4f0ea;
+      background: #ece4d8;
       border: 1px solid #d8cfc0;
-      color: #6b5f4d;
+      color: #2f3f60;
       font-size: 12px;
       font-weight: bold;
       cursor: pointer;
@@ -635,9 +701,9 @@
 
     .info-icon:hover,
     .info-icon:focus,
+    .info-icon:focus-visible,
     .info-icon.open {
-      background: #e9e1d3;
-      outline: none;
+      background: #e2d7c7;
     }
 
     .info-tooltip {
@@ -647,7 +713,7 @@
       left: 0;
       width: 320px;
       max-width: 80vw;
-      background: #1a1a1a;
+      background: var(--accent-ink);
       color: #fff7ef;
       padding: 12px 14px;
       border-radius: 6px;
@@ -670,7 +736,7 @@
       left: 16px;
       border-width: 6px;
       border-style: solid;
-      border-color: #1a1a1a transparent transparent transparent;
+      border-color: var(--accent-ink) transparent transparent transparent;
     }
 
     .info-icon:hover .info-tooltip,
@@ -732,12 +798,35 @@
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background: black;
+      background: var(--accent-ink);
       color: white;
-      padding: 12px 16px;
-      border: none;
+      padding: 12px 18px;
+      border: 1px solid var(--accent-ink);
+      border-radius: 10px;
       cursor: pointer;
       z-index: 2000;
+      box-shadow: 0 10px 20px rgba(21, 38, 69, 0.22);
+    }
+
+    .info-icon:focus-visible,
+    button:focus-visible,
+    input[type=range]:focus-visible,
+    a:focus-visible {
+      outline: 3px solid var(--focus-ring);
+      outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+      }
     }
 
     /* =======================================================================
@@ -878,6 +967,8 @@
 </head>
 
 <body>
+
+  <a class="skip-link" href="#p1">Skip to game content</a>
 
   <button id="faqButton" onclick="openFAQ()">📘 FAQ</button>
 
@@ -2715,18 +2806,39 @@
         ev.stopPropagation();
       }
       let wasOpen = el.classList.contains('open');
-      document.querySelectorAll('.info-icon.open').forEach(i => i.classList.remove('open'));
-      if (!wasOpen) el.classList.add('open');
+      document.querySelectorAll('.info-icon.open').forEach(i => {
+        i.classList.remove('open');
+        i.setAttribute('aria-expanded', 'false');
+      });
+      if (!wasOpen) {
+        el.classList.add('open');
+        el.setAttribute('aria-expanded', 'true');
+      }
     }
 
     document.addEventListener('click', function () {
-      document.querySelectorAll('.info-icon.open').forEach(i => i.classList.remove('open'));
+      document.querySelectorAll('.info-icon.open').forEach(i => {
+        i.classList.remove('open');
+        i.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.info-icon.open').forEach(i => {
+          i.classList.remove('open');
+          i.setAttribute('aria-expanded', 'false');
+        });
+      }
     });
 
     function enhanceAccessibility() {
       document.querySelectorAll('.info-icon').forEach((icon, idx) => {
-        icon.setAttribute('role', 'button');
-        icon.setAttribute('tabindex', '0');
+        if (icon.tagName !== 'BUTTON') {
+          icon.setAttribute('role', 'button');
+          icon.setAttribute('tabindex', '0');
+        }
+        icon.setAttribute('aria-expanded', 'false');
         if (!icon.getAttribute('aria-label')) {
           icon.setAttribute('aria-label', 'Open source and assumptions note ' + (idx + 1));
         }
