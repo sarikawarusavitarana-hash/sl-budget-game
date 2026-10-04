@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About the Game</title>
+  <style>
+    :root {
+      --bg: #fff7ef;
+      --text: #1a1a1a;
+      --muted: #4b4b4b;
+      --panel: #f4f0ea;
+      --line: #ddd;
+      --accent: #7e57c2;
+      --button: #111;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Georgia, serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 48px 22px 72px;
+    }
+    h1 {
+      margin: 0 0 20px;
+      font-size: 2.1em;
+      border-bottom: 3px solid #111;
+      padding-bottom: 12px;
+    }
+    h2 {
+      margin: 36px 0 14px;
+      padding-left: 14px;
+      border-left: 4px solid var(--accent);
+      font-size: 1.35em;
+    }
+    p {
+      margin: 0 0 16px;
+      text-align: justify;
+    }
+    .intro {
+      font-style: italic;
+      color: var(--muted);
+    }
+    .actions {
+      margin-top: 32px;
+      border-top: 1px solid var(--line);
+      padding-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    button, a.button-link {
+      background: var(--button);
+      color: #fff;
+      border: none;
+      padding: 12px 18px;
+      font-size: 14px;
+      cursor: pointer;
+      border-radius: 3px;
+      text-decoration: none;
+      display: inline-block;
+      font-family: inherit;
+    }
+    a.button-link {
+      background: #0c5ed9;
+    }
+    @media (max-width: 600px) {
+      .container { padding-top: 36px; }
+      p { text-align: left; }
+      h1 { font-size: 1.7em; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>About the Game</h1>
+
+    <p class="intro">
+      Almost two years ago, I had a stroke. I had to relearn reading and writing, coding, how to work with data, how government works, and how Sri Lanka’s economy and public finances fit together. I had to relearn the Budget itself, where government revenue comes from, how spending is allocated, how deficits and debt work, and how decisions in one area can affect growth, inflation, public services and people’s lives.
+    </p>
+
+    <p class="intro">
+      More broadly, I had to understand Sri Lanka again…its economy, its history and politics, its institutions, and what had changed while I was recovering.
+    </p>
+
+    <p class="intro">
+      That process led me to build this game.
+    </p>
+
+    <h2>What is the game?</h2>
+    <p>
+      The game lets you step into the role of the person making the Budget. You make choices about revenue and spending, respond to different pressures and events, and see how those choices affect the deficit, debt, growth, inflation and public services.
+    </p>
+    <p>
+      The aim is not to find one “correct” Budget. It is to understand the trade-offs.
+    </p>
+
+    <h2>How accurate is it?</h2>
+    <p>
+      This is a simulation, not a government forecast.
+    </p>
+    <p>
+      The game uses Sri Lanka’s published Budget and economic data as its starting point, including information from the Ministry of Finance, Central Bank and other public sources. But some relationships, effects and outcomes in the game are simulation assumptions. They are used to make the choices playable and to illustrate how different parts of the Budget can interact.
+    </p>
+    <p>
+      The game has changed many times as I have learned more, checked the data and challenged my own assumptions. I expect it to keep changing.
+    </p>
+
+    <h2>Why make it public?</h2>
+    <p>
+      The Budget can feel complicated and distant from everyday life. People often see the final numbers without seeing how decisions about taxes, spending, debt, investment and public services connect.
+    </p>
+    <p>
+      I wanted to create a way for people to explore those connections for themselves.
+    </p>
+    <p>
+      If someone who knows very little about public finance can play the game and come away understanding a little more about how Sri Lanka’s finances work, then it has achieved what I wanted it to do.
+    </p>
+    <p>
+      The game will continue to evolve, and feedback is part of that process.
+    </p>
+
+    <div class="actions">
+      <button type="button" onclick="window.location.href='./budget_game_fixed.html'">Back to Game</button>
+      <a class="button-link" href="./index.html">Home</a>
+    </div>
+  </div>
+</body>
+</html>
