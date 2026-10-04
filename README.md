@@ -76,8 +76,6 @@ See `docs/segregation-of-duties.md` for workflow rules and migration phases.
 - `docs/contribution-guide.md`: role-based guide for developers and policy/budget/econ contributors
 - `docs/segregation-of-duties.md`: ownership and integration contract for policy vs engineering edits
 - `docs/beta-readiness-checklist.md`: beta test gate and smoke-test protocol
-- `docs/github-pages-deployment.md`: zero-cost hosting guide for GitHub Pages on Sarika's account
-- `index.html`: repository root entry point used by GitHub Pages
 - `README.md`: project overview and contributor guidance
 - `LICENSE`: licence information for the repository
 
@@ -102,16 +100,6 @@ This checks:
 - policy content keys against HTML element IDs
 
 See `docs/beta-readiness-checklist.md` for the full beta test gate.
-
-## GitHub Pages hosting
-
-The project is prepared for zero-cost static hosting on GitHub Pages.
-
-- Expected live URL: https://sarikawarusavitarana-hash.github.io/sl-budget-game/
-- Deployment workflow: `.github/workflows/deploy-pages.yml`
-- Branch trigger: `dev`
-
-For full setup and troubleshooting steps, see `docs/github-pages-deployment.md`.
 
 ## Contributing
 
