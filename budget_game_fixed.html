@@ -794,18 +794,34 @@
       opacity: 0;
     }
 
-    #faqButton {
+    .floating-actions {
       position: fixed;
       bottom: 20px;
       right: 20px;
+      display: flex;
+      gap: 10px;
+      z-index: 2000;
+    }
+
+    .floating-action-btn {
       background: var(--accent-ink);
       color: white;
       padding: 12px 18px;
       border: 1px solid var(--accent-ink);
       border-radius: 10px;
       cursor: pointer;
-      z-index: 2000;
+      font-size: 14px;
+      font-weight: 600;
       box-shadow: 0 10px 20px rgba(21, 38, 69, 0.22);
+      transition: background-color 0.15s ease, transform 0.1s ease;
+    }
+
+    .floating-action-btn:hover {
+      background: #213c66;
+    }
+
+    .floating-action-btn:active {
+      transform: translateY(1px);
     }
 
     .info-icon:focus-visible,
@@ -970,7 +986,10 @@
 
   <a class="skip-link" href="#p1">Skip to game content</a>
 
-  <button id="faqButton" onclick="openFAQ()">📘 FAQ</button>
+  <div class="floating-actions" aria-label="Quick links">
+    <button class="floating-action-btn" id="aboutButton" type="button" onclick="openAbout()">ℹ About</button>
+    <button class="floating-action-btn" id="faqButton" type="button" onclick="openFAQ()">📘 FAQ</button>
+  </div>
 
   <!-- ✅ CORRECT BUDGET BAR (ONLY ONE VERSION) -->
   <div id="budgetBar">
@@ -2391,6 +2410,10 @@
 
     function openFAQ() {
       window.open("faq.html", "_blank");
+    }
+
+    function openAbout() {
+      window.open("about.html", "_blank");
     }
 
     /* =======================

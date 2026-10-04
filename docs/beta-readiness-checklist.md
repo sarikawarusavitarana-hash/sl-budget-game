@@ -17,6 +17,7 @@
 ## Functional checks
 
 - Intro pages, steppers, and back/next navigation work on desktop and mobile widths.
+- About and FAQ quick-link buttons open the expected pages without 404 errors.
 - Revenue, spending, deficit, debt, growth, inflation, and confidence update correctly as choices change.
 - Final results page loads and fiscal target table renders all rows.
 - No console errors during a complete playthrough.

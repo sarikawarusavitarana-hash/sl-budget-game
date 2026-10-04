@@ -15,6 +15,8 @@ This guide explains how to contribute safely and effectively, whether you are a 
 - `scripts/policy-content-loader.js`: runtime loader for policy copy.
 - `scripts/model-config-loader.js`: runtime loader for model configuration.
 - `scripts/validate-configs.js`: consistency and structure checks.
+- `about.html`: About page opened from the in-game quick-link button.
+- `faq.html`: FAQ page opened from the in-game quick-link button.
 
 ## Quick start for all contributors
 
@@ -46,6 +48,7 @@ This guide explains how to contribute safely and effectively, whether you are a 
 - No browser console errors after a full journey.
 - Sliders, steppers, and decision buttons work on desktop and mobile.
 - Final results render fiscal rules, smart cards, and summary text correctly.
+- About and FAQ quick-link buttons open the expected pages.
 - Config validation script passes.
 
 ## Guide for policy, budget, and economics contributors

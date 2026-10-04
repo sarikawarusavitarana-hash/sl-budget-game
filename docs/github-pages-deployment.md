@@ -51,8 +51,9 @@ Recommended release flow:
 
 1. Open the site root URL and verify redirect to the game page.
 2. Complete one full game playthrough.
-3. Confirm policy and model JSON files load successfully.
-4. Confirm no browser console errors.
+3. Confirm About and FAQ quick-link buttons open expected pages.
+4. Confirm policy and model JSON files load successfully.
+5. Confirm no browser console errors.
 
 ## Troubleshooting
 
