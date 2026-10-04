@@ -50,6 +50,23 @@ Revenue choices are modelled as fixed rupee adjustments, while spending choices 
 
 The source notes for the model describe it as a learning tool built from published Sri Lankan Budget and economic data, with assumptions chosen to make trade-offs visible rather than to forecast exact outcomes.
 
+## Inspiration and attribution
+
+This game is an original Sri Lanka-focused educational simulation by Sarika. It is inspired by several public-interest fiscal simulation projects.
+
+Primary inspiration:
+
+- https://ig.ft.com/chancellor-game
+
+Secondary inspirations:
+
+- https://fiscalship.org/
+- https://fiscalgame.askperi.kr/?lang=en
+- https://iwant2study.org/lookangejss/promptLibrary/ACPcookout2025/users/Budget%20Blueprint%20SG.html
+- https://ifs.org.uk/be-chancellor
+
+No endorsement or affiliation with these projects is implied.
+
 ## Segregated authoring model
 
 To support clear segregation of duties:
@@ -73,6 +90,8 @@ See `docs/segregation-of-duties.md` for workflow rules and migration phases.
 - `content/policy-content.json`: policy text managed outside the game engine
 - `content/model-config.json`: parameterized economic model and calibration values
 - `scripts/validate-configs.js`: pre-beta validation for JSON consistency
+- `about.html`: project context and methodology page linked from the game UI
+- `faq.html`: frequently asked questions page linked from the game UI
 - `docs/contribution-guide.md`: role-based guide for developers and policy/budget/econ contributors
 - `docs/segregation-of-duties.md`: ownership and integration contract for policy vs engineering edits
 - `docs/beta-readiness-checklist.md`: beta test gate and smoke-test protocol
@@ -85,7 +104,7 @@ See `docs/segregation-of-duties.md` for workflow rules and migration phases.
 ## Getting started
 
 1. Serve the folder locally with a simple static server (recommended for beta), for example `python -m http.server 8080`.
-2. Open `http://localhost:8080/budget_game_fixed.html` in a modern web browser.
+2. Open `http://localhost:8080/index.html` in a modern web browser.
 3. Play through the scenarios and use the on-screen indicators to understand the trade-offs.
 
 Note: opening directly with `file://` can block JSON loading in some browsers. The game still has fallback values, but HTTP serving is recommended for realistic testing.
