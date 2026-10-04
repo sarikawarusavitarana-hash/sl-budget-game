@@ -50,28 +50,72 @@ Revenue choices are modelled as fixed rupee adjustments, while spending choices 
 
 The source notes for the model describe it as a learning tool built from published Sri Lankan Budget and economic data, with assumptions chosen to make trade-offs visible rather than to forecast exact outcomes.
 
+## Segregated authoring model
+
+To support clear segregation of duties:
+
+- policy/economics contributors update context copy in `content/policy-content.json`
+- model/calibration contributors update assumptions in `content/model-config.json`
+- technical contributors maintain implementation in `budget_game_fixed.html` and scripts
+
+Runtime loading is handled by:
+
+- `scripts/policy-content-loader.js` for policy copy
+- `scripts/model-config-loader.js` for model/calibration parameters
+
+If either JSON file cannot be loaded, the game safely falls back to inline/default values.
+
+See `docs/segregation-of-duties.md` for workflow rules and migration phases.
+
 ## Project files
 
 - `budget_game_fixed.html`: the main playable game file
+- `content/policy-content.json`: policy text managed outside the game engine
+- `content/model-config.json`: parameterized economic model and calibration values
+- `scripts/validate-configs.js`: pre-beta validation for JSON consistency
+- `docs/contribution-guide.md`: role-based guide for developers and policy/budget/econ contributors
+- `docs/segregation-of-duties.md`: ownership and integration contract for policy vs engineering edits
+- `docs/beta-readiness-checklist.md`: beta test gate and smoke-test protocol
 - `README.md`: project overview and contributor guidance
 - `LICENSE`: licence information for the repository
 
 ## Getting started
 
-1. Open `budget_game_fixed.html` in a modern web browser.
-2. Or serve the folder locally with a simple static server if you prefer a live-reload workflow.
+1. Serve the folder locally with a simple static server (recommended for beta), for example `python -m http.server 8080`.
+2. Open `http://localhost:8080/budget_game_fixed.html` in a modern web browser.
 3. Play through the scenarios and use the on-screen indicators to understand the trade-offs.
 
-Because this is a single-file static project, no package installation is required.
+Note: opening directly with `file://` can block JSON loading in some browsers. The game still has fallback values, but HTTP serving is recommended for realistic testing.
+
+## Beta validation
+
+Before a beta test cycle, run:
+
+`node scripts/validate-configs.js`
+
+This checks:
+
+- policy JSON syntax and required fields
+- model JSON syntax and required numeric fields
+- policy content keys against HTML element IDs
+
+See `docs/beta-readiness-checklist.md` for the full beta test gate.
 
 ## Contributing
 
-If you plan to contribute changes, keep the following in mind:
+For a full contribution workflow, use `docs/contribution-guide.md`.
+
+Quick path by contributor type:
+
+- Developers: focus on `budget_game_fixed.html` and supporting scripts.
+- Policy, budget, and economics contributors: focus on `content/policy-content.json` and `content/model-config.json`.
+
+For all contributions:
 
 - preserve the educational intent of the game
-- keep policy descriptions clear, neutral, and accurate
-- avoid introducing claims that are not grounded in the game design or source material
-- test the page in a browser after editing the HTML
+- keep policy language clear, neutral, and evidence-based
+- run `node scripts/validate-configs.js` before opening a pull request
+- complete at least one end-to-end browser playthrough after your change
 
 ## Notes
 
