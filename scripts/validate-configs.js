@@ -1,5 +1,6 @@
 const fs = require("node:fs");
 const path = require("node:path");
+const { validateModelConfig } = require("./model-config-loader");
 
 const root = path.resolve(__dirname, "..");
 const htmlPath = path.join(root, "budget_game_fixed.html");
@@ -8,10 +9,6 @@ const modelPath = path.join(root, "content", "model-config.json");
 
 function readJson(filePath) {
     return JSON.parse(fs.readFileSync(filePath, "utf8"));
-}
-
-function isFiniteNumber(value) {
-    return typeof value === "number" && Number.isFinite(value);
 }
 
 function assert(condition, message) {
@@ -36,52 +33,8 @@ function validatePolicy(policy, html) {
     assert(missingIds.length === 0, `Missing HTML IDs for policy keys: ${missingIds.join(", ")}`);
 }
 
-function validateRange(range, name) {
-    assert(range && typeof range === "object", `${name} must be an object`);
-    assert(isFiniteNumber(range.min), `${name}.min must be numeric`);
-    assert(isFiniteNumber(range.max), `${name}.max must be numeric`);
-    assert(range.min < range.max, `${name}.min must be less than ${name}.max`);
-}
-
 function validateModel(model) {
-    assert(model && typeof model === "object", "model-config.json must be an object");
-    assert(model.budgetData && model.budgetData.historical, "model-config.json requires budgetData.historical");
-    assert(model.macroModel, "model-config.json requires macroModel");
-
-    const ranges = model.sliderRanges || {};
-    ["defenceSpending", "defenceModern", "energy", "agri", "admin"].forEach((k) => {
-        validateRange(ranges[k], `sliderRanges.${k}`);
-    });
-
-    const c2026 = model.budgetData.historical["2026"];
-    assert(c2026 && typeof c2026 === "object", "budgetData.historical.2026 is required");
-    ["revenueGrants", "revenueTargetGDP", "primaryBalanceTargetGDP", "publicInvestmentTargetGDP", "deficitTargetGDP"].forEach((k) => {
-        assert(isFiniteNumber(c2026[k]), `budgetData.historical.2026.${k} must be numeric`);
-    });
-
-    const ex = c2026.expenditure;
-    assert(ex && typeof ex === "object", "budgetData.historical.2026.expenditure is required");
-    ["salaries", "goodsServices", "subsidiesTransfers", "capital", "interest"].forEach((k) => {
-        assert(isFiniteNumber(ex[k]), `budgetData.historical.2026.expenditure.${k} must be numeric`);
-    });
-
-    const policyImpacts = model.policyImpacts;
-    assert(policyImpacts && typeof policyImpacts === "object", "model-config.json requires policyImpacts");
-
-    const impactChecks = [
-        [policyImpacts.agri?.drought?.yes, "policyImpacts.agri.drought.yes"],
-        [policyImpacts.agri?.relief?.yes, "policyImpacts.agri.relief.yes"],
-        [policyImpacts.energy?.targeted?.yes, "policyImpacts.energy.targeted.yes"],
-        [policyImpacts.energy?.marketPricing?.yes, "policyImpacts.energy.marketPricing.yes"],
-        [policyImpacts.infra?.maintenance?.yes, "policyImpacts.infra.maintenance.yes"],
-        [policyImpacts.infra?.climate?.yes, "policyImpacts.infra.climate.yes"],
-        [policyImpacts.env?.prevention?.yes, "policyImpacts.env.prevention.yes"],
-        [policyImpacts.env?.rebuilding?.yes, "policyImpacts.env.rebuilding.yes"]
-    ];
-
-    impactChecks.forEach(([value, name]) => {
-        assert(isFiniteNumber(value), `${name} must be numeric`);
-    });
+    validateModelConfig(model);
 }
 
 function main() {
