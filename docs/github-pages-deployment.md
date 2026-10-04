@@ -29,8 +29,14 @@ Important:
 
 ## Deployment trigger
 
-- Automatic on push to `dev`
+- Automatic on push to `main`
 - Manual via workflow_dispatch in the Actions tab
+
+Recommended release flow:
+
+1. Complete changes in `dev`.
+2. Merge `dev` into `main`.
+3. GitHub Pages deploys from the `main` push.
 
 ## Post-deploy checks
 

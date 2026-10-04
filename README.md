@@ -109,8 +109,10 @@ See `docs/beta-readiness-checklist.md` for the full beta test gate.
 The repository includes a GitHub Actions workflow for zero-cost Pages hosting.
 
 - Workflow file: `.github/workflows/deploy-pages.yml`
-- Deploy trigger: push to `dev`
+- Deploy trigger: push to `main`
 - Target URL on Sarika account: `https://sarikawarusavitarana.github.io/sl-budget-game/`
+
+This means updates go live after changes are merged from `dev` into `main`.
 
 Note: GitHub Pages URLs always use the repository owner name. If this repository remains under `sarikawarusavitarana-hash`, the live URL will stay under that owner.
 

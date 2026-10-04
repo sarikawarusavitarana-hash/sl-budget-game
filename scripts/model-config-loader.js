@@ -102,8 +102,8 @@
         ["educationRefPoints.primary", "educationRefPoints.higher", "educationRefPoints.tvet",
             "healthRefPoint", "sliderRanges.defenceSpending", "sliderRanges.defenceModern",
             "sliderRanges.energy", "sliderRanges.agri", "sliderRanges.admin"].forEach(function (path) {
-            validateRange(config, path, true);
-        });
+                validateRange(config, path, true);
+            });
         ["macroModel.growth", "macroModel.inflation", "macroModel.marketConfidence"].forEach(function (path) {
             validateRange(config, path, false);
         });
@@ -112,10 +112,10 @@
             "sectorBaseRs.admin", "sectorBaseRs.env", "sectorBaseRs.agri", "sectorBaseRs.energy",
             "educationRefPoints.primary.baselineRs", "educationRefPoints.higher.baselineRs",
             "educationRefPoints.tvet.baselineRs", "healthRefPoint.baselineRs"].forEach(function (path) {
-            if (getPath(config, path) < 0) {
-                throw new Error(path + " must not be negative");
-            }
-        });
+                if (getPath(config, path) < 0) {
+                    throw new Error(path + " must not be negative");
+                }
+            });
         ["sectorBaseRs.healthCapitalShare", "sectorBaseRs.educationCapitalShare"].forEach(function (path) {
             if (getPath(config, path) < 0 || getPath(config, path) > 1) {
                 throw new Error(path + " must be between 0 and 1");
