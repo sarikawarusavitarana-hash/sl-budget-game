@@ -28,6 +28,9 @@ jobs:
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
+        with:
+          token: ${{ secrets.PAGES_SETUP_TOKEN || github.token }}
+          enablement: ${{ secrets.PAGES_SETUP_TOKEN != '' }}
 
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3

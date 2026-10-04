@@ -27,6 +27,15 @@ Important:
 3. Ensure Actions are enabled for the repository.
 4. Keep repository visibility Public for zero-cost hosting on a personal account.
 
+The workflow's default `GITHUB_TOKEN` can deploy to an existing Pages site, but cannot enable Pages for the first time. Complete the setup above before the first deployment.
+
+Alternatively, to let the workflow enable Pages:
+
+1. Create a short-lived fine-grained personal access token with access only to this repository and **Pages: Read and write** permission.
+2. Add it as the repository Actions secret `PAGES_SETUP_TOKEN` under Settings > Secrets and variables > Actions.
+3. Run the deployment workflow from `main`. The Setup Pages step uses this token to create a Pages site with GitHub Actions as its build source if no site exists.
+4. After the first successful deployment, delete the secret and revoke the token. Subsequent deployments use `GITHUB_TOKEN`.
+
 ## Deployment trigger
 
 - Automatic on push to `main`
@@ -48,5 +57,6 @@ Recommended release flow:
 ## Troubleshooting
 
 - 404 at root: verify `index.html` exists in repository root.
+- Setup Pages fails with `Get Pages site failed` / `Not Found`: the Pages API could not find an accessible site; this occurs before artifact upload and is not a missing `index.html`. Have a repository administrator complete the one-time setup above (or configure `PAGES_SETUP_TOKEN`), then re-run the failed workflow from the Actions tab.
 - Workflow not running: verify Pages source is GitHub Actions.
 - JSON fetch issues: check network paths for `content/` and `scripts/` resources.
