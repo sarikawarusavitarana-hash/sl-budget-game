@@ -37,16 +37,16 @@ Example choices: Education +5%, Health +3%, Infrastructure −4%, welfare indexe
 | Result | Start (no choices) | Example |
 | --- | --- | --- |
 | Revenue | Rs 5,920 bn | Rs 6,009 bn |
-| Interest | Rs 2,333 bn | Rs 2,335 bn |
-| Overall balance | −Rs 1,407 bn | −Rs 1,354 bn |
-| Debt / GDP | 95.7% | 95.2% |
-| Real growth | 3.2% | 3.6% |
+| Interest | Rs 2,333 bn | Rs 2,366 bn |
+| Overall balance | −Rs 1,407 bn | −Rs 1,613 bn |
+| Debt / GDP | 95.7% | 95.9% |
+| Real growth | 3.2% | 3.5% |
 | Inflation | 5.3% | 5.4% |
-| 1-year T-bill | 9.25% | 9.27% |
-| Primary balance / GDP | 2.4% | 2.5% |
-| Market confidence | 50.6 | 51.1 |
-| Room under the 13% ceiling | Rs 70 bn | Rs 35 bn |
-| Targets met | 5 of 5 | 5 of 5 |
+| 1-year T-bill | 9.25% | 9.75% |
+| Primary balance / GDP | 2.4% | 1.9% |
+| Market confidence | 50.6 | 44.7 |
+| Room under the 13% ceiling | Rs 70 bn | −Rs 193 bn |
+| Targets met | 5 of 5 | 2 of 5 |
 
 If an intended model change alters these figures, update the workbook and *How the model works* in the same change.
 
