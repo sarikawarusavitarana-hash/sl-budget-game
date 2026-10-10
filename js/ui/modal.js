@@ -1,16 +1,24 @@
 /* About / FAQ pop-up (buttons sit in the header so they never cover Next) */
 let modalOpener = null;
+const modalTitles = {
+  about: "About the Budget Game",
+  faq: "Frequently asked questions",
+  sources: "Sources"
+};
 
-function openModal(which){
+function openModal(which) {
   modalOpener = document.activeElement;
   let m = document.getElementById("infoModal");
-  document.getElementById("modalTitle").innerText = {about: "About the Budget Game", faq: "Frequently asked questions", sources: "Sources"}[which];
-  document.getElementById("modalBody").innerHTML = MODAL_CONTENT[which];
+  let title = modalTitles[which] || "Information";
+  let body = document.getElementById("modalBody");
+  document.getElementById("modalTitle").innerText = title;
+  body.innerHTML = MODAL_CONTENT[which] || "<p>Content unavailable.</p>";
+
   m.hidden = false;
   document.body.classList.add("modal-open");
   document.getElementById("modalClose").focus();
 }
-function openInfo(title, html){
+function openInfo(title, html) {
   modalOpener = document.activeElement;
   document.getElementById("modalTitle").innerText = title;
   document.getElementById("modalBody").innerHTML = html;
@@ -19,27 +27,26 @@ function openInfo(title, html){
   document.getElementById("modalBody").scrollTop = 0;
   document.getElementById("modalClose").focus();
 }
-function openTip(el, title){
-  event.stopPropagation();
+function openTip(el, title) {
   openInfo(title, "<p>" + el.querySelector(".info-tooltip").innerHTML + "</p>");
 }
-function closeModal(){
+function closeModal() {
   let modal = document.getElementById("infoModal");
-  if(modal.hidden) return;
+  if (modal.hidden) return;
   modal.hidden = true;
   document.body.classList.remove("modal-open");
-  if(modalOpener && typeof modalOpener.focus === "function") modalOpener.focus();
+  if (modalOpener && typeof modalOpener.focus === "function") modalOpener.focus();
   modalOpener = null;
 }
-document.addEventListener("keydown", function(e){
-  if(e.key === "Escape"){
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Escape") {
     closeModal();
     return;
   }
-  if(e.key !== "Enter" && e.key !== " ") return;
-  let trigger = e.target.closest && e.target.closest(".info-icon");
-  if(!trigger) return;
+  if (e.key !== "Enter" && e.key !== " ") return;
+  let trigger = e.target?.closest?.(".info-icon");
+  if (!trigger) return;
   e.preventDefault();
   trigger.click();
 });
-document.addEventListener("click", function(e){ if(e.target && e.target.id === "infoModal") closeModal(); });
+document.addEventListener("click", function (e) { if (e.target?.id === "infoModal") closeModal(); });

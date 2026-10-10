@@ -32,7 +32,7 @@
 
 These figures come from section 8 of *How the model works*, where the game and the workbook were checked against each other. If a change is not meant to alter the model, the game must still produce them.
 
-Example choices: Education +5%, Health +3%, Infrastructure −4%, welfare indexed to inflation, Rs 20 bn emergency reserve, taxes on income, and tax relief.
+Example choices: Education +5%, Health +3%, Infrastructure −4%, welfare indexed to inflation, Rs 250 bn emergency reserve, taxes on income, and tax relief.
 
 | Result | Start (no choices) | Example |
 | --- | --- | --- |

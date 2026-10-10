@@ -1,170 +1,251 @@
 /* BUDGET BAR */
 #budgetBar {
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  box-sizing:border-box;
-  background:#f5f5f5;
-  padding:5px 12px;
-  z-index:1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.98);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(3px);
+  padding: 8px 16px 10px;
+  z-index: 1000;
 }
 
 #budgetBarInner {
-  max-width:900px;
-  margin:0 auto;
+  max-width: 1140px;
+  margin: 0 auto;
 }
 
-/* PAGE TRACKER — compact step indicator, ~1.5cm tall */
+/* SCALE */
+.budget-scale-title {
+  font-size: 12px;
+  font-weight: 650;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.budget-scale-track {
+  position: relative;
+  height: 12px;
+  display: flex;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+
+.budget-segment {
+  flex: 1;
+}
+
+.budget-segment:nth-child(1) {
+  background: #c58956;
+}
+
+.budget-segment:nth-child(2) {
+  background: #d39f63;
+}
+
+.budget-segment:nth-child(3) {
+  background: #debc7f;
+}
+
+.budget-segment:nth-child(4) {
+  background: #e9dde0;
+}
+
+.budget-segment:nth-child(5) {
+  background: #cbdce8;
+}
+
+.budget-segment:nth-child(6) {
+  background: #9ebdd3;
+}
+
+.budget-segment:nth-child(7) {
+  background: #6f9bb9;
+}
+
+#budgetPointer {
+  position: absolute;
+  top: -5px;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 9px solid var(--text-primary);
+  left: 50%;
+  transition: left 0.3s ease;
+}
+
+.budget-scale-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-top: 3px;
+}
+
+/* PAGE TRACKER */
 #pageTracker {
-  overflow-x:auto;
-  padding:4px 8px 3px 8px;
-  border-bottom:1px solid #e0d8cc;
+  overflow-x: auto;
+  padding: 7px 6px 4px;
+  border-bottom: 1px solid var(--line);
 }
 
 .tracker-row {
-  display:flex;
-  justify-content:center;
-  align-items:flex-start;
-  white-space:nowrap;
-  min-width:fit-content;
-  margin:0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  white-space: nowrap;
+  min-width: fit-content;
+  margin: 0 auto;
 }
 
 .tracker-step {
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  flex-shrink:0;
-  padding:0 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 0 4px;
 }
 
 .tracker-dot {
-  width:11px;
-  height:11px;
-  border-radius:50%;
-  background:#fff;
-  border:2px solid #bbb;
-  display:block;
-  margin-bottom:2px;
-  transition:background 0.2s, border-color 0.2s;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #9aa5b2;
+  display: block;
+  margin-bottom: 3px;
+  transition: background 0.2s, border-color 0.2s;
 }
 
 .tracker-label {
-  font-size:9px;
-  color:#999;
-  white-space:nowrap;
-  line-height:1.1;
+  font-size: 10px;
+  color: #728092;
+  white-space: nowrap;
+  line-height: 1.1;
 }
 
 .tracker-line {
-  flex:0 0 12px;
-  height:2px;
-  background:#ccc;
-  margin-top:5px;
+  flex: 0 0 14px;
+  height: 2px;
+  background: #b8c2cd;
+  margin-top: 6px;
 }
 
 .tracker-line-dotted {
-  background:none;
-  border-top:2px dotted #ccc;
-  height:0;
-  margin-top:5px;
+  background: none;
+  border-top: 2px dotted #b8c2cd;
+  height: 0;
+  margin-top: 6px;
 }
 
 .tracker-step.completed .tracker-dot,
 .tracker-step.current .tracker-dot {
-  background:#1a1a1a;
-  border-color:#1a1a1a;
+  background: var(--accent);
+  border-color: var(--accent);
 }
 
 .tracker-step.current .tracker-dot {
-  box-shadow:0 0 0 3px rgba(26,26,26,0.15);
+  box-shadow: 0 0 0 3px rgba(21, 74, 115, 0.18);
 }
 
 .tracker-step.completed .tracker-label {
-  color:#555;
+  color: var(--text-secondary);
 }
 
 .tracker-step.current .tracker-label {
-  color:#1a1a1a;
-  font-weight:bold;
+  color: var(--text-primary);
+  font-weight: 700;
 }
 
 .tracker-line.completed {
-  background:#1a1a1a;
+  background: var(--accent);
 }
 
 /* FISCAL DASHBOARD */
 #fiscalDashboard {
-  margin-top:4px;
-  font-family:'Courier New', Courier, monospace;
-  background:#fff7ef;
-  color:#1a1a1a;
-  border:1px solid #1a1a1a;
-  border-radius:3px;
-  overflow:hidden;
-  max-width:900px;
+  margin-top: 8px;
+  font-family: "Source Sans 3", "Segoe UI", Arial, sans-serif;
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  max-width: 1140px;
 }
 
 .fiscal-header {
-  display:flex;
-  align-items:center;
-  padding:2px 8px;
-  background:#1a1a1a;
-  color:#fff7ef;
-  border-bottom:1px solid #1a1a1a;
-  font-weight:bold;
-  font-size:8px;
-  letter-spacing:0.5px;
+  display: flex;
+  align-items: center;
+  padding: 7px 10px;
+  background: #eef3f8;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--line);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.03em;
 }
 
 .fiscal-header-spacer,
 .fiscal-header-week {
-  flex:1;
+  flex: 1;
 }
 
 .fiscal-header-week {
-  text-align:right;
+  text-align: right;
+  color: var(--text-secondary);
 }
 
 .fiscal-header-title {
-  flex:0 0 auto;
-  text-align:center;
+  flex: 0 0 auto;
+  text-align: center;
 }
 
 .fiscal-row {
-  display:flex;
-  border-bottom:1px solid #e0d8cc;
+  display: flex;
+  border-bottom: 1px solid var(--line);
 }
 
 .fiscal-row:last-child {
-  border-bottom:none;
+  border-bottom: none;
 }
 
 .fiscal-cell {
-  flex:1;
-  padding:1px 6px 2px 6px;
-  border-right:1px solid #e0d8cc;
+  flex: 1;
+  padding: 6px 8px;
+  border-right: 1px solid var(--line);
 }
 
 .fiscal-cell:last-child {
-  border-right:none;
+  border-right: none;
 }
 
 .fiscal-label {
-  font-size:8px;
-  color:#8a7f6e;
-  text-transform:uppercase;
-  letter-spacing:0.5px;
+  font-size: 11px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .fiscal-value {
-  font-size:10px;
-  font-weight:bold;
-  margin-top:0px;
-  color:#1a1a1a;
+  font-size: 14px;
+  font-weight: 700;
+  margin-top: 2px;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
 }
 
-.fiscal-value.negative { color:#c62828; }
-.fiscal-value.positive { color:#2e7d32; }
+.fiscal-cell-primary .fiscal-value {
+  font-size: 15px;
+}
 
+.fiscal-value.negative {
+  color: var(--status-bad);
+}
+
+.fiscal-value.positive {
+  color: var(--status-good);
+}

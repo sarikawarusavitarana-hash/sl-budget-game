@@ -1,7 +1,7 @@
 /* =======================
    RESULTS PAGE
 ======================= */
-function showFinalResult(){
+function showFinalResult() {
   let s = computeFiscalSnapshot();
   let rules = s.rules, marketConfidence = s.marketConfidence, fiscalOutcome = s.fiscalOutcome;
   let rulesMetCount = Object.values(rules).filter(r => r.met).length;
@@ -9,18 +9,18 @@ function showFinalResult(){
   document.getElementById("revValue").innerText = "LKR " + Math.round(s.revenue).toLocaleString() + " bn";
   document.getElementById("expValue").innerText = "LKR " + Math.round(s.expenditure).toLocaleString() + " bn";
   document.getElementById("balanceValue").innerText = "LKR " + Math.round(s.balance).toLocaleString() + " bn";
-  document.getElementById("deficitValue").innerText = "LKR " + Math.round(s.balance).toLocaleString() + " bn (" + s.deficitPercent.toFixed(2) + "%)";
-  document.getElementById("confidenceValue").innerText = marketConfidence.toFixed(0) + "%";
+  document.getElementById("deficitValue").innerText = "LKR " + Math.round(s.drivers.deficitAbs).toLocaleString() + " bn (" + s.deficitPercent.toFixed(2) + "%)";
+  document.getElementById("confidenceValue").innerText = marketConfidence.toFixed(0) + " / 100";
 
   document.getElementById("headlineText").innerText =
     rulesMetCount >= 4 ? "Budget Delivers a Credible Path Forward" :
-    rulesMetCount >= 3 ? "Budget Meets Some, Not All, 2027 Targets" :
-    "Budget Falls Short of the 2027 Fiscal Targets";
+      rulesMetCount >= 3 ? "Budget Meets Some, Not All, 2027 Targets" :
+        "Budget Falls Short of the 2027 Fiscal Targets";
 
   document.getElementById("summaryText").innerText =
     "Your Budget meets " + rulesMetCount + " of the 5 fiscal targets shown below, with market confidence at " + marketConfidence.toFixed(0) +
-    "%. The 1-year T-bill rate ends at " + s.tbill.toFixed(1) + "% and the rupee depreciates " + s.fxDepreciation.toFixed(1) +
-    "%, so interest costs Rs " + Math.round(s.interest).toLocaleString() + " bn (" + s.interestToGDP.toFixed(1) + "% of GDP).";
+    " / 100. The 1-year T-bill rate ends at " + s.tbill.toFixed(1) + "% and the rupee depreciates " + s.fxDepreciation.toFixed(1) +
+    "%, so interest costs Rs. " + Math.round(s.interest).toLocaleString() + " bn (" + s.interestToGDP.toFixed(1) + "% of GDP).";
 
   let color = fiscalOutcome === "NO" ? "#c62828" : fiscalOutcome === "YES_ALT" ? "#66bb6a" : "#2e7d32";
   document.getElementById("imfStatus").innerText = rulesMetCount >= 4 ? "ON TRACK" : rulesMetCount >= 3 ? "PARTIALLY ON TRACK" : "BELOW TARGET";
@@ -31,11 +31,13 @@ function showFinalResult(){
     : "Public finances are broadly aligned with the IMF's 2027 projections.";
 
   let whyEl = document.getElementById("whyList");
-  if(whyEl) whyEl.innerHTML = explainOutcome(s).map(t => "<p>" + t + "</p>").join("");
+  if (whyEl) whyEl.innerHTML = explainOutcome(s).map(t => "<p>" + t + "</p>").join("");
 
-  function fillRule(prefix, rule, op){
+  function fillRule(prefix, rule, op) {
     document.getElementById("ruleTarget" + prefix).innerText = (op || "") + rule.target.toFixed(1) + "%";
-    document.getElementById("ruleActual" + prefix).innerText = rule.actual.toFixed(1) + "%";
+    // Show 2 decimals when 1 decimal would make the actual look equal to the target.
+    let dp = rule.actual.toFixed(1) === rule.target.toFixed(1) ? 2 : 1;
+    document.getElementById("ruleActual" + prefix).innerText = rule.actual.toFixed(dp) + "%";
     document.getElementById("ruleStatus" + prefix).innerHTML = rule.met
       ? "<span class='rule-status met'>✓ Met</span>"
       : "<span class='rule-status below'>⚠ " + (op === "≤ " ? "Above limit" : "Below target") + "</span>";
@@ -46,14 +48,14 @@ function showFinalResult(){
   fillRule("Deficit", rules.deficit, "≤ ");
   fillRule("PrimExp", rules.primaryExpenditure, "≤ ");
 
-  function setCard(id, status){
+  function setCard(id, status) {
     let el = document.getElementById(id).parentElement;
-    el.classList.remove("green","yellow","red"); el.classList.add(status);
+    el.classList.remove("green", "yellow", "red"); el.classList.add(status);
   }
   const base = baselineSnapshot();
   const rs = n => "Rs. " + Math.abs(n).toFixed(1) + " bn";
   const sg = (n, d) => (n >= 0 ? "+" : "\u2212") + Math.abs(n).toFixed(d);
-  function fillCard(id, status, title, detail, risk, vals){
+  function fillCard(id, status, title, detail, risk, vals) {
     setCard(id, status);
     document.getElementById(id).innerHTML = "<strong>" + title + "</strong><br>" + detail +
       "<div class='card-vals'>" + vals + "</div><div class='risk'><strong>Key risk:</strong> " + risk + "</div>";
@@ -89,6 +91,6 @@ function showFinalResult(){
     mc === "green" ? "Confidence is strengthening" : mc === "yellow" ? "Confidence remains cautious" : "Confidence is weakening",
     mc === "green" ? "The confidence score is rising." : mc === "yellow" ? "The score is close to its starting level." : "The score is falling.",
     "A weaker fiscal position can reduce the confidence score and put additional pressure on borrowing costs and the rupee.",
-    "Confidence " + marketConfidence.toFixed(0) + " (start " + base.marketConfidence.toFixed(0) + ") \u00B7 Primary balance " + sg(s.primaryBalance,1) + "% \u00B7 Deficit " + s.deficitPercent.toFixed(1) + "% of GDP");
+    "Confidence " + marketConfidence.toFixed(0) + " (start " + base.marketConfidence.toFixed(0) + ") \u00B7 Primary balance " + sg(s.primaryBalance, 1) + "% \u00B7 Deficit " + s.deficitPercent.toFixed(1) + "% of GDP");
 }
 

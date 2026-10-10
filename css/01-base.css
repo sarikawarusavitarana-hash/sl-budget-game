@@ -1,16 +1,66 @@
+:root {
+  --bg-canvas: #f7f8fa;
+  --bg-surface: #ffffff;
+  --text-primary: #17212f;
+  --text-secondary: #475467;
+  --accent: #154a73;
+  --accent-soft: #e7f1f8;
+  --line: #d3d9e0;
+  --focus: #005fcc;
+  --status-good: #0f6b5b;
+  --status-warn: #9b460e;
+  --status-bad: #b42318;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 html {
   overflow-x: hidden;
 }
 
 body {
-  font-family: Georgia, serif;
-  font-size:14px;
-  background:#fff7ef;
-  margin:0;
+  font-family: "Source Sans 3", "Segoe UI", "Noto Sans", Arial, sans-serif;
+  font-size: 17px;
+  color: var(--text-primary);
+  background: radial-gradient(circle at 12% 0%, #f1f5fa 0%, var(--bg-canvas) 38%, #f4f6f9 100%);
+  margin: 0;
   /* --header-h is measured from the real fixed header by syncHeaderSpace() in
      the script, so the gap under the header is always exact (no guessing). */
-  padding-top:var(--header-h, 115px);
+  padding-top: var(--header-h, 115px);
   overflow-x: hidden;
   max-width: 100%;
 }
 
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Source Serif 4", "Georgia", "Times New Roman", serif;
+  color: var(--text-primary);
+  letter-spacing: 0.01em;
+}
+
+a {
+  color: var(--accent);
+}
+
+button:focus-visible,
+input:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

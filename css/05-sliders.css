@@ -1,131 +1,135 @@
 /* SLIDER */
 input[type=range] {
-  width:100%;
-  margin:20px 0;
-  -webkit-appearance:none;
-  appearance:none;
-  height:8px;
-  border-radius:4px;
-  background:#e0e0e0;
-  outline:none;
-  cursor:pointer;
+  width: 100%;
+  margin: 20px 0;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 10px;
+  border-radius: 999px;
+  background: #dce3ea;
+  outline: none;
+  cursor: pointer;
 }
 
 /* Track */
 input[type=range]::-webkit-slider-runnable-track {
-  height:8px;
-  border-radius:4px;
-  background:transparent;
+  height: 10px;
+  border-radius: 999px;
+  background: transparent;
 }
 
 input[type=range]::-moz-range-track {
-  height:8px;
-  border-radius:4px;
-  background:#e0e0e0;
+  height: 10px;
+  border-radius: 999px;
+  background: #dce3ea;
 }
 
 input[type=range]::-moz-range-progress {
-  height:8px;
-  border-radius:4px;
-  background:#1a73e8;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--accent);
 }
 
 /* Thumb */
 input[type=range]::-webkit-slider-thumb {
-  -webkit-appearance:none;
-  appearance:none;
-  width:22px;
-  height:22px;
-  border-radius:50%;
-  background:#1a73e8;
-  border:3px solid #fff;
-  box-shadow:0 1px 4px rgba(0,0,0,0.35);
-  cursor:pointer;
-  margin-top:-7px;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 3px solid #fff;
+  box-shadow: 0 1px 6px rgba(23, 33, 47, 0.25);
+  cursor: pointer;
+  margin-top: -7px;
 }
 
 input[type=range]::-moz-range-thumb {
-  width:16px;
-  height:16px;
-  border-radius:50%;
-  background:#1a73e8;
-  border:3px solid #fff;
-  box-shadow:0 1px 4px rgba(0,0,0,0.35);
-  cursor:pointer;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 3px solid #fff;
+  box-shadow: 0 1px 6px rgba(23, 33, 47, 0.25);
+  cursor: pointer;
 }
 
 /* THREE-MARKER SLIDER (2025 Budget / 2026 Budget / Your Budget) */
 .slider-container {
-  position:relative;
-  margin:30px 0 58px 0;
-  padding-top:34px;
+  position: relative;
+  margin: 30px 0 58px 0;
+  padding-top: 36px;
 }
 
 .slider-container input[type=range] {
-  position:relative;
-  z-index:2;
-  margin:0;
+  position: relative;
+  z-index: 2;
+  margin: 0;
 }
 
 .your-budget-marker {
-  position:absolute;
-  top:0;
-  transform:translateX(-50%);
-  background:#000;
-  color:#fff;
-  font-size:11px;
-  font-weight:bold;
-  padding:3px 8px;
-  border-radius:3px;
-  white-space:nowrap;
-  z-index:3;
-  transition:left 0.15s ease;
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  background: var(--accent);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 9px;
+  border-radius: 6px;
+  white-space: nowrap;
+  z-index: 3;
+  transition: left 0.15s ease;
 }
 
 .your-budget-marker::after {
-  content:"";
-  position:absolute;
-  left:50%;
-  bottom:-5px;
-  transform:translateX(-50%);
-  border-left:5px solid transparent;
-  border-right:5px solid transparent;
-  border-top:5px solid #000;
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  transform: translateX(-50%);
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid var(--accent);
 }
 
 .ref-marker {
-  position:absolute;
-  top:46px;
-  transform:translateX(-50%);
-  font-size:14px;
-  font-weight:bold;
-  color:#333;
-  text-align:center;
-  white-space:nowrap;
-  line-height:1.4;
+  position: absolute;
+  top: 48px;
+  transform: translateX(-50%);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: center;
+  white-space: nowrap;
+  line-height: 1.35;
 }
 
 .ref-marker .tick {
-  display:block;
-  width:2px;
-  height:12px;
-  margin:0 auto 5px auto;
-  background:#999;
+  display: block;
+  width: 2px;
+  height: 12px;
+  margin: 0 auto 5px auto;
+  background: #9aa5b2;
 }
 
-.ref-marker.marker-2025 .tick { background:#7e57c2; }
-.ref-marker.marker-2026 .tick { background:#5c6bc0; }
+.ref-marker.marker-2025 .tick {
+  background: #9b460e;
+}
+
+.ref-marker.marker-2026 .tick {
+  background: var(--accent);
+}
 
 .slider-range-labels {
-  display:flex;
-  justify-content:space-between;
-  font-size:12px;
-  color:#666;
-  margin-top:26px;
-  line-height:1.4;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 26px;
+  line-height: 1.4;
 }
 
 .slider-range-labels.three-way span:nth-child(2) {
-  text-align:center;
+  text-align: center;
 }
-

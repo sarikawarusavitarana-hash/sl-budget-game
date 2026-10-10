@@ -47,7 +47,7 @@ The game is implemented as a single-page HTML experience with interactive contro
 - feedback panels that summarise the consequences of the choices you make
 - budget and fiscal indicators that update as the game progresses
 
-Revenue choices are modelled as fixed rupee adjustments. Spending choices are percentage changes from each sector's 2027 Appropriation Bill allocation, and the emergency reserve is set in rupees (Rs 0 to 50 bn). The interface is intentionally lightweight so it can run in a browser without any build step or extra dependencies.
+Revenue choices are modelled as fixed rupee adjustments. Spending choices are percentage changes from each sector's 2027 Appropriation Bill allocation, and the emergency reserve is set in rupees (Rs 0 to 750 bn, in steps of Rs 250 bn). The interface is intentionally lightweight so it can run in a browser without any build step or extra dependencies.
 
 The source notes for the model describe it as a learning tool built from published Sri Lankan Budget and economic data, with assumptions chosen to make trade-offs visible rather than to forecast exact outcomes.
 
@@ -57,7 +57,7 @@ The full explanation is in *Sri Lanka Budget Game 2027: How the model works* (`S
 
 **Starting point (2027).** Nominal GDP 2026 Rs 35,835 bn; real growth 3.2%; inflation 5.3%; 2026 revenue 15.2% of GDP; interest 6.0% of GDP (Rs 2,333 bn); public debt 100.1% of GDP (IMF Country Report 26/111). 1-year Treasury bill rate 9.25% (CBSL, 1 Oct 2026). Spending before interest Rs 4,992.8 bn (2027 Appropriation Bill). Ceiling on spending before interest 13% of GDP. Rupee depreciation 4% (game assumption). With no changes, nominal GDP grows about 8.7% to roughly Rs 38,944 bn and revenue grows from Rs 5,447 bn to about Rs 5,920 bn, while the Bill keeps spending almost flat, so each sector's share of GDP falls.
 
-**Player choices.** A slider setting of p% on a Bill allocation B changes spending by B × p / 100; the capital share of that change feeds public investment and growth. Education, Health, Welfare and Digital count as social spending. Indexing welfare adds Rs 79.8 bn × 5.3% (about Rs 4.2 bn). The emergency reserve counts as planned spending. Tax choices add fixed amounts (for example, +Rs 80 bn for taxes on income, +Rs 110 bn for taxes on goods and services) with small inflation or growth effects. Priority questions change the on-screen explanation only, not the numbers.
+**Player choices.** A slider setting of p% on a Bill allocation B changes spending by B × p / 100; the capital share of that change feeds public investment and growth. Education, Health, Welfare and Digital count as social spending. Indexing welfare applies 5.3% to the recurrent part of the welfare allocation only (Rs 43.8 bn of Rs 79.8 bn; about Rs 2.3 bn). The emergency reserve counts as planned spending for the fiscal targets, but not in the growth and inflation effects, because it is only spent if a disaster occurs. Tax choices add fixed amounts (for example, +Rs 80 bn for taxes on income, +Rs 110 bn for taxes on goods and services) with small inflation or growth effects. Priority questions change the on-screen explanation only, not the numbers.
 
 **Calculation order** (`computeFiscalSnapshot()` in `js/engine/fiscal-engine.js`):
 
@@ -74,11 +74,11 @@ The full explanation is in *Sri Lanka Budget Game 2027: How the model works* (`S
 
 Steps 3 to 7 are simplified game assumptions, not estimates from Sri Lankan data.
 
-**Five targets** (IMF 2027 projections, used until the Government publishes its own in the Budget Speech on 12 November 2026): revenue at least 15.1% of GDP; primary balance at least 2.3%; public investment at least 4.0%; deficit no more than 3.7%; spending before interest no more than 13%. Meeting 4 or 5 gives the best headline, 3 a middle one, fewer a weaker one.
+**Five targets** (IMF 2027 projections, used until the Government publishes its own in the Budget Speech on 12 November 2026): revenue at least 15.1% of GDP; primary balance at least 2.3%; public investment at least 4.0%; deficit no more than 3.7%; spending before interest no more than 13% of the GDP projected when the Budget is set (the same basis as the headroom bar). Public investment is scored on the capital allocation, not on delivery. Meeting 4 or 5 gives the best headline, 3 a middle one, fewer a weaker one.
 
 **Results boxes** compare the player's Budget with the Bill unchanged (inflation 5.3%, growth 3.2%, rupee depreciation 4%, confidence 50.6).
 
-**Left out on purpose:** how the deficit is financed, and whether capital projects are delivered. The results page notes that an allocation is not the same as spending, but this does not change the numbers.
+**Left out on purpose:** how the deficit is financed, whether capital projects are delivered, and the revaluation of foreign-currency debt when the rupee weakens (so debt is understated when depreciation exceeds the 4% baseline). The results page notes that an allocation is not the same as spending, but this does not change the numbers.
 
 **To check as new data arrive:** the Government's 2027 targets (12 November 2026); whether Public Administration includes pensions; the 2026 comparators for Energy and Digital.
 

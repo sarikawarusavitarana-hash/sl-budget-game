@@ -1,806 +1,1310 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-<title>Sri Lanka Budget Game</title>
 
-<link rel="stylesheet" href="css/01-base.css">
-<link rel="stylesheet" href="css/02-content.css">
-<link rel="stylesheet" href="css/03-header.css">
-<link rel="stylesheet" href="css/04-layout.css">
-<link rel="stylesheet" href="css/05-sliders.css">
-<link rel="stylesheet" href="css/06-tooltips.css">
-<link rel="stylesheet" href="css/07-stepper.css">
-<link rel="stylesheet" href="css/08-text.css">
-<link rel="stylesheet" href="css/09-responsive.css">
-<link rel="stylesheet" href="css/10-modal-and-cards.css">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Sri Lanka Budget Game</title>
+
+  <link rel="stylesheet" href="css/01-base.css">
+  <link rel="stylesheet" href="css/02-content.css">
+  <link rel="stylesheet" href="css/03-header.css">
+  <link rel="stylesheet" href="css/04-layout.css">
+  <link rel="stylesheet" href="css/05-sliders.css">
+  <link rel="stylesheet" href="css/06-tooltips.css">
+  <link rel="stylesheet" href="css/07-stepper.css">
+  <link rel="stylesheet" href="css/08-text.css">
+  <link rel="stylesheet" href="css/09-responsive.css">
+  <link rel="stylesheet" href="css/10-modal-and-cards.css">
 </head>
 
 <body>
 
 
-<!-- ✅ CORRECT BUDGET BAR (ONLY ONE VERSION) -->
-<div id="budgetBar">
+  <!-- ✅ CORRECT BUDGET BAR (ONLY ONE VERSION) -->
+  <div id="budgetBar">
 
-  <div id="budgetBarInner">
-  <div class="top-links">
-    <button type="button" onclick="openModal('about')">About</button>
-    <button type="button" onclick="openModal('faq')">FAQ</button>
-    <button type="button" onclick="openModal('sources')">Sources</button>
-  </div>
-  <div style="font-weight:bold; margin-bottom:1px; font-size:9px;">
-    Room under the 13% spending ceiling (LKR bn)
-  </div>
-
-  <div style="position:relative; height:10px; display:flex;">
-
-    <div style="flex:1; background:#e53935;"></div>
-    <div style="flex:1; background:#f4511e;"></div>
-    <div style="flex:1; background:#fb8c00;"></div>
-    <div style="flex:1; background:#fbc02d;"></div>
-    <div style="flex:1; background:#c0ca33;"></div>
-    <div style="flex:1; background:#7e57c2;"></div>
-    <div style="flex:1; background:#5c6bc0;"></div>
-
-    <!-- POINTER -->
-    <div id="budgetPointer" style="
-      position:absolute;
-      top:-4px;
-      width:0;
-      height:0;
-      border-left:4px solid transparent;
-      border-right:4px solid transparent;
-      border-top:7px solid black;
-      left:50%;
-      transition:left 0.3s ease;
-    "></div>
-
-  </div>
-
-  <div style="display:flex; justify-content:space-between; font-size:8px; margin-top:1px;">
-    <span>-200</span>
-    <span>-100</span>
-    <span>0</span>
-    <span>100</span>
-    <span>200</span>
-  </div>
-
-  <div id="fiscalDashboard">
-
-    <div class="fiscal-header">
-      <span class="fiscal-header-spacer"></span>
-      <span class="fiscal-header-title">SRI LANKA BUDGET 2027</span>
-      <span id="fiscalWeek" class="fiscal-header-week">WEEK 0 / 10</span>
-    </div>
-
-    <div id="pageTracker" style="display:none;">
-      <div class="tracker-row">
-        <div class="tracker-step" data-label="Education"><span class="tracker-dot"></span><span class="tracker-label">Education</span></div>
-        <div class="tracker-line"></div>
-        <div class="tracker-step" data-label="Health"><span class="tracker-dot"></span><span class="tracker-label">Health</span></div>
-        <div class="tracker-line"></div>
-        <div class="tracker-step" data-label="Welfare"><span class="tracker-dot"></span><span class="tracker-label">Welfare</span></div>
-        <div class="tracker-line"></div>
-        <div class="tracker-step" data-label="Defence"><span class="tracker-dot"></span><span class="tracker-label">Defence</span></div>
-        <div class="tracker-line"></div>
-        <div class="tracker-step" data-label="Energy"><span class="tracker-dot"></span><span class="tracker-label">Energy</span></div>
-        <div class="tracker-line"></div>
-        <div class="tracker-step" data-label="Infra"><span class="tracker-dot"></span><span class="tracker-label">Infra</span></div>
-        <div class="tracker-line"></div>
-        <div class="tracker-step" data-label="Agri"><span class="tracker-dot"></span><span class="tracker-label">Agri</span></div>
-        <div class="tracker-line"></div>
-        <div class="tracker-step" data-label="Admin"><span class="tracker-dot"></span><span class="tracker-label">Admin</span></div>
-        <div class="tracker-line"></div>
-        <div class="tracker-step" data-label="Digital"><span class="tracker-dot"></span><span class="tracker-label">Digital</span></div>
-        <div class="tracker-line"></div>
-        <div class="tracker-step" data-label="Enviro"><span class="tracker-dot"></span><span class="tracker-label">Enviro</span></div>
-        <div class="tracker-line tracker-line-dotted"></div>
-        <div class="tracker-step" data-label="Results"><span class="tracker-dot"></span><span class="tracker-label">Results</span></div>
+    <div id="budgetBarInner">
+      <div class="top-links">
+        <button type="button" onclick="openModal('about')">About</button>
+        <button type="button" onclick="openModal('faq')">FAQ</button>
+        <button type="button" onclick="openModal('sources')">Sources</button>
       </div>
-    </div>
-
-    <div class="fiscal-row">
-      <div class="fiscal-cell">
-        <div class="fiscal-label">Revenue</div>
-        <div class="fiscal-value" id="fdRevenue">—</div>
+      <div class="budget-scale-title">
+        Room under the 13% spending ceiling (LKR bn)
       </div>
-      <div class="fiscal-cell">
-        <div class="fiscal-label">Spending</div>
-        <div class="fiscal-value" id="fdSpending">—</div>
+
+      <div class="budget-scale-track">
+
+        <div class="budget-segment"></div>
+        <div class="budget-segment"></div>
+        <div class="budget-segment"></div>
+        <div class="budget-segment"></div>
+        <div class="budget-segment"></div>
+        <div class="budget-segment"></div>
+        <div class="budget-segment"></div>
+
+        <!-- POINTER -->
+        <div id="budgetPointer"></div>
+
       </div>
-      <div class="fiscal-cell">
-        <div class="fiscal-label">Deficit</div>
-        <div class="fiscal-value" id="fdDeficit">—</div>
+
+      <div class="budget-scale-labels">
+        <span>-200</span>
+        <span>-100</span>
+        <span>0</span>
+        <span>100</span>
+        <span>200</span>
       </div>
-      <div class="fiscal-cell">
-        <div class="fiscal-label">Debt</div>
-        <div class="fiscal-value" id="fdDebt">—</div>
+
+      <div id="fiscalDashboard">
+
+        <div class="fiscal-header">
+          <span class="fiscal-header-spacer"></span>
+          <span class="fiscal-header-title">SRI LANKA BUDGET 2027</span>
+          <span id="fiscalWeek" class="fiscal-header-week">WEEK 0 / 10</span>
+        </div>
+
+        <div id="pageTracker" style="display:none;">
+          <div class="tracker-row">
+            <div class="tracker-step" data-label="Education"><span class="tracker-dot"></span><span
+                class="tracker-label">Education</span></div>
+            <div class="tracker-line"></div>
+            <div class="tracker-step" data-label="Health"><span class="tracker-dot"></span><span
+                class="tracker-label">Health</span></div>
+            <div class="tracker-line"></div>
+            <div class="tracker-step" data-label="Welfare"><span class="tracker-dot"></span><span
+                class="tracker-label">Welfare</span></div>
+            <div class="tracker-line"></div>
+            <div class="tracker-step" data-label="Defence"><span class="tracker-dot"></span><span
+                class="tracker-label">Defence</span></div>
+            <div class="tracker-line"></div>
+            <div class="tracker-step" data-label="Energy"><span class="tracker-dot"></span><span
+                class="tracker-label">Energy</span></div>
+            <div class="tracker-line"></div>
+            <div class="tracker-step" data-label="Infra"><span class="tracker-dot"></span><span
+                class="tracker-label">Infra</span></div>
+            <div class="tracker-line"></div>
+            <div class="tracker-step" data-label="Agri"><span class="tracker-dot"></span><span
+                class="tracker-label">Agri</span></div>
+            <div class="tracker-line"></div>
+            <div class="tracker-step" data-label="Admin"><span class="tracker-dot"></span><span
+                class="tracker-label">Admin</span></div>
+            <div class="tracker-line"></div>
+            <div class="tracker-step" data-label="Digital"><span class="tracker-dot"></span><span
+                class="tracker-label">Digital</span></div>
+            <div class="tracker-line"></div>
+            <div class="tracker-step" data-label="Enviro"><span class="tracker-dot"></span><span
+                class="tracker-label">Enviro</span></div>
+            <div class="tracker-line tracker-line-dotted"></div>
+            <div class="tracker-step" data-label="Results"><span class="tracker-dot"></span><span
+                class="tracker-label">Results</span></div>
+          </div>
+        </div>
+
+        <div class="fiscal-row">
+          <div class="fiscal-cell fiscal-cell-primary">
+            <div class="fiscal-label">Revenue</div>
+            <div class="fiscal-value" id="fdRevenue">—</div>
+          </div>
+          <div class="fiscal-cell fiscal-cell-primary">
+            <div class="fiscal-label">Spending</div>
+            <div class="fiscal-value" id="fdSpending">—</div>
+          </div>
+          <div class="fiscal-cell fiscal-cell-primary">
+            <div class="fiscal-label">Deficit</div>
+            <div class="fiscal-value" id="fdDeficit">—</div>
+          </div>
+          <div class="fiscal-cell fiscal-cell-primary">
+            <div class="fiscal-label">Debt</div>
+            <div class="fiscal-value" id="fdDebt">—</div>
+          </div>
+          <div class="fiscal-cell">
+            <div class="fiscal-label">Growth</div>
+            <div class="fiscal-value" id="fdGrowth">—</div>
+          </div>
+          <div class="fiscal-cell">
+            <div class="fiscal-label">Primary Balance</div>
+            <div class="fiscal-value" id="fdPrimary">—</div>
+          </div>
+          <div class="fiscal-cell">
+            <div class="fiscal-label">Inflation</div>
+            <div class="fiscal-value" id="fdInflation">—</div>
+          </div>
+          <div class="fiscal-cell">
+            <div class="fiscal-label">Market Confidence</div>
+            <div class="fiscal-value" id="fdConfidence">—</div>
+          </div>
+        </div>
+
       </div>
-      <div class="fiscal-cell">
-        <div class="fiscal-label">Growth</div>
-        <div class="fiscal-value" id="fdGrowth">—</div>
-      </div>
-      <div class="fiscal-cell">
-        <div class="fiscal-label">Primary Balance</div>
-        <div class="fiscal-value" id="fdPrimary">—</div>
-      </div>
-      <div class="fiscal-cell">
-        <div class="fiscal-label">Inflation</div>
-        <div class="fiscal-value" id="fdInflation">—</div>
-      </div>
-      <div class="fiscal-cell">
-        <div class="fiscal-label">Market Confidence</div>
-        <div class="fiscal-value" id="fdConfidence">—</div>
-      </div>
-    </div>
 
-  </div>
-
-  </div>
-
-</div>
-
-<div id="infoModal" class="modal" hidden>
-  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modal-head"><h3 id="modalTitle"></h3><button type="button" id="modalClose" onclick="closeModal()" aria-label="Close">&times;</button></div>
-    <div id="modalBody" class="modal-body"></div>
-    <div class="modal-foot"><button type="button" onclick="closeModal()">Close</button></div>
-  </div>
-</div>
-
-<!-- PAGE 1 -->
-<div id="p1" class="screen active">
-  <div class="box">
-
-    <h2>The Economic Context</h2>
-
-    <p>Sri Lanka&rsquo;s economy is recovering from the 2022 crisis, but challenges remain. Economic growth has returned, while inflation has risen again (about 8% in August&ndash;September 2026) and public debt remains high at around 100% of GDP. Debt repayments leave less money for public services and investment, while many households continue to struggle with the cost of living. Rising energy prices, global uncertainty and climate-related disasters add further pressure.</p>
-
-    <p>As Finance Minister, you must balance economic growth, social protection and investment while keeping public finances sustainable.</p>
-
-    <div class="nav">
-      <button onclick="go('p2')">Next</button>
     </div>
 
   </div>
-</div>
 
-
-<!-- PAGE 2 -->
-<div id="p2" class="screen">
-  <div class="box">
-
-    <h2>Can You Build Sri Lanka&rsquo;s 2027 Budget?</h2>
-
-    <p>You have ten weeks to prepare Sri Lanka&rsquo;s 2027 Budget. You are the Finance Minister, and the decisions are yours to make.</p>
-
-    <p>You have around Rs. 5 trillion to spend before paying interest on government debt. You must decide how the Government raises money and where it spends it. Can you support the economy, protect essential public services and manage the country&rsquo;s debt?</p>
-
-    <p>You will work with your Cabinet, but you cannot increase everything at once. More money for one priority may mean less for another. Your choices will affect government revenue, spending, borrowing needs and the wider economy.</p>
-
-    <p class="info-icon-wrap"><span class="info-icon" tabindex="0" onclick="openTip(this, 'Source &amp; assumptions')">&#9432; Source &amp; assumptions<span class="info-tooltip tip-long" style="display:none !important"><strong>Economic assumptions for 2027.</strong> Real GDP growth 3.2% and inflation 5.3% (IMF projections; inflation was about 8% in Aug&ndash;Sep 2026). The rupee weakens 4% over the year and the 1-year Treasury bill rate is about 9.25%.<br><br><strong>Natural growth.</strong> With no policy change, revenue grows with nominal GDP (real growth plus inflation, about 8.7%). Spending would need to grow as fast to keep its share of GDP. The 2027 Appropriation Bill sets spending before interest at Rs. 4,993 bn, only about 1% above this year, so every sector's share of GDP falls unless you raise it. Every slider starts at the Bill's figure (0%) and moves spending by that percentage.<br><br><strong>Interest.</strong> About 6% of GDP and mostly outside your control. The Treasury bill rate drives rupee borrowing costs; the exchange rate drives foreign interest and border taxes. More interest means less cash for other priorities.<br><br><strong>Limits.</strong> Spending before interest must stay below 13% of GDP (IMF-linked), and the Bill is already close to it. A large capital allocation uses up room that could fund spending more certain to be delivered, and capital projects have often been under-spent. How the deficit is financed is not part of this game.<br><br><strong>Targets.</strong> Revenue 15.1% of GDP, primary surplus 2.3%, public investment 4.0%, deficit no more than 3.7%, and the 13% spending ceiling. These are IMF projections (Country Report 26/111), because the Government's own 2027 targets come in the Budget Speech on 12 November 2026. Baselines are from the 2027 Appropriation Bill (7 October 2026). Growth, inflation, interest and tax effects of your choices are simplified game assumptions, not forecasts.</span></span></p>
-
-    <h2>Your challenge</h2>
-
-    <p>There is no perfect Budget. Spend too much, and the deficit may rise. Cut too much, and essential services and investment may suffer. Raise taxes, and you may collect more revenue, but households and businesses could face greater costs.</p>
-
-    <p>Make your choices, watch the numbers change, and see whether you can build a Budget that meets people&rsquo;s needs today while protecting Sri Lanka&rsquo;s economic future.</p>
-
-    <div class="nav">
-      <button onclick="go('p1')">Back</button>
-      <button onclick="go('p17')">Next</button>
+  <div id="infoModal" class="modal" hidden>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-head">
+        <h3 id="modalTitle"></h3><button type="button" id="modalClose" onclick="closeModal()"
+          aria-label="Close">&times;</button>
+      </div>
+      <div id="modalBody" class="modal-body"></div>
+      <div class="modal-foot"><button type="button" onclick="closeModal()">Close</button></div>
     </div>
-
-  </div>
-</div>
-
-<!-- PAGE 17 REVENUE CABINET -->
-<div id="p17" class="screen">
-<div class="box">
-
-<h2>Taxes</h2>
-
-<p>Before deciding how to spend the money, decide how the Government will raise it. With no change in policy, revenue grows with the economy to about Rs. 5,900 bn in 2027 (15.2% of GDP in 2026, grown by about 8.7%). The IMF projects revenue of 15.1% of GDP for 2027, and the Government is also improving tax collection through the Revenue Administration Management Information System. What, if anything, will you add to that?</p>
-
-<p class="info-icon-wrap"><span class="info-icon" tabindex="0" onclick="toggleInfoTooltip(this)">&#9432; Source &amp; assumptions<span class="info-tooltip">Baseline revenue is 2026 revenue (IMF projection, 15.2% of GDP) grown with nominal GDP. The revenue and growth effects of each option below are simulation assumptions built for this game, not official Treasury forecasts. They're designed to teach the direction of these trade-offs — progressive vs. regressive, growth vs. revenue — not to predict real collections.</span></span></p>
-
-<div class="stepper" id="stepper-p17" data-prev-page="p2" data-next-page="p4">
-
-<div class="stepper-counter">Step 1 of 3</div>
-
-<div class="step active">
-
-<p><strong>Question 1: How should the Government raise additional revenue?</strong></p>
-
-<div class="question" data-question="revenueApproach">
-
-<button onclick="selectTaxOption(this)" data-question="revenueApproach" data-impact="80" data-value="income">
-Increase taxes on income, profits and wealth <span class="impact-tag">+Rs. 80 bn</span><br>
-<small>A progressive option — it falls on higher earners and larger profits rather than everyone equally.</small>
-</button>
-
-<button onclick="selectTaxOption(this)" data-question="revenueApproach" data-impact="110" data-value="consumption">
-Increase taxes on goods and services <span class="impact-tag">+Rs. 110 bn</span><br>
-<small>Raises more revenue, but is regressive — it falls hardest on lower-income households and pushes up the cost of living.</small>
-</button>
-
-<button onclick="selectTaxOption(this)" data-question="revenueApproach" data-impact="50" data-value="compliance">
-Improve tax collection and reduce tax evasion <span class="impact-tag">+Rs. 50 bn</span><br>
-<small>Raises less immediately than a rate change, but is the domestic revenue mobilisation strategy the 2026 Budget itself emphasises (RAMIS).</small>
-</button>
-
-<button onclick="selectTaxOption(this)" data-question="revenueApproach" data-impact="0" data-value="unchanged">
-No new taxes: rely on the economy growing <span class="impact-tag">+Rs. 0 bn</span><br>
-<small>Tax rates stay as they are. Revenue still rises with the economy, but there are no new revenue measures, so the Budget depends more on spending decisions.</small>
-</button>
-
-</div>
-
-</div>
-
-<div class="step">
-
-<p><strong>Question 2: What should matter more when setting taxes?</strong></p>
-
-<div class="question" data-question="balanceApproach">
-
-<button onclick="selectTaxOption(this)" data-question="balanceApproach" data-impact="30" data-value="revenue">
-Prioritise revenue, even if it raises the tax burden <span class="impact-tag">+Rs. 30 bn</span><br>
-<small>Strengthens the Budget position but risks dampening private investment and growth.</small>
-</button>
-
-<button onclick="selectTaxOption(this)" data-question="balanceApproach" data-impact="-20" data-value="relief">
-Prioritise tax relief for households and businesses <span class="impact-tag">&minus;Rs. 20 bn</span><br>
-<small>Costs revenue in the near term, but is more growth-friendly and politically popular.</small>
-</button>
-
-<button onclick="selectTaxOption(this)" data-question="balanceApproach" data-impact="35" data-value="expand">
-Prioritise widening the tax base <span class="impact-tag">+Rs. 35 bn</span><br>
-<small>Aligns with formalising the economy — moderate revenue gain without raising rates on those already paying.</small>
-</button>
-
-</div>
-
-</div>
-
-<div class="step">
-
-<p style="margin-top:15px; font-weight: bold;">Impact of your choices</p>
-
-<p id="revenueImpact" class="fade-text" style="font-weight: normal;">
-Current revenue impact will appear here.
-</p>
-
-</div>
-
-<div class="step-nav">
-<button class="step-back-btn" onclick="stepperBack('stepper-p17')">Back</button>
-<button class="step-next-btn" onclick="stepperNext('stepper-p17')">Next</button>
-</div>
-
-</div>
-
-</div>
-</div>
-
-<!-- PAGE P4 EDUCATION -->
-<div id="p4" class="screen">
-<div class="box">
-
-<h2>Week One: Education and Skills</h2>
-<p class="subtitle">Investing in Sri Lanka&#x27;s Future</p>
-<p>Education spending supports schools, teachers, universities, vocational training and the development of skills for future employment. As Finance Minister, decide how much to allocate and how to balance the needs of schools, higher education and skills development.</p>
-
-<div class="stepper" id="stepper-p4" data-prev-page="p17" data-next-page="p5">
-
-<div class="stepper-counter">Step 1 of 3</div>
-
-<div class="step active" data-requires-touch="edu"><p class="tradeoff"><strong>Your challenge.</strong> Decide how much to allocate to education and which parts of the education system should receive priority.</p><p class="info-icon-wrap"><span class="info-icon" tabindex="0" onclick="toggleInfoTooltip(this)">&#9432; Source &amp; assumptions<span class="info-tooltip">The 2027 Appropriation Bill proposes Rs. 328 bn for the Ministry of Education, Higher Education and Vocational Education. The Bill does not split this between schools, universities and vocational training.</span></span></p><p><strong>How should the Government&#x27;s education allocation change?</strong></p><p>Choose whether to reduce, maintain or increase the proposed allocation, considering education needs and competing demands on public finances.</p><div class="slider-container">
-  <input type="range" id="slider-edu" min="-10" max="10" step="1" value="0" oninput="onSector('edu')">
-  <div id="your-edu" class="your-budget-marker">Your Budget: Rs. 328.0 bn (0%)</div>
-  <div id="base-edu" class="ref-marker marker-2025"><span class="tick"></span>2027 Bill:<br>Rs. 328.0 bn</div>
-  <div class="slider-range-labels"><span>Reduce<br>−10%</span><span>Increase<br>+10%</span></div>
-</div><div class="impact-live" id="impact-edu"></div></div>
-
-<div class="step"><p><strong>What should be the main priority within the education budget?</strong></p><div class="question"><button onclick="selectPriority(this)" data-sector="edu" data-label="Strengthen school education" data-desc="Prioritise teachers, learning materials, school facilities and the quality of primary and secondary education.">Strengthen school education<br><small>Prioritise teachers, learning materials, school facilities and the quality of primary and secondary education.</small></button>
-<button onclick="selectPriority(this)" data-sector="edu" data-label="Expand higher education" data-desc="Prioritise universities, research, facilities and access to tertiary education.">Expand higher education<br><small>Prioritise universities, research, facilities and access to tertiary education.</small></button>
-<button onclick="selectPriority(this)" data-sector="edu" data-label="Invest in vocational education and skills" data-desc="Prioritise technical training, vocational qualifications and skills linked to employment needs.">Invest in vocational education and skills<br><small>Prioritise technical training, vocational qualifications and skills linked to employment needs.</small></button>
-</div><p class="note">This choice changes the focus of the allocation. It does not add spending on top of the amount set by the slider.</p></div>
-
-<div class="step" data-impact-for="edu"><p><strong>Your choice</strong></p><div class="impact-live" id="impact-edu-final"></div><p class="tradeoff"><strong>The trade-off.</strong> Increasing the overall education allocation puts additional pressure on public finances. Keeping it unchanged means that giving more funding to one area may leave less for another. Reducing it creates fiscal space elsewhere but may limit resources available for education and skills development.</p></div>
-
-<div class="step-nav">
-<button class="step-back-btn" onclick="stepperBack('stepper-p4')">Back</button>
-<button class="step-next-btn" onclick="stepperNext('stepper-p4')">Next</button>
-</div>
-
-</div>
-
-</div>
-</div>
-
-<!-- PAGE P5 HEALTH -->
-<div id="p5" class="screen">
-<div class="box">
-
-<h2>Week Two: Health and Wellbeing</h2>
-<p class="subtitle">Protecting the Health of the Population</p>
-<p>Public healthcare provides essential services, from primary care and medicines to hospitals and specialist treatment. Decide how much to allocate and which health services should receive priority.</p>
-
-<div class="stepper" id="stepper-p5" data-prev-page="p4" data-next-page="p6">
-
-<div class="stepper-counter">Step 1 of 3</div>
-
-<div class="step active" data-requires-touch="health"><p class="tradeoff"><strong>Your challenge.</strong> Decide how much to allocate and which health services should receive priority.</p><p class="info-icon-wrap"><span class="info-icon" tabindex="0" onclick="toggleInfoTooltip(this)">&#9432; Source &amp; assumptions<span class="info-tooltip">The 2027 Appropriation Bill proposes Rs. 590.5 bn for the Ministry of Health and Mass Media (2026: Rs. 555.1 bn). This ministry allocation covers more than healthcare alone, so the game treats it as the health envelope, not as healthcare-only spending.</span></span></p><p><strong>How should the Government&#x27;s health allocation change?</strong></p><p>Choose whether to reduce, maintain or increase the proposed allocation, balancing healthcare needs against other demands on public finances.</p><div class="slider-container">
-  <input type="range" id="slider-health" min="-10" max="10" step="1" value="0" oninput="onSector('health')">
-  <div id="your-health" class="your-budget-marker">Your Budget: Rs. 590.5 bn (0%)</div>
-  <div id="base-health" class="ref-marker marker-2025"><span class="tick"></span>2027 Bill:<br>Rs. 590.5 bn</div>
-  <div class="slider-range-labels"><span>Reduce<br>−10%</span><span>Increase<br>+10%</span></div>
-</div><div class="impact-live" id="impact-health"></div></div>
-
-<div class="step"><p><strong>Which area of healthcare should receive priority?</strong></p><div class="question"><button onclick="selectPriority(this)" data-sector="health" data-label="Strengthen primary healthcare" data-desc="Improve access to local clinics, preventive care and early diagnosis.">Strengthen primary healthcare<br><small>Improve access to local clinics, preventive care and early diagnosis.</small></button>
-<button onclick="selectPriority(this)" data-sector="health" data-label="Improve hospitals and treatment" data-desc="Invest in hospital facilities, medical equipment, medicines and patient care.">Improve hospitals and treatment<br><small>Invest in hospital facilities, medical equipment, medicines and patient care.</small></button>
-<button onclick="selectPriority(this)" data-sector="health" data-label="Expand prevention and public health" data-desc="Strengthen vaccination, disease prevention, health promotion and early intervention.">Expand prevention and public health<br><small>Strengthen vaccination, disease prevention, health promotion and early intervention.</small></button>
-</div><p class="note">This choice changes the focus of the allocation. It does not add spending on top of the amount set by the slider.</p></div>
-
-<div class="step" data-impact-for="health"><p><strong>Your choice</strong></p><div class="impact-live" id="impact-health-final"></div><p class="tradeoff"><strong>The trade-off.</strong> Increasing the allocation puts additional pressure on public finances. Keeping it unchanged means prioritising some services over others, while reducing it creates fiscal space but may limit resources available for healthcare.</p></div>
-
-<div class="step-nav">
-<button class="step-back-btn" onclick="stepperBack('stepper-p5')">Back</button>
-<button class="step-next-btn" onclick="stepperNext('stepper-p5')">Next</button>
-</div>
-
-</div>
-
-</div>
-</div>
-
-<!-- PAGE P6 WELFARE -->
-<div id="p6" class="screen">
-<div class="box">
-
-<h2>Week Three: Welfare and Social Protection</h2>
-<p class="subtitle">Supporting Vulnerable Households</p>
-<p>Welfare programmes such as Aswesuma help eligible households meet essential needs. As Finance Minister, decide how much to spend on social protection, who should receive support and how to protect vulnerable households within a limited Budget.</p>
-
-<div class="stepper" id="stepper-p6" data-prev-page="p5" data-next-page="p9">
-
-<div class="stepper-counter">Step 1 of 4</div>
-
-<div class="step active" data-requires-touch="welfare"><p class="tradeoff"><strong>Your challenge.</strong> Decide how much to allocate to welfare, how to prioritise support and whether to protect recipients from rising prices.</p><p class="info-icon-wrap"><span class="info-icon" tabindex="0" onclick="toggleInfoTooltip(this)">&#9432; Source &amp; assumptions<span class="info-tooltip">The Bill proposes Rs. 79.8 bn (Rs. 43.8 bn recurrent, Rs. 36.0 bn capital) for the Ministry of Rural Development, Social Security and Community Empowerment. Social protection is spread across several programmes and the Bill does not itemise Aswesuma payments, so this is the game&#x27;s welfare envelope, not total social-protection spending.</span></span></p><p><strong>How should the Government&#x27;s welfare allocation change?</strong></p><p>The slider changes the total welfare allocation relative to the game&#x27;s baseline.</p><div class="slider-container">
-  <input type="range" id="slider-welfare" min="-10" max="10" step="1" value="0" oninput="onSector('welfare')">
-  <div id="your-welfare" class="your-budget-marker">Your Budget: Rs. 79.8 bn (0%)</div>
-  <div id="base-welfare" class="ref-marker marker-2025"><span class="tick"></span>2027 Bill:<br>Rs. 79.8 bn</div>
-  <div class="slider-range-labels"><span>Reduce spending<br>−10%</span><span>Increase spending<br>+10%</span></div>
-</div><div class="impact-live" id="impact-welfare"></div></div>
-
-<div class="step"><p><strong>Should welfare payments go up each year to match rising prices (inflation)?</strong></p><p>Prices are expected to rise about 5.3% in 2027. If payments stay the same, recipients can buy less each month.</p><div class="question"><button onclick="selectWelfareIndex(this)" data-value="yes">Yes: raise payments in line with prices<br><small>Payments go up by about 5.3%, so recipients can still buy the same as before. This costs the Government about Rs. 4.2 bn more.</small></button><button onclick="selectWelfareIndex(this)" data-value="no">No: leave payments as they are<br><small>No extra cost to the Government, but recipients can buy about 5% less as prices rise.</small></button></div><div class="impact-live" id="impact-welfare-idx"></div></div>
-
-<div class="step"><p><strong>What should welfare policy prioritise?</strong></p><div class="question"><button onclick="selectPriority(this)" data-sector="welfare" data-label="Expand coverage" data-desc="Extend support to more eligible low-income households, spreading available resources across more recipients.">Expand coverage<br><small>Extend support to more eligible low-income households, spreading available resources across more recipients.</small></button>
-<button onclick="selectPriority(this)" data-sector="welfare" data-label="Increase payments" data-desc="Provide larger payments to existing recipients, increasing support per household but potentially limiting the number covered.">Increase payments<br><small>Provide larger payments to existing recipients, increasing support per household but potentially limiting the number covered.</small></button>
-<button onclick="selectPriority(this)" data-sector="welfare" data-label="Support employment and livelihoods" data-desc="Invest in skills, employment and livelihood opportunities to help households improve longer-term earning potential.">Support employment and livelihoods<br><small>Invest in skills, employment and livelihood opportunities to help households improve longer-term earning potential.</small></button>
-</div><p class="note">This choice determines how the welfare allocation is prioritised. It does not automatically increase the total welfare budget beyond the amount set by the slider.</p></div>
-
-<div class="step" data-impact-for="welfare"><p><strong>Your choice</strong></p><div class="impact-live" id="impact-welfare-final"></div><p class="tradeoff"><strong>The trade-off.</strong> The Government cannot increase every spending priority without finding additional revenue or making savings elsewhere. Choices about coverage, payment size and longer-term livelihood opportunities affect who benefits and how far the available budget can stretch.</p></div>
-
-<div class="step-nav">
-<button class="step-back-btn" onclick="stepperBack('stepper-p6')">Back</button>
-<button class="step-next-btn" onclick="stepperNext('stepper-p6')">Next</button>
-</div>
-
-</div>
-
-</div>
-</div>
-
-<!-- PAGE P9 DEFENCE -->
-<div id="p9" class="screen">
-<div class="box">
-
-<h2>Week Four: Defence and National Security</h2>
-
-<p>Defence spending supports military personnel, national security, maritime protection, equipment and training. The Government has also highlighted modernisation, defence research, advanced technology and professional training. Decide how much to allocate to defence and how to prioritise spending within that budget. (Disaster response is covered in Week Ten.)</p>
-
-<div class="stepper" id="stepper-p9" data-prev-page="p6" data-next-page="p10">
-
-<div class="stepper-counter">Step 1 of 3</div>
-
-<div class="step active" data-requires-touch="def"><p class="tradeoff"><strong>Your challenge.</strong> Decide how much to allocate to defence and how to distribute that funding across competing priorities.</p><p class="info-icon-wrap"><span class="info-icon" tabindex="0" onclick="toggleInfoTooltip(this)">&#9432; Source &amp; assumptions<span class="info-tooltip">The 2027 Appropriation Bill proposes Rs. 458 bn for the Ministry of Defence (2026: Rs. 455 bn). Police and public security (Rs. 230.5 bn) sit in a separate ministry and are not adjustable here.</span></span></p><p><strong>How should the Government&#x27;s defence budget change?</strong></p><p>Choose whether to reduce, maintain or increase the allocation, considering security needs and competing demands on public finances.</p><div class="slider-container">
-  <input type="range" id="slider-def" min="-10" max="10" step="1" value="0" oninput="onSector('def')">
-  <div id="your-def" class="your-budget-marker">Your Budget: Rs. 458.0 bn (0%)</div>
-  <div id="base-def" class="ref-marker marker-2025"><span class="tick"></span>2027 Bill:<br>Rs. 458.0 bn</div>
-  <div class="slider-range-labels"><span>Reduce<br>−10%</span><span>Increase<br>+10%</span></div>
-</div><div class="impact-live" id="impact-def"></div></div>
-
-<div class="step"><p><strong>What should be the priority within the defence budget?</strong></p><div class="question"><button onclick="selectPriority(this)" data-sector="def" data-label="Maintain existing capabilities" data-desc="Prioritise personnel, equipment, maintenance and ongoing operations.">Maintain existing capabilities<br><small>Prioritise personnel, equipment, maintenance and ongoing operations.</small></button>
-<button onclick="selectPriority(this)" data-sector="def" data-label="Modernise defence capabilities" data-desc="Prioritise advanced equipment, technology, maritime security and research.">Modernise defence capabilities<br><small>Prioritise advanced equipment, technology, maritime security and research.</small></button>
-<button onclick="selectPriority(this)" data-sector="def" data-label="Strengthen training and professional capacity" data-desc="Prioritise training, technical skills and professional development across the armed forces.">Strengthen training and professional capacity<br><small>Prioritise training, technical skills and professional development across the armed forces.</small></button>
-</div><p class="note">This choice changes the focus of the defence allocation. It does not automatically increase total defence spending beyond the amount set by the slider.</p></div>
-
-<div class="step" data-impact-for="def"><p><strong>Your choice</strong></p><div class="impact-live" id="impact-def-final"></div><p class="tradeoff"><strong>The trade-off.</strong> Increasing the overall defence allocation puts additional pressure on public finances. Prioritising modernisation or training within the existing allocation means directing funds away from other defence activities. Every choice involves balancing national security needs against education, health, welfare and infrastructure.</p></div>
-
-<div class="step-nav">
-<button class="step-back-btn" onclick="stepperBack('stepper-p9')">Back</button>
-<button class="step-next-btn" onclick="stepperNext('stepper-p9')">Next</button>
-</div>
-
-</div>
-
-</div>
-</div>
-
-<!-- PAGE P10 ENERGY -->
-<div id="p10" class="screen">
-<div class="box">
-
-<h2>Week Five: Energy and Electricity</h2>
-<p class="subtitle">Keeping Energy Affordable, Reliable and Sustainable</p>
-<p>Energy affects household bills, the cost of running a business, transport, industry and economic growth. Balance affordable electricity with reliable supply and investment in a more sustainable energy system. In 2026 the Middle East war pushed fuel prices up by about half and electricity tariffs by about a third.</p>
-
-<div class="stepper" id="stepper-p10" data-prev-page="p9" data-next-page="p12">
-
-<div class="stepper-counter">Step 1 of 3</div>
-
-<div class="step active" data-requires-touch="energy"><p class="tradeoff"><strong>Your challenge.</strong> Choose how much to allocate to energy and whether to prioritise affordability, reliability or sustainability.</p><p class="info-icon-wrap"><span class="info-icon" tabindex="0" onclick="toggleInfoTooltip(this)">&#9432; Source &amp; assumptions<span class="info-tooltip">The 2027 Appropriation Bill proposes Rs. 30.2 bn for the Ministry of Energy (Rs. 1.2 bn recurrent, Rs. 29.0 bn capital); the earlier draft cites Rs. 23.1 bn for 2026. This is a small share of the Budget: fuel and electricity price support is not a separate line in the Bill, so the slider moves the ministry&#x27;s allocation only.</span></span></p><p><strong>How should the Government&#x27;s energy allocation change?</strong></p><p>Move the slider to change the Ministry of Energy allocation relative to the 2027 Bill. An allocation is not the same as actual spending: execution depends on project readiness and implementation capacity.</p><div class="slider-container">
-  <input type="range" id="slider-energy" min="-20" max="20" step="2" value="0" oninput="onSector('energy')">
-  <div id="your-energy" class="your-budget-marker">Your Budget: Rs. 30.2 bn (0%)</div>
-  <div id="base-energy" class="ref-marker marker-2025"><span class="tick"></span>2027 Bill:<br>Rs. 30.2 bn</div>
-  <div class="slider-range-labels"><span>Reduce<br>−20%</span><span>Increase<br>+20%</span></div>
-</div><div class="impact-live" id="impact-energy"></div></div>
-
-<div class="step"><p><strong>What should energy policy prioritise?</strong></p><div class="question"><button onclick="selectPriority(this)" data-sector="energy" data-label="Keep energy affordable" data-desc="Prioritise measures that help households and businesses manage electricity costs. Subsidies and bill relief have fiscal costs and must be funded explicitly.">Keep energy affordable<br><small>Prioritise measures that help households and businesses manage electricity costs. Subsidies and bill relief have fiscal costs and must be funded explicitly.</small></button>
-<button onclick="selectPriority(this)" data-sector="energy" data-label="Improve reliability and modernise the energy system" data-desc="Prioritise transmission, distribution, maintenance and other infrastructure for a more reliable supply.">Improve reliability and modernise the energy system<br><small>Prioritise transmission, distribution, maintenance and other infrastructure for a more reliable supply.</small></button>
-<button onclick="selectPriority(this)" data-sector="energy" data-label="Expand renewable energy and energy efficiency" data-desc="Prioritise solar, wind and measures that reduce energy waste. Projects require upfront investment and careful planning.">Expand renewable energy and energy efficiency<br><small>Prioritise solar, wind and measures that reduce energy waste. Projects require upfront investment and careful planning.</small></button>
-</div><p class="note">This choice determines the focus of the energy allocation. It does not add spending on top of the amount set by the slider.</p></div>
-
-<div class="step" data-impact-for="energy"><p><strong>Your choice</strong></p><div class="impact-live" id="impact-energy-final"></div><p class="tradeoff"><strong>The trade-off.</strong> Affordability asks who receives support and how it is funded. Reliability requires investment in maintaining and improving the system. Sustainability requires investment now to support a different energy mix over time.</p></div>
-
-<div class="step-nav">
-<button class="step-back-btn" onclick="stepperBack('stepper-p10')">Back</button>
-<button class="step-next-btn" onclick="stepperNext('stepper-p10')">Next</button>
-</div>
-
-</div>
-
-</div>
-</div>
-
-<!-- PAGE P12 INFRA -->
-<div id="p12" class="screen">
-<div class="box">
-
-<h2>Week Six: Infrastructure</h2>
-<p class="subtitle">Transport, Water and Climate Resilience</p>
-<p>Roads, public transport and water systems connect people to jobs, schools, markets and essential services. After Cyclone Ditwah (November 2025), about US$1.7 bn of damage was to infrastructure. Decide how to balance maintaining existing assets with building new and more resilient infrastructure.</p>
-
-<div class="stepper" id="stepper-p12" data-prev-page="p10" data-next-page="p14">
-
-<div class="stepper-counter">Step 1 of 3</div>
-
-<div class="step active" data-requires-touch="infra"><p class="tradeoff"><strong>Your challenge.</strong> Decide how much to allocate and whether to prioritise maintenance, transport connectivity or water access and climate resilience.</p><p class="info-icon-wrap"><span class="info-icon" tabindex="0" onclick="toggleInfoTooltip(this)">&#9432; Source &amp; assumptions<span class="info-tooltip">Game-defined envelope: Rs. 500 bn for Transport, Highways and Urban Development (Rs. 68 bn recurrent, Rs. 432 bn capital) plus Rs. 82.3 bn for Housing, Construction and Water Supply (Rs. 2.8 bn recurrent, Rs. 79.5 bn capital), from the 2027 Appropriation Bill. It is a total across two ministries, not a single allocation.</span></span></p><p><strong>How should the Government&#x27;s infrastructure allocation change?</strong></p><p>Allocation is not actual expenditure. The amount spent depends on project readiness, implementation capacity and capital-budget execution.</p><div class="slider-container">
-  <input type="range" id="slider-infra" min="-10" max="10" step="1" value="0" oninput="onSector('infra')">
-  <div id="your-infra" class="your-budget-marker">Your Budget: Rs. 582.3 bn (0%)</div>
-  <div id="base-infra" class="ref-marker marker-2025"><span class="tick"></span>2027 Bill:<br>Rs. 582.3 bn</div>
-  <div class="slider-range-labels"><span>Reduce investment<br>−10%</span><span>Expand investment<br>+10%</span></div>
-</div><div class="impact-live" id="impact-infra"></div></div>
-
-<div class="step"><p><strong>What should infrastructure investment prioritise?</strong></p><div class="question"><button onclick="selectPriority(this)" data-sector="infra" data-label="Maintain and rehabilitate existing infrastructure" data-desc="Repair roads, bridges and water systems, protecting previous public investment.">Maintain and rehabilitate existing infrastructure<br><small>Repair roads, bridges and water systems, protecting previous public investment.</small></button>
-<button onclick="selectPriority(this)" data-sector="infra" data-label="Improve transport connectivity" data-desc="Prioritise roads, public transport infrastructure and links between communities, services and economic centres.">Improve transport connectivity<br><small>Prioritise roads, public transport infrastructure and links between communities, services and economic centres.</small></button>
-<button onclick="selectPriority(this)" data-sector="infra" data-label="Expand water access and climate-resilient infrastructure" data-desc="Improve drinking-water systems and strengthen physical assets against floods, landslides and droughts.">Expand water access and climate-resilient infrastructure<br><small>Improve drinking-water systems and strengthen physical assets against floods, landslides and droughts.</small></button>
-</div><p class="note">This choice changes the focus within the allocation. It does not add spending on top of the slider.</p></div>
-
-<div class="step" data-impact-for="infra"><p><strong>Your choice</strong></p><div class="impact-live" id="impact-infra-final"></div><p class="tradeoff"><strong>The trade-off.</strong> Maintenance protects existing assets and may prevent more expensive repairs later. New transport projects can improve connectivity but require upfront investment. Water and resilient infrastructure can improve access to essential services and reduce the vulnerability of physical assets.</p></div>
-
-<div class="step-nav">
-<button class="step-back-btn" onclick="stepperBack('stepper-p12')">Back</button>
-<button class="step-next-btn" onclick="stepperNext('stepper-p12')">Next</button>
-</div>
-
-</div>
-
-</div>
-</div>
-
-<!-- PAGE P14 AGRI -->
-<div id="p14" class="screen">
-<div class="box">
-
-<h2>Week Seven: Agriculture</h2>
-<p class="subtitle">Food Production, Farm Incomes and Agricultural Resilience</p>
-<p>Agriculture supports food security, rural livelihoods, employment and domestic production. Farmers face El Niño-driven drought, damage from Cyclone Ditwah and changing weather. Decide how to support food production, farmer incomes and resilient agricultural livelihoods.</p>
-
-<div class="stepper" id="stepper-p14" data-prev-page="p12" data-next-page="p15">
-
-<div class="stepper-counter">Step 1 of 3</div>
-
-<div class="step active" data-requires-touch="agri"><p class="tradeoff"><strong>Your challenge.</strong> Decide how much to allocate to agriculture and whether to prioritise productivity, farmer incomes or resilience. Keep irrigation infrastructure and disaster response spending separate.</p><p class="info-icon-wrap"><span class="info-icon" tabindex="0" onclick="toggleInfoTooltip(this)">&#9432; Source &amp; assumptions<span class="info-tooltip">The 2027 Appropriation Bill proposes Rs. 218 bn for the Ministry of Agriculture, Livestock, Land and Irrigation (Rs. 99 bn recurrent, Rs. 119 bn capital). This ministry includes irrigation; the Infrastructure page does not, so nothing is counted twice.</span></span></p><p><strong>How should the Government&#x27;s agriculture allocation change?</strong></p><p>An allocation does not guarantee that money will be spent or production will increase. Outcomes depend on implementation, input availability, weather, farmer participation and markets.</p><div class="slider-container">
-  <input type="range" id="slider-agri" min="-10" max="10" step="1" value="0" oninput="onSector('agri')">
-  <div id="your-agri" class="your-budget-marker">Your Budget: Rs. 218.0 bn (0%)</div>
-  <div id="base-agri" class="ref-marker marker-2025"><span class="tick"></span>2027 Bill:<br>Rs. 218.0 bn</div>
-  <div class="slider-range-labels"><span>Reduce<br>−10%</span><span>Increase<br>+10%</span></div>
-</div><div class="impact-live" id="impact-agri"></div></div>
-
-<div class="step"><p><strong>What should agricultural policy prioritise?</strong></p><div class="question"><button onclick="selectPriority(this)" data-sector="agri" data-label="Improve farm productivity and access to inputs" data-desc="Support quality seeds, planting material, fertiliser, extension services and appropriate technology.">Improve farm productivity and access to inputs<br><small>Support quality seeds, planting material, fertiliser, extension services and appropriate technology.</small></button>
-<button onclick="selectPriority(this)" data-sector="agri" data-label="Strengthen farmer incomes and market access" data-desc="Improve storage, post-harvest facilities, processing and links between farmers and buyers.">Strengthen farmer incomes and market access<br><small>Improve storage, post-harvest facilities, processing and links between farmers and buyers.</small></button>
-<button onclick="selectPriority(this)" data-sector="agri" data-label="Diversify production and strengthen agricultural resilience" data-desc="Support crop diversification and farming practices that can better withstand changing weather and production risks.">Diversify production and strengthen agricultural resilience<br><small>Support crop diversification and farming practices that can better withstand changing weather and production risks.</small></button>
-</div><p class="note">This choice changes the focus of agricultural support within the allocation; it does not add spending on top of the slider.</p></div>
-
-<div class="step" data-impact-for="agri"><p><strong>Your choice</strong></p><div class="impact-live" id="impact-agri-final"></div><p class="tradeoff"><strong>The trade-off.</strong> Productivity and inputs can improve production but require funding and effective delivery. Market access can reduce losses and improve the value farmers receive. Diversification can reduce exposure to particular risks, although benefits may take time to emerge.</p></div>
-
-<div class="step-nav">
-<button class="step-back-btn" onclick="stepperBack('stepper-p14')">Back</button>
-<button class="step-next-btn" onclick="stepperNext('stepper-p14')">Next</button>
-</div>
-
-</div>
-
-</div>
-</div>
-
-<!-- PAGE P15 ADMIN -->
-<div id="p15" class="screen">
-<div class="box">
-
-<h2>Week Eight: Public Administration</h2>
-<p class="subtitle">Better Public Services, Greater Efficiency and Accountability</p>
-<p>Public administration affects how people access government services, how quickly decisions are made and how effectively public money is used. Institutions need staff and resources, but administrative costs must be managed within the country&#x27;s fiscal limits.</p>
-
-<div class="stepper" id="stepper-p15" data-prev-page="p14" data-next-page="p18">
-
-<div class="stepper-counter">Step 1 of 3</div>
-
-<div class="step active" data-requires-touch="admin"><p class="tradeoff"><strong>Your challenge.</strong> Decide how much to spend on public administration and whether to prioritise frontline services, institutional efficiency or accountability.</p><p class="info-icon-wrap"><span class="info-icon" tabindex="0" onclick="toggleInfoTooltip(this)">&#9432; Source &amp; assumptions<span class="info-tooltip">The 2027 Appropriation Bill proposes Rs. 651 bn for the Ministry of Public Administration, Provincial Councils and Local Government (2026: Rs. 596 bn). The Bill figures I could read do not separate pensions, so this is the full ministry allocation and may include pension-related spending.</span></span></p><p><strong>How should the Government change spending on public administration?</strong></p><p>Cutting expenditure does not automatically make government more efficient. The effect depends on what is cut and whether essential services continue.</p><div class="slider-container">
-  <input type="range" id="slider-admin" min="-10" max="10" step="1" value="0" oninput="onSector('admin')">
-  <div id="your-admin" class="your-budget-marker">Your Budget: Rs. 651.0 bn (0%)</div>
-  <div id="base-admin" class="ref-marker marker-2025"><span class="tick"></span>2027 Bill:<br>Rs. 651.0 bn</div>
-  <div class="slider-range-labels"><span>Reduce<br>−10%</span><span>Increase<br>+10%</span></div>
-</div><div class="impact-live" id="impact-admin"></div></div>
-
-<div class="step"><p><strong>What should public administration prioritise?</strong></p><div class="question"><button onclick="selectPriority(this)" data-sector="admin" data-label="Improve frontline public services" data-desc="Support government offices and frontline staff to deliver essential services and respond to the public.">Improve frontline public services<br><small>Support government offices and frontline staff to deliver essential services and respond to the public.</small></button>
-<button onclick="selectPriority(this)" data-sector="admin" data-label="Simplify procedures and strengthen institutional efficiency" data-desc="Reduce unnecessary duplication and clarify responsibilities between institutions.">Simplify procedures and strengthen institutional efficiency<br><small>Reduce unnecessary duplication and clarify responsibilities between institutions.</small></button>
-<button onclick="selectPriority(this)" data-sector="admin" data-label="Strengthen accountability and performance" data-desc="Improve monitoring, internal controls, transparency and measurement of service delivery.">Strengthen accountability and performance<br><small>Improve monitoring, internal controls, transparency and measurement of service delivery.</small></button>
-</div><p class="note">This choice changes the focus of administrative improvements within the allocation; it does not add expenditure on top of the slider.</p></div>
-
-<div class="step" data-impact-for="admin"><p><strong>Your choice</strong></p><div class="impact-live" id="impact-admin-final"></div><p class="tradeoff"><strong>The trade-off.</strong> Frontline services may need additional staff and operating resources. Institutional efficiency may improve delivery through better processes. Accountability can help identify waste and monitor results. Some reforms require upfront investment; others may improve efficiency within existing budgets.</p></div>
-
-<div class="step-nav">
-<button class="step-back-btn" onclick="stepperBack('stepper-p15')">Back</button>
-<button class="step-next-btn" onclick="stepperNext('stepper-p15')">Next</button>
-</div>
-
-</div>
-
-</div>
-</div>
-
-<!-- PAGE P18 DIGITAL -->
-<div id="p18" class="screen">
-<div class="box">
-
-<h2>Week Nine: Digital Economy and Government</h2>
-<p class="subtitle">Building Digital Public Services and Economic Opportunity</p>
-<p>Digital technology can make government services easier to access, improve how public institutions work and create opportunities for businesses. Examples include digital identity, online government payments, shared digital infrastructure, cybersecurity and digital-economy development.</p>
-
-<div class="stepper" id="stepper-p18" data-prev-page="p15" data-next-page="p16">
-
-<div class="stepper-counter">Step 1 of 3</div>
-
-<div class="step active" data-requires-touch="digital"><p class="tradeoff"><strong>Your challenge.</strong> Decide how much to allocate to digital transformation and whether to prioritise public services, secure digital infrastructure or economic innovation.</p><p class="info-icon-wrap"><span class="info-icon" tabindex="0" onclick="toggleInfoTooltip(this)">&#9432; Source &amp; assumptions<span class="info-tooltip">The 2027 Appropriation Bill proposes Rs. 26 bn for the Ministry of Digital Economy (Rs. 6 bn recurrent, Rs. 20 bn capital); the earlier draft cites Rs. 16 bn for 2026. Projects already counted on another page are not counted again here.</span></span></p><p><strong>How should the Government&#x27;s digital investment allocation change?</strong></p><p>Choose whether to reduce, maintain or increase the allocation for digital projects and systems.</p><div class="slider-container">
-  <input type="range" id="slider-digital" min="-10" max="10" step="1" value="0" oninput="onSector('digital')">
-  <div id="your-digital" class="your-budget-marker">Your Budget: Rs. 26.0 bn (0%)</div>
-  <div id="base-digital" class="ref-marker marker-2025"><span class="tick"></span>2027 Bill:<br>Rs. 26.0 bn</div>
-  <div class="slider-range-labels"><span>Reduce investment<br>−10%</span><span>Expand investment<br>+10%</span></div>
-</div><div class="impact-live" id="impact-digital"></div></div>
-
-<div class="step"><p><strong>What should digital investment prioritise?</strong></p><div class="question"><button onclick="selectPriority(this)" data-sector="digital" data-label="Improve digital government services" data-desc="Prioritise digital identity, online government payments, shared government systems, cloud infrastructure and easier access to public services.">Improve digital government services<br><small>Prioritise digital identity, online government payments, shared government systems, cloud infrastructure and easier access to public services.</small></button>
-<button onclick="selectPriority(this)" data-sector="digital" data-label="Strengthen digital infrastructure and cybersecurity" data-desc="Prioritise secure networks, data protection, cybersecurity capabilities and systems that allow institutions to exchange information safely.">Strengthen digital infrastructure and cybersecurity<br><small>Prioritise secure networks, data protection, cybersecurity capabilities and systems that allow institutions to exchange information safely.</small></button>
-<button onclick="selectPriority(this)" data-sector="digital" data-label="Expand the digital economy and innovation" data-desc="Support digital businesses, startups, AI, cloud services and innovation that can create economic opportunities.">Expand the digital economy and innovation<br><small>Support digital businesses, startups, AI, cloud services and innovation that can create economic opportunities.</small></button>
-</div><p class="note">This choice determines the focus of the digital allocation. It does not add spending on top of the slider.</p></div>
-
-<div class="step" data-impact-for="digital"><p><strong>Your choice</strong></p><div class="impact-live" id="impact-digital-final"></div><p class="tradeoff"><strong>The trade-off.</strong> Digital government services can improve access but require process redesign and maintenance. Shared infrastructure and cybersecurity need ongoing technical capacity. Digital-economy investment depends on private investment, skills, reliable infrastructure and market demand.</p></div>
-
-<div class="step-nav">
-<button class="step-back-btn" onclick="stepperBack('stepper-p18')">Back</button>
-<button class="step-next-btn" onclick="stepperNext('stepper-p18')">Next</button>
-</div>
-
-</div>
-
-</div>
-</div>
-
-<!-- PAGE P16 ENVIRO -->
-<div id="p16" class="screen">
-<div class="box">
-
-<h2>Week Ten: Environment and Disaster Management</h2>
-<p class="subtitle">Preparing for Future Emergencies</p>
-<p>Floods, landslides, droughts and cyclones can disrupt livelihoods, damage infrastructure and create unexpected costs for the Government. After Cyclone Ditwah, Parliament approved a Rs. 500 bn supplementary estimate. Decide how to reduce environmental and disaster risks and how much funding to keep available for emergencies.</p>
-
-<div class="stepper" id="stepper-p16" data-prev-page="p18" data-next-page="p13" data-next-action="showFinalResult" data-finish-label="Finish">
-
-<div class="stepper-counter">Step 1 of 3</div>
-
-<div class="step active"><p class="tradeoff"><strong>Your challenge.</strong> Decide how to reduce environmental and disaster risks and how much funding to reserve for emergencies. Prepare for uncertainty while keeping the overall Budget within its fiscal limits.</p><p><strong>What should the Government prioritise to reduce disaster risks?</strong></p><div class="question"><button onclick="selectPriority(this)" data-sector="env" data-label="Strengthen early warning and preparedness" data-desc="Improve weather monitoring, risk information, early warning systems and community preparedness.">Strengthen early warning and preparedness<br><small>Improve weather monitoring, risk information, early warning systems and community preparedness.</small></button>
-<button onclick="selectPriority(this)" data-sector="env" data-label="Protect ecosystems and natural environments" data-desc="Support forests, wetlands, coastal ecosystems and other natural environments that contribute to environmental health and resilience.">Protect ecosystems and natural environments<br><small>Support forests, wetlands, coastal ecosystems and other natural environments that contribute to environmental health and resilience.</small></button>
-<button onclick="selectPriority(this)" data-sector="env" data-label="Strengthen community disaster readiness" data-desc="Improve local coordination, public awareness and emergency preparedness.">Strengthen community disaster readiness<br><small>Improve local coordination, public awareness and emergency preparedness.</small></button>
-</div><p class="note">This choice determines the focus of the existing prevention and environmental allocation. It does not automatically increase total expenditure.</p></div>
-
-<div class="step" data-requires-touch="env"><p><strong>How much should the Government set aside for future emergencies?</strong></p><p>Choose how much funding to reserve for emergency relief, support for affected households and businesses, and restoration of essential services after a disaster. The Rs. 0 to 50 bn range is a game-design assumption; the 2027 Bill does not establish a dedicated fund of this size.</p><div class="slider-container">
-  <input type="range" id="slider-env" min="0" max="50" step="5" value="0" oninput="onSector('env')">
-  <div id="your-env" class="your-budget-marker">Your reserve: Rs. 0 bn</div>
-  <div class="reserve-ticks"><span style="left:0%">None<br>Rs. 0</span><span style="left:20%">Small<br>Rs. 10</span><span style="left:50%">Moderate<br>Rs. 25</span><span style="left:100%">Large<br>Rs. 50 bn</span></div>
-</div><div class="impact-live" id="impact-env"></div></div>
-
-<div class="step" data-impact-for="env"><p><strong>Your choice</strong></p><div class="impact-live" id="impact-env-final"></div><p class="tradeoff"><strong>The trade-off.</strong> Prevention and preparedness require resources before a disaster occurs. Emergency funding provides flexibility when unexpected costs arise, but leaves less fiscal space for other priorities. Prevention can reduce risks; reserves help finance responses when disasters occur.</p></div>
-
-<div class="step-nav">
-<button class="step-back-btn" onclick="stepperBack('stepper-p16')">Back</button>
-<button class="step-next-btn" onclick="stepperNext('stepper-p16')">Next</button>
-</div>
-
-</div>
-
-</div>
-</div>
-
-<div id="p13" class="screen">
-<div class="box">
-
-<h2>Sri Lanka Budget 2027 Outcome</h2>
-
-<p class="subtitle">
-Your decisions reflect trade-offs between fiscal stability, economic recovery, and public expectations.
-</p>
-
-<!-- HEADLINE -->
-<div id="headlineBox">
-  <h3 id="headlineText"></h3>
-  <p id="summaryText"></p>
-</div>
-
-<!-- FISCAL STATUS -->
-<div class="status-box" id="imfBox">
-  <div id="imfStatus">STATUS</div>
-  <p id="imfText"></p>
-</div>
-
-<!-- TARGET VS OUTCOME -->
-<div class="rules-table" id="rulesTable">
-
-  <div class="rules-header">2027 targets vs. your Budget</div>
-
-  <div class="rules-row rules-row-head">
-    <span>Indicator</span>
-    <span>Target (IMF)</span>
-    <span>Your Budget</span>
-    <span>Status</span>
   </div>
 
-  <div class="rules-row" id="ruleRowRevenue">
-    <span>Revenue / GDP</span>
-    <span id="ruleTargetRevenue">—</span>
-    <span id="ruleActualRevenue">—</span>
-    <span id="ruleStatusRevenue">—</span>
+  <!-- PAGE 1 -->
+  <div id="p1" class="screen active">
+    <div class="box">
+
+      <h2>The Economic Context</h2>
+
+      <p>Sri Lanka&rsquo;s economy is recovering from the 2022 crisis, but challenges remain. Economic growth has
+        returned, while inflation has risen again (about 8% in August&ndash;September 2026) and public debt remains high
+        at around 100% of GDP. Debt repayments leave less money for public services and investment, while many
+        households continue to struggle with the cost of living. Rising energy prices, global uncertainty and
+        climate-related disasters add further pressure.</p>
+
+      <p>As Finance Minister, you must balance economic growth, social protection and investment while keeping public
+        finances sustainable.</p>
+
+      <p>All starting figures in this game use the 2027 Appropriation Bill baseline together with IMF 2027
+        projections and clearly labelled game assumptions.</p>
+
+      <div class="nav">
+        <button onclick="go('p2')">Next</button>
+      </div>
+
+    </div>
   </div>
 
-  <div class="rules-row" id="ruleRowPrimary">
-    <span>Primary Balance / GDP</span>
-    <span id="ruleTargetPrimary">—</span>
-    <span id="ruleActualPrimary">—</span>
-    <span id="ruleStatusPrimary">—</span>
+
+  <!-- PAGE 2 -->
+  <div id="p2" class="screen">
+    <div class="box">
+
+      <h2>Can You Build Sri Lanka&rsquo;s 2027 Budget?</h2>
+
+      <p>You have ten weeks to prepare Sri Lanka&rsquo;s 2027 Budget. You are the Finance Minister, and the decisions
+        are yours to make.</p>
+
+      <p>You have around Rs. 5 trillion to spend excluding interest payments. You must decide how the
+        Government raises money and where it spends it. Can you support the economy, protect essential public services
+        and manage the country&rsquo;s debt?</p>
+
+      <p>You will work with your Cabinet, but you cannot increase everything at once. More money for one priority may
+        mean less for another. Your choices will affect government revenue, spending, borrowing needs and the wider
+        economy.</p>
+
+      <p class="info-icon-wrap"><span class="info-icon" tabindex="0"
+          onclick="openTip(this, 'Source &amp; assumptions')">&#9432; Source &amp; assumptions<span
+            class="info-tooltip tip-long" style="display:none !important"><strong>Economic assumptions for
+              2027.</strong> Real GDP growth 3.2% and inflation 5.3% (IMF projections; inflation was about 8% in
+            Aug&ndash;Sep 2026). The rupee weakens 4% over the year and the 1-year Treasury bill rate is about
+            9.25%.<br><br><strong>Natural growth.</strong> With no policy change, revenue grows with nominal GDP (real
+            growth plus inflation, about 8.7%). Spending would need to grow as fast to keep its share of GDP. The 2027
+            Appropriation Bill sets spending before interest at Rs. 4,993 bn, only about 1% above this year, so every
+            sector's share of GDP falls unless you raise it. Every slider starts at the Bill's figure (0%) and moves
+            spending by that percentage.<br><br><strong>Interest.</strong> About 6% of GDP and mostly outside your
+            control. The Treasury bill rate drives rupee borrowing costs; the exchange rate drives foreign interest and
+            border taxes. More interest means less cash for other priorities.<br><br><strong>Limits.</strong> Spending
+            before interest must not exceed 13% of the GDP projected for 2027 (IMF-linked), and the Bill is already
+            close to it. A large
+            capital allocation uses up room that could fund spending more certain to be delivered, and capital projects
+            have often been under-spent. How the deficit is financed is not part of this
+            game.<br><br><strong>Targets.</strong> Revenue 15.1% of GDP, primary surplus 2.3%, public investment 4.0%,
+            deficit no more than 3.7%, and the 13% spending ceiling. These are IMF projections (Country Report 26/111),
+            because the Government's own 2027 targets come in the Budget Speech on 12 November 2026. Baselines are from
+            the 2027 Appropriation Bill (7 October 2026). Growth, inflation, interest and tax effects of your choices
+            are simplified game assumptions, not forecasts.</span></span></p>
+
+      <h2>Your challenge</h2>
+
+      <p>There is no perfect Budget. Spend too much, and the deficit may rise. Cut too much, and essential services and
+        investment may suffer. Raise taxes, and you may collect more revenue, but households and businesses could face
+        greater costs.</p>
+
+      <p>Make your choices, watch the numbers change, and see whether you can build a Budget that meets people&rsquo;s
+        needs today while protecting Sri Lanka&rsquo;s economic future.</p>
+
+      <div class="nav">
+        <button onclick="go('p1')">Back</button>
+        <button onclick="go('p17')">Next</button>
+      </div>
+
+    </div>
   </div>
 
-  <div class="rules-row" id="ruleRowInvestment">
-    <span>Public Investment / GDP</span>
-    <span id="ruleTargetInvestment">—</span>
-    <span id="ruleActualInvestment">—</span>
-    <span id="ruleStatusInvestment">—</span>
+  <!-- PAGE 17 REVENUE CABINET -->
+  <div id="p17" class="screen">
+    <div class="box">
+
+      <h2>Taxes</h2>
+
+      <p>Before deciding how to spend the money, decide how the Government will raise it. With no change in policy,
+        revenue grows with the economy to about Rs. 5,900 bn in 2027 (15.2% of GDP in 2026, grown by about 8.7%). The
+        IMF projects revenue of 15.1% of GDP for 2027, and the Government is also improving tax collection through the
+        Revenue Administration Management Information System. What, if anything, will you add to that?</p>
+
+      <p class="info-icon-wrap"><span class="info-icon" tabindex="0" onclick="toggleInfoTooltip(this)">&#9432; Source
+          &amp; assumptions<span class="info-tooltip">Baseline revenue is 2026 revenue (IMF projection, 15.2% of GDP)
+            grown with nominal GDP. The revenue and growth effects of each option below are simulation assumptions built
+            for this game, not official Treasury forecasts. They're designed to teach the direction of these trade-offs
+            — progressive vs. regressive, growth vs. revenue — not to predict real collections.</span></span></p>
+
+      <div class="stepper" id="stepper-p17" data-prev-page="p2" data-next-page="p4">
+
+        <div class="stepper-counter">Step 1 of 3</div>
+
+        <div class="step active">
+
+          <p><strong>Question 1: How should the Government raise additional revenue?</strong></p>
+
+          <div class="question" data-question="revenueApproach">
+
+            <button onclick="selectTaxOption(this)" data-question="revenueApproach" data-impact="80"
+              data-value="income">
+              Increase taxes on income, profits and wealth <span class="impact-tag">+Rs. 80 bn</span><br>
+              <small>A progressive option — it falls on higher earners and larger profits rather than everyone
+                equally.</small>
+            </button>
+
+            <button onclick="selectTaxOption(this)" data-question="revenueApproach" data-impact="110"
+              data-value="consumption">
+              Increase taxes on goods and services <span class="impact-tag">+Rs. 110 bn</span><br>
+              <small>Raises more revenue, but is regressive — it falls hardest on lower-income households and pushes up
+                the cost of living.</small>
+            </button>
+
+            <button onclick="selectTaxOption(this)" data-question="revenueApproach" data-impact="50"
+              data-value="compliance">
+              Improve tax collection and reduce tax evasion <span class="impact-tag">+Rs. 50 bn</span><br>
+              <small>Raises less immediately than a rate change, but is the domestic revenue mobilisation strategy the
+                2026 Budget itself emphasises (RAMIS).</small>
+            </button>
+
+            <button onclick="selectTaxOption(this)" data-question="revenueApproach" data-impact="0"
+              data-value="unchanged">
+              No new taxes: rely on the economy growing <span class="impact-tag">+Rs. 0 bn</span><br>
+              <small>Tax rates stay as they are. Revenue still rises with the economy, but there are no new revenue
+                measures, so the Budget depends more on spending decisions.</small>
+            </button>
+
+          </div>
+
+        </div>
+
+        <div class="step">
+
+          <p><strong>Question 2: What should matter more when setting taxes?</strong></p>
+
+          <div class="question" data-question="balanceApproach">
+
+            <button onclick="selectTaxOption(this)" data-question="balanceApproach" data-impact="30"
+              data-value="revenue">
+              Prioritise revenue, even if it raises the tax burden <span class="impact-tag">+Rs. 30 bn</span><br>
+              <small>Strengthens the Budget position but risks dampening private investment and growth.</small>
+            </button>
+
+            <button onclick="selectTaxOption(this)" data-question="balanceApproach" data-impact="-20"
+              data-value="relief">
+              Prioritise tax relief for households and businesses <span class="impact-tag">&minus;Rs. 20 bn</span><br>
+              <small>Costs revenue in the near term, but is more growth-friendly and politically popular.</small>
+            </button>
+
+            <button onclick="selectTaxOption(this)" data-question="balanceApproach" data-impact="35"
+              data-value="expand">
+              Prioritise widening the tax base <span class="impact-tag">+Rs. 35 bn</span><br>
+              <small>Aligns with formalising the economy — moderate revenue gain without raising rates on those already
+                paying.</small>
+            </button>
+
+          </div>
+
+        </div>
+
+        <div class="step">
+
+          <p style="margin-top:15px; font-weight: bold;">Impact of your choices</p>
+
+          <p id="revenueImpact" class="fade-text" style="font-weight: normal;">
+            Current revenue impact will appear here.
+          </p>
+
+        </div>
+
+        <div class="step-nav">
+          <button class="step-back-btn" onclick="stepperBack('stepper-p17')">Back</button>
+          <button class="step-next-btn" onclick="stepperNext('stepper-p17')">Next</button>
+        </div>
+
+      </div>
+
+    </div>
   </div>
 
-  <div class="rules-row" id="ruleRowDeficit">
-    <span>Deficit / GDP</span>
-    <span id="ruleTargetDeficit">—</span>
-    <span id="ruleActualDeficit">—</span>
-    <span id="ruleStatusDeficit">—</span>
+  <!-- PAGE P4 EDUCATION -->
+  <div id="p4" class="screen">
+    <div class="box">
+
+      <h2>Week One: Education and Skills</h2>
+      <p class="subtitle">Investing in Sri Lanka&#x27;s Future</p>
+      <p>Education spending supports schools, teachers, universities, vocational training and the development of skills
+        for future employment. As Finance Minister, decide how much to allocate and how to balance the needs of schools,
+        higher education and skills development.</p>
+
+      <div class="stepper" id="stepper-p4" data-prev-page="p17" data-next-page="p5">
+
+        <div class="stepper-counter">Step 1 of 3</div>
+
+        <div class="step active" data-requires-touch="edu">
+          <p class="tradeoff"><strong>Your challenge.</strong> Decide how much to allocate to education and which parts
+            of the education system should receive priority.</p>
+          <p class="info-icon-wrap"><span class="info-icon" tabindex="0" onclick="toggleInfoTooltip(this)">&#9432;
+              Source &amp; assumptions<span class="info-tooltip">The 2027 Appropriation Bill proposes Rs. 328 bn for the
+                Ministry of Education, Higher Education and Vocational Education. The Bill does not split this between
+                schools, universities and vocational training.</span></span></p>
+          <p><strong>How should the Government&#x27;s education allocation change?</strong></p>
+          <p>Choose whether to reduce, maintain or increase the proposed allocation, considering education needs and
+            competing demands on public finances.</p>
+          <div class="slider-container">
+            <input type="range" id="slider-edu" min="-10" max="10" step="1" value="0" oninput="onSector('edu')">
+            <div id="your-edu" class="your-budget-marker">Your Budget: Rs. 328.0 bn (0%)</div>
+            <div id="base-edu" class="ref-marker marker-2025"><span class="tick"></span>2027 Bill:<br>Rs. 328.0 bn</div>
+            <div class="slider-range-labels"><span>Reduce<br>−10%</span><span>Increase<br>+10%</span></div>
+          </div>
+          <div class="impact-live" id="impact-edu"></div>
+        </div>
+
+        <div class="step">
+          <p><strong>What should be the main priority within the education budget?</strong></p>
+          <div class="question"><button onclick="selectPriority(this)" data-sector="edu"
+              data-label="Strengthen school education"
+              data-desc="Prioritise teachers, learning materials, school facilities and the quality of primary and secondary education.">Strengthen
+              school education<br><small>Prioritise teachers, learning materials, school facilities and the quality of
+                primary and secondary education.</small></button>
+            <button onclick="selectPriority(this)" data-sector="edu" data-label="Expand higher education"
+              data-desc="Prioritise universities, research, facilities and access to tertiary education.">Expand higher
+              education<br><small>Prioritise universities, research, facilities and access to tertiary
+                education.</small></button>
+            <button onclick="selectPriority(this)" data-sector="edu"
+              data-label="Invest in vocational education and skills"
+              data-desc="Prioritise technical training, vocational qualifications and skills linked to employment needs.">Invest
+              in vocational education and skills<br><small>Prioritise technical training, vocational qualifications and
+                skills linked to employment needs.</small></button>
+          </div>
+          <p class="note">This choice changes the focus of the allocation. It does not add spending on top of the amount
+            set by the slider.</p>
+        </div>
+
+        <div class="step" data-impact-for="edu">
+          <p><strong>Your choice</strong></p>
+          <div class="impact-live" id="impact-edu-final"></div>
+          <p class="tradeoff"><strong>The trade-off.</strong> Increasing the overall education allocation puts
+            additional pressure on public finances. Keeping it unchanged means that giving more funding to one area may
+            leave less for another. Reducing it creates fiscal space elsewhere but may limit resources available for
+            education and skills development.</p>
+        </div>
+
+        <div class="step-nav">
+          <button class="step-back-btn" onclick="stepperBack('stepper-p4')">Back</button>
+          <button class="step-next-btn" onclick="stepperNext('stepper-p4')">Next</button>
+        </div>
+
+      </div>
+
+    </div>
   </div>
 
-  <div class="rules-row" id="ruleRowPrimExp">
-    <span>Primary Expenditure / GDP</span>
-    <span id="ruleTargetPrimExp">—</span>
-    <span id="ruleActualPrimExp">—</span>
-    <span id="ruleStatusPrimExp">—</span>
+  <!-- PAGE P5 HEALTH -->
+  <div id="p5" class="screen">
+    <div class="box">
+
+      <h2>Week Two: Health and Wellbeing</h2>
+      <p class="subtitle">Protecting the Health of the Population</p>
+      <p>Public healthcare provides essential services, from primary care and medicines to hospitals and specialist
+        treatment. Decide how much to allocate and which health services should receive priority.</p>
+
+      <div class="stepper" id="stepper-p5" data-prev-page="p4" data-next-page="p6">
+
+        <div class="stepper-counter">Step 1 of 3</div>
+
+        <div class="step active" data-requires-touch="health">
+          <p class="tradeoff"><strong>Your challenge.</strong> Decide how much to allocate and which health services
+            should receive priority.</p>
+          <p class="info-icon-wrap"><span class="info-icon" tabindex="0" onclick="toggleInfoTooltip(this)">&#9432;
+              Source &amp; assumptions<span class="info-tooltip">The 2027 Appropriation Bill proposes Rs. 590.5 bn for
+                the Ministry of Health and Mass Media (2026: Rs. 555.1 bn). This ministry allocation covers more than
+                healthcare alone, so the game treats it as the health envelope, not as healthcare-only
+                spending.</span></span></p>
+          <p><strong>How should the Government&#x27;s health allocation change?</strong></p>
+          <p>Choose whether to reduce, maintain or increase the proposed allocation, balancing healthcare needs against
+            other demands on public finances.</p>
+          <div class="slider-container">
+            <input type="range" id="slider-health" min="-10" max="10" step="1" value="0" oninput="onSector('health')">
+            <div id="your-health" class="your-budget-marker">Your Budget: Rs. 590.5 bn (0%)</div>
+            <div id="base-health" class="ref-marker marker-2025"><span class="tick"></span>2027 Bill:<br>Rs. 590.5 bn
+            </div>
+            <div class="slider-range-labels"><span>Reduce<br>−10%</span><span>Increase<br>+10%</span></div>
+          </div>
+          <div class="impact-live" id="impact-health"></div>
+        </div>
+
+        <div class="step">
+          <p><strong>Which area of healthcare should receive priority?</strong></p>
+          <div class="question"><button onclick="selectPriority(this)" data-sector="health"
+              data-label="Strengthen primary healthcare"
+              data-desc="Improve access to local clinics, preventive care and early diagnosis.">Strengthen primary
+              healthcare<br><small>Improve access to local clinics, preventive care and early
+                diagnosis.</small></button>
+            <button onclick="selectPriority(this)" data-sector="health" data-label="Improve hospitals and treatment"
+              data-desc="Invest in hospital facilities, medical equipment, medicines and patient care.">Improve
+              hospitals and treatment<br><small>Invest in hospital facilities, medical equipment, medicines and patient
+                care.</small></button>
+            <button onclick="selectPriority(this)" data-sector="health" data-label="Expand prevention and public health"
+              data-desc="Strengthen vaccination, disease prevention, health promotion and early intervention.">Expand
+              prevention and public health<br><small>Strengthen vaccination, disease prevention, health promotion and
+                early intervention.</small></button>
+          </div>
+          <p class="note">This choice changes the focus of the allocation. It does not add spending on top of the amount
+            set by the slider.</p>
+        </div>
+
+        <div class="step" data-impact-for="health">
+          <p><strong>Your choice</strong></p>
+          <div class="impact-live" id="impact-health-final"></div>
+          <p class="tradeoff"><strong>The trade-off.</strong> Increasing the allocation puts additional pressure on
+            public finances. Keeping it unchanged means prioritising some services over others, while reducing it
+            creates fiscal space but may limit resources available for healthcare.</p>
+        </div>
+
+        <div class="step-nav">
+          <button class="step-back-btn" onclick="stepperBack('stepper-p5')">Back</button>
+          <button class="step-next-btn" onclick="stepperNext('stepper-p5')">Next</button>
+        </div>
+
+      </div>
+
+    </div>
   </div>
 
-  <div class="rules-footnote">Simulation estimate, not an official forecast. Targets are the IMF's 2027 projections (Country Report 26/111), because the Government's own 2027 targets are due in the Budget Speech on 12 November 2026. The 13% ceiling is the IMF-linked limit on spending before interest. Interest costs rise or fall with the T-bill rate and the rupee, which move with your Budget.</div>
+  <!-- PAGE P6 WELFARE -->
+  <div id="p6" class="screen">
+    <div class="box">
 
-</div>
+      <h2>Week Three: Welfare and Social Protection</h2>
+      <p class="subtitle">Supporting Vulnerable Households</p>
+      <p>Welfare programmes such as Aswesuma help eligible households meet essential needs. As Finance Minister, decide
+        how much to spend on social protection, who should receive support and how to protect vulnerable households
+        within a limited Budget.</p>
 
-<!-- WHY IT TURNED OUT THIS WAY -->
-<div class="why-box">
-  <h3>Why your Budget turned out this way</h3>
-  <div id="whyList"></div>
-</div>
+      <div class="stepper" id="stepper-p6" data-prev-page="p5" data-next-page="p9">
 
-<!-- CORE NUMBERS -->
-<div class="results-table">
+        <div class="stepper-counter">Step 1 of 4</div>
 
-  <div class="row">
-    <span>Government Revenue</span>
-    <span id="revValue"></span>
+        <div class="step active" data-requires-touch="welfare">
+          <p class="tradeoff"><strong>Your challenge.</strong> Decide how much to allocate to welfare, how to prioritise
+            support and whether to protect recipients from rising prices.</p>
+          <p class="info-icon-wrap"><span class="info-icon" tabindex="0" onclick="toggleInfoTooltip(this)">&#9432;
+              Source &amp; assumptions<span class="info-tooltip">The Bill proposes Rs. 79.8 bn (Rs. 43.8 bn recurrent,
+                Rs. 36.0 bn capital) for the Ministry of Rural Development, Social Security and Community Empowerment.
+                Social protection is spread across several programmes and the Bill does not itemise Aswesuma payments,
+                so this is the game&#x27;s welfare envelope, not total social-protection spending.</span></span></p>
+          <p><strong>How should the Government&#x27;s welfare allocation change?</strong></p>
+          <p>The slider changes the total welfare allocation relative to the game&#x27;s baseline.</p>
+          <div class="slider-container">
+            <input type="range" id="slider-welfare" min="-10" max="10" step="1" value="0" oninput="onSector('welfare')">
+            <div id="your-welfare" class="your-budget-marker">Your Budget: Rs. 79.8 bn (0%)</div>
+            <div id="base-welfare" class="ref-marker marker-2025"><span class="tick"></span>2027 Bill:<br>Rs. 79.8 bn
+            </div>
+            <div class="slider-range-labels"><span>Reduce spending<br>−10%</span><span>Increase spending<br>+10%</span>
+            </div>
+          </div>
+          <div class="impact-live" id="impact-welfare"></div>
+        </div>
+
+        <div class="step">
+          <p><strong>Should welfare payments go up each year to match rising prices (inflation)?</strong></p>
+          <p>Prices are expected to rise about 5.3% in 2027. If payments stay the same, recipients can buy less each
+            month.</p>
+          <div class="question"><button onclick="selectWelfareIndex(this)" data-value="yes">Yes: raise payments in line
+              with prices<br><small>Payments go up by about 5.3%, so recipients can still buy the same as before. This
+                costs the Government about Rs. 2.3 bn more.</small></button><button onclick="selectWelfareIndex(this)"
+              data-value="no">No: leave payments as they are<br><small>No extra cost to the Government, but recipients
+                can buy about 5% less as prices rise.</small></button></div>
+          <div class="impact-live" id="impact-welfare-idx"></div>
+        </div>
+
+        <div class="step">
+          <p><strong>What should welfare policy prioritise?</strong></p>
+          <div class="question"><button onclick="selectPriority(this)" data-sector="welfare"
+              data-label="Expand coverage"
+              data-desc="Extend support to more eligible low-income households, spreading available resources across more recipients.">Expand
+              coverage<br><small>Extend support to more eligible low-income households, spreading available resources
+                across more recipients.</small></button>
+            <button onclick="selectPriority(this)" data-sector="welfare" data-label="Increase payments"
+              data-desc="Provide larger payments to existing recipients, increasing support per household but potentially limiting the number covered.">Increase
+              payments<br><small>Provide larger payments to existing recipients, increasing support per household but
+                potentially limiting the number covered.</small></button>
+            <button onclick="selectPriority(this)" data-sector="welfare" data-label="Support employment and livelihoods"
+              data-desc="Invest in skills, employment and livelihood opportunities to help households improve longer-term earning potential.">Support
+              employment and livelihoods<br><small>Invest in skills, employment and livelihood opportunities to help
+                households improve longer-term earning potential.</small></button>
+          </div>
+          <p class="note">This choice determines how the welfare allocation is prioritised. It does not automatically
+            increase the total welfare budget beyond the amount set by the slider.</p>
+        </div>
+
+        <div class="step" data-impact-for="welfare">
+          <p><strong>Your choice</strong></p>
+          <div class="impact-live" id="impact-welfare-final"></div>
+          <p class="tradeoff"><strong>The trade-off.</strong> The Government cannot increase every spending priority
+            without finding additional revenue or making savings elsewhere. Choices about coverage, payment size and
+            longer-term livelihood opportunities affect who benefits and how far the available budget can stretch.</p>
+        </div>
+
+        <div class="step-nav">
+          <button class="step-back-btn" onclick="stepperBack('stepper-p6')">Back</button>
+          <button class="step-next-btn" onclick="stepperNext('stepper-p6')">Next</button>
+        </div>
+
+      </div>
+
+    </div>
   </div>
 
-  <div class="row">
-    <span>Government Expenditure</span>
-    <span id="expValue"></span>
+  <!-- PAGE P9 DEFENCE -->
+  <div id="p9" class="screen">
+    <div class="box">
+
+      <h2>Week Four: Defence and National Security</h2>
+
+      <p>Defence spending supports military personnel, national security, maritime protection, equipment and training.
+        The Government has also highlighted modernisation, defence research, advanced technology and professional
+        training. Decide how much to allocate to defence and how to prioritise spending within that budget. (Disaster
+        response is covered in Week Ten.)</p>
+
+      <div class="stepper" id="stepper-p9" data-prev-page="p6" data-next-page="p10">
+
+        <div class="stepper-counter">Step 1 of 3</div>
+
+        <div class="step active" data-requires-touch="def">
+          <p class="tradeoff"><strong>Your challenge.</strong> Decide how much to allocate to defence and how to
+            distribute that funding across competing priorities.</p>
+          <p class="info-icon-wrap"><span class="info-icon" tabindex="0" onclick="toggleInfoTooltip(this)">&#9432;
+              Source &amp; assumptions<span class="info-tooltip">The 2027 Appropriation Bill proposes Rs. 458 bn for the
+                Ministry of Defence (2026: Rs. 455 bn). Police and public security (Rs. 230.5 bn) sit in a separate
+                ministry and are not adjustable here.</span></span></p>
+          <p><strong>How should the Government&#x27;s defence budget change?</strong></p>
+          <p>Choose whether to reduce, maintain or increase the allocation, considering security needs and competing
+            demands on public finances.</p>
+          <div class="slider-container">
+            <input type="range" id="slider-def" min="-10" max="10" step="1" value="0" oninput="onSector('def')">
+            <div id="your-def" class="your-budget-marker">Your Budget: Rs. 458.0 bn (0%)</div>
+            <div id="base-def" class="ref-marker marker-2025"><span class="tick"></span>2027 Bill:<br>Rs. 458.0 bn</div>
+            <div class="slider-range-labels"><span>Reduce<br>−10%</span><span>Increase<br>+10%</span></div>
+          </div>
+          <div class="impact-live" id="impact-def"></div>
+        </div>
+
+        <div class="step">
+          <p><strong>What should be the priority within the defence budget?</strong></p>
+          <div class="question"><button onclick="selectPriority(this)" data-sector="def"
+              data-label="Maintain existing capabilities"
+              data-desc="Prioritise personnel, equipment, maintenance and ongoing operations.">Maintain existing
+              capabilities<br><small>Prioritise personnel, equipment, maintenance and ongoing
+                operations.</small></button>
+            <button onclick="selectPriority(this)" data-sector="def" data-label="Modernise defence capabilities"
+              data-desc="Prioritise advanced equipment, technology, maritime security and research.">Modernise defence
+              capabilities<br><small>Prioritise advanced equipment, technology, maritime security and
+                research.</small></button>
+            <button onclick="selectPriority(this)" data-sector="def"
+              data-label="Strengthen training and professional capacity"
+              data-desc="Prioritise training, technical skills and professional development across the armed forces.">Strengthen
+              training and professional capacity<br><small>Prioritise training, technical skills and professional
+                development across the armed forces.</small></button>
+          </div>
+          <p class="note">This choice changes the focus of the defence allocation. It does not automatically increase
+            total defence spending beyond the amount set by the slider.</p>
+        </div>
+
+        <div class="step" data-impact-for="def">
+          <p><strong>Your choice</strong></p>
+          <div class="impact-live" id="impact-def-final"></div>
+          <p class="tradeoff"><strong>The trade-off.</strong> Changing the overall defence allocation changes fiscal
+            space for other priorities. Prioritising modernisation or training within the existing allocation means
+            directing funds away from other defence activities. Every choice involves balancing national security needs
+            against education, health, welfare and infrastructure.</p>
+        </div>
+
+        <div class="step-nav">
+          <button class="step-back-btn" onclick="stepperBack('stepper-p9')">Back</button>
+          <button class="step-next-btn" onclick="stepperNext('stepper-p9')">Next</button>
+        </div>
+
+      </div>
+
+    </div>
   </div>
 
-  <div class="row total">
-    <span>Overall Balance</span>
-    <span id="balanceValue"></span>
+  <!-- PAGE P10 ENERGY -->
+  <div id="p10" class="screen">
+    <div class="box">
+
+      <h2>Week Five: Energy and Electricity</h2>
+      <p class="subtitle">Keeping Energy Affordable, Reliable and Sustainable</p>
+      <p>Energy affects household bills, the cost of running a business, transport, industry and economic growth.
+        Balance affordable electricity with reliable supply and investment in a more sustainable energy system. In 2026
+        the Middle East war pushed fuel prices up by about half and electricity tariffs by about a third.</p>
+
+      <div class="stepper" id="stepper-p10" data-prev-page="p9" data-next-page="p12">
+
+        <div class="stepper-counter">Step 1 of 3</div>
+
+        <div class="step active" data-requires-touch="energy">
+          <p class="tradeoff"><strong>Your challenge.</strong> Choose how much to allocate to energy and whether to
+            prioritise affordability, reliability or sustainability.</p>
+          <p class="info-icon-wrap"><span class="info-icon" tabindex="0" onclick="toggleInfoTooltip(this)">&#9432;
+              Source &amp; assumptions<span class="info-tooltip">The 2027 Appropriation Bill proposes Rs. 30.2 bn for
+                the Ministry of Energy (Rs. 1.2 bn recurrent, Rs. 29.0 bn capital); the earlier draft cites Rs. 23.1 bn
+                for 2026. This is a small share of the Budget: fuel and electricity price support is not a separate line
+                in the Bill, so the slider moves the ministry&#x27;s allocation only.</span></span></p>
+          <p><strong>How should the Government&#x27;s energy allocation change?</strong></p>
+          <p>Move the slider to change the Ministry of Energy allocation relative to the 2027 Bill. An allocation is not
+            the same as actual spending: execution depends on project readiness and implementation capacity.</p>
+          <div class="slider-container">
+            <input type="range" id="slider-energy" min="-20" max="20" step="2" value="0" oninput="onSector('energy')">
+            <div id="your-energy" class="your-budget-marker">Your Budget: Rs. 30.2 bn (0%)</div>
+            <div id="base-energy" class="ref-marker marker-2025"><span class="tick"></span>2027 Bill:<br>Rs. 30.2 bn
+            </div>
+            <div class="slider-range-labels"><span>Reduce<br>−20%</span><span>Increase<br>+20%</span></div>
+          </div>
+          <div class="impact-live" id="impact-energy"></div>
+        </div>
+
+        <div class="step">
+          <p><strong>What should energy policy prioritise?</strong></p>
+          <div class="question"><button onclick="selectPriority(this)" data-sector="energy"
+              data-label="Keep energy affordable"
+              data-desc="Prioritise measures that help households and businesses manage electricity costs. Subsidies and bill relief have fiscal costs and must be funded explicitly.">Keep
+              energy affordable<br><small>Prioritise measures that help households and businesses manage electricity
+                costs. Subsidies and bill relief have fiscal costs and must be funded explicitly.</small></button>
+            <button onclick="selectPriority(this)" data-sector="energy"
+              data-label="Improve reliability and modernise the energy system"
+              data-desc="Prioritise transmission, distribution, maintenance and other infrastructure for a more reliable supply.">Improve
+              reliability and modernise the energy system<br><small>Prioritise transmission, distribution, maintenance
+                and other infrastructure for a more reliable supply.</small></button>
+            <button onclick="selectPriority(this)" data-sector="energy"
+              data-label="Expand renewable energy and energy efficiency"
+              data-desc="Prioritise solar, wind and measures that reduce energy waste. Projects require upfront investment and careful planning.">Expand
+              renewable energy and energy efficiency<br><small>Prioritise solar, wind and measures that reduce energy
+                waste. Projects require upfront investment and careful planning.</small></button>
+          </div>
+          <p class="note">This choice determines the focus of the energy allocation. It does not add spending on top of
+            the amount set by the slider.</p>
+        </div>
+
+        <div class="step" data-impact-for="energy">
+          <p><strong>Your choice</strong></p>
+          <div class="impact-live" id="impact-energy-final"></div>
+          <p class="tradeoff"><strong>The trade-off.</strong> Affordability asks who receives support and how it is
+            funded. Reliability requires investment in maintaining and improving the system. Sustainability requires
+            investment now to support a different energy mix over time.</p>
+        </div>
+
+        <div class="step-nav">
+          <button class="step-back-btn" onclick="stepperBack('stepper-p10')">Back</button>
+          <button class="step-next-btn" onclick="stepperNext('stepper-p10')">Next</button>
+        </div>
+
+      </div>
+
+    </div>
   </div>
 
-  <div class="row">
-    <span>Deficit (% of GDP)</span>
-    <span id="deficitValue"></span>
+  <!-- PAGE P12 INFRA -->
+  <div id="p12" class="screen">
+    <div class="box">
+
+      <h2>Week Six: Infrastructure</h2>
+      <p class="subtitle">Transport, Water and Climate Resilience</p>
+      <p>Roads, public transport and water systems connect people to jobs, schools, markets and essential services.
+        After Cyclone Ditwah (November 2025), about US$1.7 bn infrastructure damage was sustained. Decide how to balance
+        maintaining existing assets with building new and more resilient infrastructure.</p>
+
+      <div class="stepper" id="stepper-p12" data-prev-page="p10" data-next-page="p14">
+
+        <div class="stepper-counter">Step 1 of 3</div>
+
+        <div class="step active" data-requires-touch="infra">
+          <p class="tradeoff"><strong>Your challenge.</strong> Decide how much to allocate and whether to prioritise
+            maintenance, transport connectivity or water access and climate resilience.</p>
+          <p class="info-icon-wrap"><span class="info-icon" tabindex="0" onclick="toggleInfoTooltip(this)">&#9432;
+              Source &amp; assumptions<span class="info-tooltip">Game-defined envelope: Rs. 500 bn for Transport,
+                Highways and Urban Development (Rs. 68 bn recurrent, Rs. 432 bn capital) plus Rs. 82.3 bn for Housing,
+                Construction and Water Supply (Rs. 2.8 bn recurrent, Rs. 79.5 bn capital), from the 2027 Appropriation
+                Bill. It is a total across two ministries, not a single allocation.</span></span></p>
+          <p><strong>How should the Government&#x27;s infrastructure allocation change?</strong></p>
+          <p>Allocation is not actual expenditure. The amount spent depends on project readiness, implementation
+            capacity and capital-budget execution.</p>
+          <div class="slider-container">
+            <input type="range" id="slider-infra" min="-10" max="10" step="1" value="0" oninput="onSector('infra')">
+            <div id="your-infra" class="your-budget-marker">Your Budget: Rs. 582.3 bn (0%)</div>
+            <div id="base-infra" class="ref-marker marker-2025"><span class="tick"></span>2027 Bill:<br>Rs. 582.3 bn
+            </div>
+            <div class="slider-range-labels"><span>Reduce investment<br>−10%</span><span>Expand
+                investment<br>+10%</span></div>
+          </div>
+          <div class="impact-live" id="impact-infra"></div>
+        </div>
+
+        <div class="step">
+          <p><strong>What should infrastructure investment prioritise?</strong></p>
+          <div class="question"><button onclick="selectPriority(this)" data-sector="infra"
+              data-label="Maintain and rehabilitate existing infrastructure"
+              data-desc="Repair roads, bridges and water systems, protecting previous public investment.">Maintain and
+              rehabilitate existing infrastructure<br><small>Repair roads, bridges and water systems, protecting
+                previous public investment.</small></button>
+            <button onclick="selectPriority(this)" data-sector="infra" data-label="Improve transport connectivity"
+              data-desc="Prioritise roads, public transport infrastructure and links between communities, services and economic centres.">Improve
+              transport connectivity<br><small>Prioritise roads, public transport infrastructure and links between
+                communities, services and economic centres.</small></button>
+            <button onclick="selectPriority(this)" data-sector="infra"
+              data-label="Expand water access and climate-resilient infrastructure"
+              data-desc="Improve drinking-water systems and strengthen physical assets against floods, landslides and droughts.">Expand
+              water access and climate-resilient infrastructure<br><small>Improve drinking-water systems and strengthen
+                physical assets against floods, landslides and droughts.</small></button>
+          </div>
+          <p class="note">This choice changes the focus within the allocation. It does not add spending on top of the
+            slider.</p>
+        </div>
+
+        <div class="step" data-impact-for="infra">
+          <p><strong>Your choice</strong></p>
+          <div class="impact-live" id="impact-infra-final"></div>
+          <p class="tradeoff"><strong>The trade-off.</strong> Maintenance protects existing assets and may prevent more
+            expensive repairs later. New transport projects can improve connectivity but require upfront investment.
+            Water and resilient infrastructure can improve access to essential services and reduce the vulnerability of
+            physical assets.</p>
+        </div>
+
+        <div class="step-nav">
+          <button class="step-back-btn" onclick="stepperBack('stepper-p12')">Back</button>
+          <button class="step-next-btn" onclick="stepperNext('stepper-p12')">Next</button>
+        </div>
+
+      </div>
+
+    </div>
   </div>
 
-<div class="row">
-  <span>Market Confidence</span>
-  <span id="confidenceValue"></span>
-</div>
+  <!-- PAGE P14 AGRI -->
+  <div id="p14" class="screen">
+    <div class="box">
 
-</div>
+      <h2>Week Seven: Agriculture</h2>
+      <p class="subtitle">Food Production, Farm Incomes and Agricultural Resilience</p>
+      <p>Agriculture supports food security, rural livelihoods, employment and domestic production. Farmers face El
+        Niño-driven drought, damage from Cyclone Ditwah and changing weather. Decide how to support food production,
+        farmer incomes and resilient agricultural livelihoods.</p>
 
-<!-- INTERPRETATION BLOCKS -->
-<div class="grid">
+      <div class="stepper" id="stepper-p14" data-prev-page="p12" data-next-page="p15">
 
-  <div class="card">
-    <div class="card-head"><h4>Public Services</h4><p class="info-icon-wrap"><span class="info-icon" tabindex="0" onclick="openTip(this, 'How is this calculated?')">&#9432; How is this calculated?<span class="info-tooltip tip-long" style="display:none !important">The game adds up the change in spending on the sectors it treats as social (education, health, welfare including any inflation-linked increase, and digital services) compared with the 2027 Appropriation Bill. Starting point: the Bill&rsquo;s figures, so the starting change is zero. The status is more room if social spending is more than Rs. 5 bn above the Bill, pressure if it is more than Rs. 5 bn below, and limited room otherwise. The game does not measure service quality or outcomes.</span></span></p></div>
-    <p class="card-sub">What your choices mean for public services and people.</p>
-    <p id="servicesText"></p>
+        <div class="stepper-counter">Step 1 of 3</div>
+
+        <div class="step active" data-requires-touch="agri">
+          <p class="tradeoff"><strong>Your challenge.</strong> Decide how much to allocate to agriculture and whether to
+            prioritise productivity, farmer incomes or resilience. Keep irrigation infrastructure and disaster response
+            spending separate.</p>
+          <p class="info-icon-wrap"><span class="info-icon" tabindex="0" onclick="toggleInfoTooltip(this)">&#9432;
+              Source &amp; assumptions<span class="info-tooltip">The 2027 Appropriation Bill proposes Rs. 218 bn for the
+                Ministry of Agriculture, Livestock, Land and Irrigation (Rs. 99 bn recurrent, Rs. 119 bn capital). This
+                ministry includes irrigation; the Infrastructure page does not, so nothing is counted
+                twice.</span></span></p>
+          <p><strong>How should the Government&#x27;s agriculture allocation change?</strong></p>
+          <p>An allocation does not guarantee that money will be spent or production will increase. Outcomes depend on
+            implementation, input availability, weather, farmer participation and markets.</p>
+          <div class="slider-container">
+            <input type="range" id="slider-agri" min="-10" max="10" step="1" value="0" oninput="onSector('agri')">
+            <div id="your-agri" class="your-budget-marker">Your Budget: Rs. 218.0 bn (0%)</div>
+            <div id="base-agri" class="ref-marker marker-2025"><span class="tick"></span>2027 Bill:<br>Rs. 218.0 bn
+            </div>
+            <div class="slider-range-labels"><span>Reduce<br>−10%</span><span>Increase<br>+10%</span></div>
+          </div>
+          <div class="impact-live" id="impact-agri"></div>
+        </div>
+
+        <div class="step">
+          <p><strong>What should agricultural policy prioritise?</strong></p>
+          <div class="question"><button onclick="selectPriority(this)" data-sector="agri"
+              data-label="Improve farm productivity and access to inputs"
+              data-desc="Support quality seeds, planting material, fertiliser, extension services and appropriate technology.">Improve
+              farm productivity and access to inputs<br><small>Support quality seeds, planting material, fertiliser,
+                extension services and appropriate technology.</small></button>
+            <button onclick="selectPriority(this)" data-sector="agri"
+              data-label="Strengthen farmer incomes and market access"
+              data-desc="Improve storage, post-harvest facilities, processing and links between farmers and buyers.">Strengthen
+              farmer incomes and market access<br><small>Improve storage, post-harvest facilities, processing and links
+                between farmers and buyers.</small></button>
+            <button onclick="selectPriority(this)" data-sector="agri"
+              data-label="Diversify production and strengthen agricultural resilience"
+              data-desc="Support crop diversification and farming practices that can better withstand changing weather and production risks.">Diversify
+              production and strengthen agricultural resilience<br><small>Support crop diversification and farming
+                practices that can better withstand changing weather and production risks.</small></button>
+          </div>
+          <p class="note">This choice changes the focus of agricultural support within the allocation; it does not add
+            spending on top of the slider.</p>
+        </div>
+
+        <div class="step" data-impact-for="agri">
+          <p><strong>Your choice</strong></p>
+          <div class="impact-live" id="impact-agri-final"></div>
+          <p class="tradeoff"><strong>The trade-off.</strong> Productivity and inputs can improve production but require
+            funding and effective delivery. Market access can reduce losses and improve the value farmers receive.
+            Diversification can reduce exposure to particular risks, although benefits may take time to emerge.</p>
+        </div>
+
+        <div class="step-nav">
+          <button class="step-back-btn" onclick="stepperBack('stepper-p14')">Back</button>
+          <button class="step-next-btn" onclick="stepperNext('stepper-p14')">Next</button>
+        </div>
+
+      </div>
+
+    </div>
   </div>
 
-  <div class="card">
-    <div class="card-head"><h4>Prices &amp; Energy Costs</h4><p class="info-icon-wrap"><span class="info-icon" tabindex="0" onclick="openTip(this, 'How is this calculated?')">&#9432; How is this calculated?<span class="info-tooltip tip-long" style="display:none !important">Inflation comes from the game&rsquo;s engine: it starts at the IMF&rsquo;s 5.3% for 2027 and rises by 0.25 points for every 1% of GDP of extra spending, plus any effect of the tax options you chose. The rupee starts at 4% depreciation and moves with the primary balance, inflation and the deficit. Status: easing if inflation is more than 0.1 point below the start, rising if it is more than 0.5 point above, and under pressure in between. The game does not calculate actual household energy bills.</span></span></p></div>
-    <p class="card-sub">How your Budget affects inflation and the cost pressures facing households and businesses.</p>
-    <p id="subsidyText"></p>
+  <!-- PAGE P15 ADMIN -->
+  <div id="p15" class="screen">
+    <div class="box">
+
+      <h2>Week Eight: Public Administration</h2>
+      <p class="subtitle">Better Public Services, Greater Efficiency and Accountability</p>
+      <p>Public administration affects how people access government services, how quickly decisions are made and how
+        effectively public money is used. Institutions need staff and resources, but administrative costs must be
+        managed within the country&#x27;s fiscal limits.</p>
+
+      <div class="stepper" id="stepper-p15" data-prev-page="p14" data-next-page="p18">
+
+        <div class="stepper-counter">Step 1 of 3</div>
+
+        <div class="step active" data-requires-touch="admin">
+          <p class="tradeoff"><strong>Your challenge.</strong> Decide how much to spend on public administration and
+            whether to prioritise frontline services, institutional efficiency or accountability.</p>
+          <p class="info-icon-wrap"><span class="info-icon" tabindex="0" onclick="toggleInfoTooltip(this)">&#9432;
+              Source &amp; assumptions<span class="info-tooltip">The 2027 Appropriation Bill proposes Rs. 651 bn for the
+                Ministry of Public Administration, Provincial Councils and Local Government (2026: Rs. 596
+                bn).</span></span></p>
+          <p><strong>How should the Government change spending on public administration?</strong></p>
+          <p>Cutting expenditure does not automatically make government more efficient. The effect depends on what is
+            cut and whether essential services continue.</p>
+          <div class="slider-container">
+            <input type="range" id="slider-admin" min="-10" max="10" step="1" value="0" oninput="onSector('admin')">
+            <div id="your-admin" class="your-budget-marker">Your Budget: Rs. 651.0 bn (0%)</div>
+            <div id="base-admin" class="ref-marker marker-2025"><span class="tick"></span>2027 Bill:<br>Rs. 651.0 bn
+            </div>
+            <div class="slider-range-labels"><span>Reduce<br>−10%</span><span>Increase<br>+10%</span></div>
+          </div>
+          <div class="impact-live" id="impact-admin"></div>
+        </div>
+
+        <div class="step">
+          <p><strong>What should public administration prioritise?</strong></p>
+          <div class="question"><button onclick="selectPriority(this)" data-sector="admin"
+              data-label="Improve frontline public services"
+              data-desc="Support government offices and frontline staff to deliver essential services and respond to the public.">Improve
+              frontline public services<br><small>Support government offices and frontline staff to deliver essential
+                services and respond to the public.</small></button>
+            <button onclick="selectPriority(this)" data-sector="admin"
+              data-label="Simplify procedures and strengthen institutional efficiency"
+              data-desc="Reduce unnecessary duplication and clarify responsibilities between institutions.">Simplify
+              procedures and strengthen institutional efficiency<br><small>Reduce unnecessary duplication and clarify
+                responsibilities between institutions.</small></button>
+            <button onclick="selectPriority(this)" data-sector="admin"
+              data-label="Strengthen accountability and performance"
+              data-desc="Improve monitoring, internal controls, transparency and measurement of service delivery.">Strengthen
+              accountability and performance<br><small>Improve monitoring, internal controls, transparency and
+                measurement of service delivery.</small></button>
+          </div>
+          <p class="note">This choice changes the focus of administrative improvements within the allocation; it does
+            not add expenditure on top of the slider.</p>
+        </div>
+
+        <div class="step" data-impact-for="admin">
+          <p><strong>Your choice</strong></p>
+          <div class="impact-live" id="impact-admin-final"></div>
+          <p class="tradeoff"><strong>The trade-off.</strong> Frontline services may need additional staff and operating
+            resources. Institutional efficiency may improve delivery through better processes. Accountability can help
+            identify waste and monitor results. Some reforms require upfront investment; others may improve efficiency
+            within existing budgets.</p>
+        </div>
+
+        <div class="step-nav">
+          <button class="step-back-btn" onclick="stepperBack('stepper-p15')">Back</button>
+          <button class="step-next-btn" onclick="stepperNext('stepper-p15')">Next</button>
+        </div>
+
+      </div>
+
+    </div>
   </div>
 
-  <div class="card">
-    <div class="card-head"><h4>Growth &amp; Investment</h4><p class="info-icon-wrap"><span class="info-icon" tabindex="0" onclick="openTip(this, 'How is this calculated?')">&#9432; How is this calculated?<span class="info-tooltip tip-long" style="display:none !important">Real growth starts at the IMF&rsquo;s 3.2% for 2027 and moves with total spending, capital spending, social spending, market confidence, crowding-out when the deficit is above 6% of GDP, and your tax choices. Public investment is capital spending in the Bill plus your capital changes, as a share of GDP. Status: improving if growth is more than 0.1 point above the start, weakening if more than 0.1 point below, and steady otherwise. An allocation does not guarantee that projects are finished or that the money is spent.</span></span></p></div>
-    <p class="card-sub">Whether your choices support economic activity and investment in the future.</p>
-    <p id="growthText"></p>
+  <!-- PAGE P18 DIGITAL -->
+  <div id="p18" class="screen">
+    <div class="box">
+
+      <h2>Week Nine: Digital Economy and Government</h2>
+      <p class="subtitle">Building Digital Public Services and Economic Opportunity</p>
+      <p>Digital technology can make government services easier to access, improve how public institutions work and
+        create opportunities for businesses. Examples include digital identity, online government payments, shared
+        digital infrastructure, cybersecurity and digital-economy development.</p>
+
+      <div class="stepper" id="stepper-p18" data-prev-page="p15" data-next-page="p16">
+
+        <div class="stepper-counter">Step 1 of 3</div>
+
+        <div class="step active" data-requires-touch="digital">
+          <p class="tradeoff"><strong>Your challenge.</strong> Decide how much to allocate to digital transformation and
+            whether to prioritise public services, secure digital infrastructure or economic innovation.</p>
+          <p class="info-icon-wrap"><span class="info-icon" tabindex="0" onclick="toggleInfoTooltip(this)">&#9432;
+              Source &amp; assumptions<span class="info-tooltip">The 2027 Appropriation Bill proposes Rs. 26 bn for the
+                Ministry of Digital Economy (Rs. 6 bn recurrent, Rs. 20 bn capital); the earlier draft cites Rs. 16 bn
+                for 2026. Projects already counted on another page are not counted again here.</span></span></p>
+          <p><strong>How should the Government&#x27;s digital investment allocation change?</strong></p>
+          <p>Choose whether to reduce, maintain or increase the allocation for digital projects and systems.</p>
+          <div class="slider-container">
+            <input type="range" id="slider-digital" min="-10" max="10" step="1" value="0" oninput="onSector('digital')">
+            <div id="your-digital" class="your-budget-marker">Your Budget: Rs. 26.0 bn (0%)</div>
+            <div id="base-digital" class="ref-marker marker-2025"><span class="tick"></span>2027 Bill:<br>Rs. 26.0 bn
+            </div>
+            <div class="slider-range-labels"><span>Reduce investment<br>−10%</span><span>Expand
+                investment<br>+10%</span></div>
+          </div>
+          <div class="impact-live" id="impact-digital"></div>
+        </div>
+
+        <div class="step">
+          <p><strong>What should digital investment prioritise?</strong></p>
+          <div class="question"><button onclick="selectPriority(this)" data-sector="digital"
+              data-label="Improve digital government services"
+              data-desc="Prioritise digital identity, online government payments, shared government systems, cloud infrastructure and easier access to public services.">Improve
+              digital government services<br><small>Prioritise digital identity, online government payments, shared
+                government systems, cloud infrastructure and easier access to public services.</small></button>
+            <button onclick="selectPriority(this)" data-sector="digital"
+              data-label="Strengthen digital infrastructure and cybersecurity"
+              data-desc="Prioritise secure networks, data protection, cybersecurity capabilities and systems that allow institutions to exchange information safely.">Strengthen
+              digital infrastructure and cybersecurity<br><small>Prioritise secure networks, data protection,
+                cybersecurity capabilities and systems that allow institutions to exchange information
+                safely.</small></button>
+            <button onclick="selectPriority(this)" data-sector="digital"
+              data-label="Expand the digital economy and innovation"
+              data-desc="Support digital businesses, startups, AI, cloud services and innovation that can create economic opportunities.">Expand
+              the digital economy and innovation<br><small>Support digital businesses, startups, AI, cloud services and
+                innovation that can create economic opportunities.</small></button>
+          </div>
+          <p class="note">This choice determines the focus of the digital allocation. It does not add spending on top of
+            the slider.</p>
+        </div>
+
+        <div class="step" data-impact-for="digital">
+          <p><strong>Your choice</strong></p>
+          <div class="impact-live" id="impact-digital-final"></div>
+          <p class="tradeoff"><strong>The trade-off.</strong> Digital government services can improve access but require
+            process redesign and maintenance. Shared infrastructure and cybersecurity need ongoing technical capacity.
+            Digital-economy investment depends on private investment, skills, reliable infrastructure and market demand.
+          </p>
+        </div>
+
+        <div class="step-nav">
+          <button class="step-back-btn" onclick="stepperBack('stepper-p18')">Back</button>
+          <button class="step-next-btn" onclick="stepperNext('stepper-p18')">Next</button>
+        </div>
+
+      </div>
+
+    </div>
   </div>
 
-  <div class="card">
-    <div class="card-head"><h4>Markets &amp; Confidence</h4><p class="info-icon-wrap"><span class="info-icon" tabindex="0" onclick="openTip(this, 'How is this calculated?')">&#9432; How is this calculated?<span class="info-tooltip tip-long" style="display:none !important">The score starts at 50 and is calculated as 50 plus 8 points for each percentage point the primary balance is above the 2.3% target, minus 4 points for each point the deficit is above 3.7% of GDP, kept between 0 and 100. It also feeds into growth. Status compares it with the score at the unchanged 2027 Bill: strengthening if it is more than 2 points higher, weakening if more than 2 points lower, otherwise cautious. It is a game indicator, not a measure of real investor sentiment.</span></span></p></div>
-    <p class="card-sub">How the Budget&rsquo;s fiscal position affects the game&rsquo;s confidence indicator.</p>
-    <p id="reactionText"></p>
+  <!-- PAGE P16 ENVIRO -->
+  <div id="p16" class="screen">
+    <div class="box">
+
+      <h2>Week Ten: Environment and Disaster Management</h2>
+      <p class="subtitle">Preparing for Future Emergencies</p>
+      <p>Floods, landslides, droughts and cyclones can disrupt livelihoods, damage infrastructure and create unexpected
+        costs for the Government. After Cyclone Ditwah, Parliament approved a Rs. 500 bn supplementary estimate. Decide
+        how to reduce environmental and disaster risks and how much funding to keep available for emergencies.</p>
+
+      <div class="stepper" id="stepper-p16" data-prev-page="p18" data-next-page="p13" data-next-action="showFinalResult"
+        data-finish-label="Finish">
+
+        <div class="stepper-counter">Step 1 of 3</div>
+
+        <div class="step active">
+          <p class="tradeoff"><strong>Your challenge.</strong> Decide how to reduce environmental and disaster risks and
+            how much funding to reserve for emergencies. Prepare for uncertainty while keeping the overall Budget within
+            its fiscal limits.</p>
+          <p><strong>What should the Government prioritise to reduce disaster risks?</strong></p>
+          <div class="question"><button onclick="selectPriority(this)" data-sector="env"
+              data-label="Strengthen early warning and preparedness"
+              data-desc="Improve weather monitoring, risk information, early warning systems and community preparedness.">Strengthen
+              early warning and preparedness<br><small>Improve weather monitoring, risk information, early warning
+                systems and community preparedness.</small></button>
+            <button onclick="selectPriority(this)" data-sector="env"
+              data-label="Protect ecosystems and natural environments"
+              data-desc="Support forests, wetlands, coastal ecosystems and other natural environments that contribute to environmental health and resilience.">Protect
+              ecosystems and natural environments<br><small>Support forests, wetlands, coastal ecosystems and other
+                natural environments that contribute to environmental health and resilience.</small></button>
+            <button onclick="selectPriority(this)" data-sector="env"
+              data-label="Strengthen community disaster readiness"
+              data-desc="Improve local coordination, public awareness and emergency preparedness.">Strengthen community
+              disaster readiness<br><small>Improve local coordination, public awareness and emergency
+                preparedness.</small></button>
+          </div>
+          <p class="note">This choice determines the focus of the existing prevention and environmental allocation. It
+            does not automatically increase total expenditure.</p>
+        </div>
+
+        <div class="step" data-requires-touch="env">
+          <p><strong>How much should the Government set aside for future emergencies?</strong></p>
+          <p>Choose how much funding to reserve for emergency relief, support for affected households and businesses,
+            and restoration of essential services after a disaster. The reserve levels below are game assumptions; the
+            2027 Bill does not establish a dedicated fund with these fixed amounts.</p>
+          <div class="slider-container">
+            <input type="range" id="slider-env" min="0" max="750" step="250" value="0" oninput="onSector('env')">
+            <div id="your-env" class="your-budget-marker">Your reserve: Rs. 0 bn</div>
+            <div class="reserve-ticks"><span style="left:0%">None<br>Rs. 0</span><span style="left:33.333%">Small<br>Rs.
+                250 bn</span><span style="left:66.667%">Moderate<br>Rs. 500 bn</span><span
+                style="left:100%">Large<br>Rs.
+                750 bn</span></div>
+          </div>
+          <div class="impact-live" id="impact-env"></div>
+        </div>
+
+        <div class="step" data-impact-for="env">
+          <p><strong>Your choice</strong></p>
+          <div class="impact-live" id="impact-env-final"></div>
+          <p class="tradeoff"><strong>The trade-off.</strong> Prevention and preparedness require resources before a
+            disaster occurs. Emergency funding provides flexibility when unexpected costs arise, but leaves less fiscal
+            space for other priorities. Prevention can reduce risks; reserves help finance responses when disasters
+            occur.</p>
+        </div>
+
+        <div class="step-nav">
+          <button class="step-back-btn" onclick="stepperBack('stepper-p16')">Back</button>
+          <button class="step-next-btn" onclick="stepperNext('stepper-p16')">Next</button>
+        </div>
+
+      </div>
+
+    </div>
   </div>
 
-</div>
+  <div id="p13" class="screen">
+    <div class="box">
 
-<div class="nav">
-<button onclick="window.location.reload()">Restart Simulation</button>
-</div>
+      <h2>Sri Lanka Budget 2027 Outcome</h2>
 
-</div>
-</div>
+      <p class="subtitle">
+        Your decisions reflect trade-offs between fiscal stability, economic recovery, and public expectations.
+      </p>
 
-<script src="js/data/sectors.js"></script>
-<script src="js/data/modal-content.js"></script>
-<script src="js/engine/state.js"></script>
-<script src="js/ui/navigation.js"></script>
-<script src="js/ui/modal.js"></script>
-<script src="js/ui/stepper.js"></script>
-<script src="js/ui/sectors.js"></script>
-<script src="js/ui/taxes.js"></script>
-<script src="js/engine/fiscal-engine.js"></script>
-<script src="js/ui/dashboard.js"></script>
-<script src="js/engine/outcome-explanation.js"></script>
-<script src="js/ui/results.js"></script>
-<script src="js/main.js"></script>
+      <!-- HEADLINE -->
+      <div id="headlineBox">
+        <h3 id="headlineText"></h3>
+        <p id="summaryText"></p>
+      </div>
+
+      <!-- FISCAL STATUS -->
+      <div class="status-box" id="imfBox">
+        <div id="imfStatus">STATUS</div>
+        <p id="imfText"></p>
+      </div>
+
+      <!-- TARGET VS OUTCOME -->
+      <div class="rules-table" id="rulesTable">
+
+        <div class="rules-header">2027 targets vs. your Budget</div>
+
+        <div class="rules-row rules-row-head">
+          <span>Indicator</span>
+          <span>Target (IMF)</span>
+          <span>Your Budget</span>
+          <span>Status</span>
+        </div>
+
+        <div class="rules-row" id="ruleRowRevenue">
+          <span>Revenue / GDP</span>
+          <span id="ruleTargetRevenue">—</span>
+          <span id="ruleActualRevenue">—</span>
+          <span id="ruleStatusRevenue">—</span>
+        </div>
+
+        <div class="rules-row" id="ruleRowPrimary">
+          <span>Primary Balance / GDP</span>
+          <span id="ruleTargetPrimary">—</span>
+          <span id="ruleActualPrimary">—</span>
+          <span id="ruleStatusPrimary">—</span>
+        </div>
+
+        <div class="rules-row" id="ruleRowInvestment">
+          <span>Public Investment / GDP</span>
+          <span id="ruleTargetInvestment">—</span>
+          <span id="ruleActualInvestment">—</span>
+          <span id="ruleStatusInvestment">—</span>
+        </div>
+
+        <div class="rules-row" id="ruleRowDeficit">
+          <span>Deficit / GDP</span>
+          <span id="ruleTargetDeficit">—</span>
+          <span id="ruleActualDeficit">—</span>
+          <span id="ruleStatusDeficit">—</span>
+        </div>
+
+        <div class="rules-row" id="ruleRowPrimExp">
+          <span>Primary Expenditure / GDP</span>
+          <span id="ruleTargetPrimExp">—</span>
+          <span id="ruleActualPrimExp">—</span>
+          <span id="ruleStatusPrimExp">—</span>
+        </div>
+
+        <div class="rules-footnote">Simulation estimate, not an official forecast. Targets are the IMF's 2027
+          projections (Country Report 26/111), because the Government's own 2027 targets are due in the Budget Speech on
+          12 November 2026. The 13% ceiling is the IMF-linked limit on spending before interest, measured against the
+          GDP projected when
+          the Budget is set. Public investment is scored on the capital allocation, not on actual delivery. Interest
+          costs rise or
+          fall with the T-bill rate and the rupee, which move with your Budget.</div>
+
+      </div>
+
+      <!-- WHY IT TURNED OUT THIS WAY -->
+      <div class="why-box">
+        <h3>Why your Budget turned out this way</h3>
+        <div id="whyList"></div>
+      </div>
+
+      <!-- CORE NUMBERS -->
+      <div class="results-table">
+
+        <div class="row">
+          <span>Government Revenue</span>
+          <span id="revValue"></span>
+        </div>
+
+        <div class="row">
+          <span>Government Expenditure</span>
+          <span id="expValue"></span>
+        </div>
+
+        <div class="row total">
+          <span>Overall Balance</span>
+          <span id="balanceValue"></span>
+        </div>
+
+        <div class="row">
+          <span>Deficit (% of GDP)</span>
+          <span id="deficitValue"></span>
+        </div>
+
+        <div class="row">
+          <span>Market Confidence</span>
+          <span id="confidenceValue"></span>
+        </div>
+
+      </div>
+
+      <!-- INTERPRETATION BLOCKS -->
+      <div class="grid">
+
+        <div class="card">
+          <div class="card-head">
+            <h4>Public Services</h4>
+            <p class="info-icon-wrap"><span class="info-icon" tabindex="0"
+                onclick="openTip(this, 'How is this calculated?')">&#9432; How is this calculated?<span
+                  class="info-tooltip tip-long" style="display:none !important">The game adds up the change in spending
+                  on the sectors it treats as social (education, health, welfare including any inflation-linked
+                  increase, and digital services) compared with the 2027 Appropriation Bill. Starting point: the
+                  Bill&rsquo;s figures, so the starting change is zero. The status is more room if social spending is
+                  more than Rs. 5 bn above the Bill, pressure if it is more than Rs. 5 bn below, and limited room
+                  otherwise. The game does not measure service quality or outcomes.</span></span></p>
+          </div>
+          <p class="card-sub">What your choices mean for public services and people.</p>
+          <p id="servicesText"></p>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <h4>Prices &amp; Energy Costs</h4>
+            <p class="info-icon-wrap"><span class="info-icon" tabindex="0"
+                onclick="openTip(this, 'How is this calculated?')">&#9432; How is this calculated?<span
+                  class="info-tooltip tip-long" style="display:none !important">Inflation comes from the game&rsquo;s
+                  engine: it starts at the IMF&rsquo;s 5.3% for 2027 and rises by 0.25 points for every 1% of GDP of
+                  extra spending, plus any effect of the tax options you chose. The rupee starts at 4% depreciation and
+                  moves with the primary balance, inflation and the deficit. Status: easing if inflation is more than
+                  0.1 point below the start, rising if it is more than 0.5 point above, and under pressure in between.
+                  The game does not calculate actual household energy bills.</span></span></p>
+          </div>
+          <p class="card-sub">How your Budget affects inflation and the cost pressures facing households and businesses.
+          </p>
+          <p id="subsidyText"></p>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <h4>Growth &amp; Investment</h4>
+            <p class="info-icon-wrap"><span class="info-icon" tabindex="0"
+                onclick="openTip(this, 'How is this calculated?')">&#9432; How is this calculated?<span
+                  class="info-tooltip tip-long" style="display:none !important">Real growth starts at the IMF&rsquo;s
+                  3.2% for 2027 and moves with total spending, capital spending, social spending, market confidence,
+                  crowding-out when the deficit is above 6% of GDP, and your tax choices. Public investment is capital
+                  spending in the Bill plus your capital changes, as a share of GDP. Status: improving if growth is more
+                  than 0.1 point above the start, weakening if more than 0.1 point below, and steady otherwise. An
+                  allocation does not guarantee that projects are finished or that the money is spent.</span></span></p>
+          </div>
+          <p class="card-sub">Whether your choices support economic activity and investment in the future.</p>
+          <p id="growthText"></p>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <h4>Markets &amp; Confidence</h4>
+            <p class="info-icon-wrap"><span class="info-icon" tabindex="0"
+                onclick="openTip(this, 'How is this calculated?')">&#9432; How is this calculated?<span
+                  class="info-tooltip tip-long" style="display:none !important">The score starts at 50 and is calculated
+                  as 50 plus 8 points for each percentage point the primary balance is above the 2.3% target, minus 4
+                  points for each point the deficit is above 3.7% of GDP, kept between 0 and 100. It also feeds into
+                  growth. Status compares it with the score at the unchanged 2027 Bill: strengthening if it is more than
+                  2 points higher, weakening if more than 2 points lower, otherwise cautious. It is a game indicator,
+                  not a measure of real investor sentiment.</span></span></p>
+          </div>
+          <p class="card-sub">How the Budget&rsquo;s fiscal position affects the game&rsquo;s confidence indicator.</p>
+          <p id="reactionText"></p>
+        </div>
+
+      </div>
+
+      <div class="nav">
+        <button onclick="window.location.reload()">Restart Simulation</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="js/data/sectors.js"></script>
+  <script src="js/data/modal-content.js"></script>
+  <script src="js/engine/state.js"></script>
+  <script src="js/ui/navigation.js"></script>
+  <script src="js/ui/modal.js"></script>
+  <script src="js/ui/stepper.js"></script>
+  <script src="js/ui/sectors.js"></script>
+  <script src="js/ui/taxes.js"></script>
+  <script src="js/engine/fiscal-engine.js"></script>
+  <script src="js/ui/dashboard.js"></script>
+  <script src="js/engine/outcome-explanation.js"></script>
+  <script src="js/ui/results.js"></script>
+  <script src="js/main.js"></script>
 </body>
+
 </html>
