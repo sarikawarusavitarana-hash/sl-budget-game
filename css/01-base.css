@@ -1,0 +1,16 @@
+html {
+  overflow-x: hidden;
+}
+
+body {
+  font-family: Georgia, serif;
+  font-size:14px;
+  background:#fff7ef;
+  margin:0;
+  /* --header-h is measured from the real fixed header by syncHeaderSpace() in
+     the script, so the gap under the header is always exact (no guessing). */
+  padding-top:var(--header-h, 115px);
+  overflow-x: hidden;
+  max-width: 100%;
+}
+

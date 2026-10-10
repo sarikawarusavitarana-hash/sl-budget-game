@@ -1,0 +1,170 @@
+/* BUDGET BAR */
+#budgetBar {
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  box-sizing:border-box;
+  background:#f5f5f5;
+  padding:5px 12px;
+  z-index:1000;
+}
+
+#budgetBarInner {
+  max-width:900px;
+  margin:0 auto;
+}
+
+/* PAGE TRACKER — compact step indicator, ~1.5cm tall */
+#pageTracker {
+  overflow-x:auto;
+  padding:4px 8px 3px 8px;
+  border-bottom:1px solid #e0d8cc;
+}
+
+.tracker-row {
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  white-space:nowrap;
+  min-width:fit-content;
+  margin:0 auto;
+}
+
+.tracker-step {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  flex-shrink:0;
+  padding:0 3px;
+}
+
+.tracker-dot {
+  width:11px;
+  height:11px;
+  border-radius:50%;
+  background:#fff;
+  border:2px solid #bbb;
+  display:block;
+  margin-bottom:2px;
+  transition:background 0.2s, border-color 0.2s;
+}
+
+.tracker-label {
+  font-size:9px;
+  color:#999;
+  white-space:nowrap;
+  line-height:1.1;
+}
+
+.tracker-line {
+  flex:0 0 12px;
+  height:2px;
+  background:#ccc;
+  margin-top:5px;
+}
+
+.tracker-line-dotted {
+  background:none;
+  border-top:2px dotted #ccc;
+  height:0;
+  margin-top:5px;
+}
+
+.tracker-step.completed .tracker-dot,
+.tracker-step.current .tracker-dot {
+  background:#1a1a1a;
+  border-color:#1a1a1a;
+}
+
+.tracker-step.current .tracker-dot {
+  box-shadow:0 0 0 3px rgba(26,26,26,0.15);
+}
+
+.tracker-step.completed .tracker-label {
+  color:#555;
+}
+
+.tracker-step.current .tracker-label {
+  color:#1a1a1a;
+  font-weight:bold;
+}
+
+.tracker-line.completed {
+  background:#1a1a1a;
+}
+
+/* FISCAL DASHBOARD */
+#fiscalDashboard {
+  margin-top:4px;
+  font-family:'Courier New', Courier, monospace;
+  background:#fff7ef;
+  color:#1a1a1a;
+  border:1px solid #1a1a1a;
+  border-radius:3px;
+  overflow:hidden;
+  max-width:900px;
+}
+
+.fiscal-header {
+  display:flex;
+  align-items:center;
+  padding:2px 8px;
+  background:#1a1a1a;
+  color:#fff7ef;
+  border-bottom:1px solid #1a1a1a;
+  font-weight:bold;
+  font-size:8px;
+  letter-spacing:0.5px;
+}
+
+.fiscal-header-spacer,
+.fiscal-header-week {
+  flex:1;
+}
+
+.fiscal-header-week {
+  text-align:right;
+}
+
+.fiscal-header-title {
+  flex:0 0 auto;
+  text-align:center;
+}
+
+.fiscal-row {
+  display:flex;
+  border-bottom:1px solid #e0d8cc;
+}
+
+.fiscal-row:last-child {
+  border-bottom:none;
+}
+
+.fiscal-cell {
+  flex:1;
+  padding:1px 6px 2px 6px;
+  border-right:1px solid #e0d8cc;
+}
+
+.fiscal-cell:last-child {
+  border-right:none;
+}
+
+.fiscal-label {
+  font-size:8px;
+  color:#8a7f6e;
+  text-transform:uppercase;
+  letter-spacing:0.5px;
+}
+
+.fiscal-value {
+  font-size:10px;
+  font-weight:bold;
+  margin-top:0px;
+  color:#1a1a1a;
+}
+
+.fiscal-value.negative { color:#c62828; }
+.fiscal-value.positive { color:#2e7d32; }
+

@@ -2,48 +2,33 @@
 
 ## Objective
 
-This project now separates policy content from implementation logic so that:
-
-- policy/economics experts can edit narrative and context safely
-- technical developers can evolve logic, UX, and architecture
-- both streams can work in parallel without merge conflicts in the core game engine
+The code is split by concern so that policy/economics contributors and developers can work in parallel without editing the same files.
 
 ## Ownership model
 
-- Policy team owns: `content/policy-content.json`
-- Engineering team owns: `budget_game_fixed.html` structure, scripts, and behaviour
-- Shared contract: stable element IDs used as content anchors
-
-## Technical contract
-
-1. The HTML contains stable IDs for policy-owned text blocks (for example `p1-economy-context`).
-2. `scripts/policy-content-loader.js` loads `content/policy-content.json` at runtime.
-3. If content loading fails, the game keeps working with inline fallback copy.
+- Policy team owns:
+  - on-screen text and tooltips in `budget_game_fixed.html`
+  - `js/data/modal-content.js` (About, FAQ, Sources pop-ups)
+  - `js/data/sectors.js` and `js/data/history.js` (allocations and history)
+  - `macro` and `targets` at the top of `js/engine/fiscal-engine.js`
+- Engineering team owns: `css/`, `js/ui/`, `js/engine/` logic, `js/main.js`, and page structure
+- Shared contract: stable element IDs and global function names used by inline handlers
 
 ## Policy editing workflow
 
-1. Open `content/policy-content.json`.
-2. Edit only `text` (or `html` where explicitly needed) values.
-3. Keep numeric assumptions aligned with source documents and dates.
-4. Run a browser check to confirm text flow and readability.
+1. Edit text or values in the files listed above only.
+2. Keep numeric assumptions aligned with source documents and dates, and with the workbook and *How the model works*.
+3. If you edit the history, update both `js/data/history.js` and the FAQ table in `js/data/modal-content.js`.
+4. Run a browser playthrough to confirm text flow, readability, and no console errors.
 
 ## Engineering workflow
 
-1. Keep ID anchors stable unless migration is intentional.
-2. If an ID must change, update both HTML and `content/policy-content.json`.
-3. Keep loader backward compatible to avoid breaking policy-only edits.
-4. Validate that fallback copy still reads correctly when JSON is unavailable.
+1. Keep element IDs and globally called function names stable unless a migration is intentional.
+2. Keep the `<link>` and `<script>` order in `budget_game_fixed.html`.
+3. Avoid changing model outcomes as a side effect of UI or refactoring work.
 
-## Seamless integration checklist
+## Integration checklist
 
-- Game loads with network/file access and applies JSON content.
-- Game still loads if JSON fetch fails (fallback path).
 - No logic regressions in navigation, steppers, or budget calculations.
 - Updated copy does not overflow mobile layout.
-
-## Next migration phases
-
-- Phase 2: externalise all remaining policy copy (tooltips, option descriptions, result text).
-- Phase 3: add comprehensive schema validation for policy and model JSON in CI.
-- Phase 4: add automated regression and smoke tests for key gameplay paths.
-- Phase 5: split into a module-based front-end structure with maintainable test coverage.
+- No browser console errors during a full playthrough.
