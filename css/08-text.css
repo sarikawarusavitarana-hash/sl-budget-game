@@ -1,0 +1,11 @@
+/* FADE */
+.fade-text { transition: opacity 0.25s ease; }
+p.fade-text:empty { display:none; }
+.fade-out { opacity:0; }
+.plain-list { margin:0 0 14px 0; padding-left:22px; line-height:1.55; }
+.plain-list li { margin-bottom:6px; }
+.why-box { margin:18px 0; padding:14px 18px; background:#f6f6f6; border-left:4px solid #1a1a1a; border-radius:4px; text-align:left; }
+.why-box h3 { margin:0 0 8px 0; }
+.why-box ul { margin:0; padding-left:20px; line-height:1.5; }
+.why-box li { margin-bottom:8px; }
+

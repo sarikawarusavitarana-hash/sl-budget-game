@@ -1,0 +1,70 @@
+/* INFO TOOLTIP (replaces the old always-visible data-note boxes) */
+.info-icon-wrap {
+  margin:10px 0;
+}
+
+.info-icon {
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  padding:4px 10px;
+  border-radius:12px;
+  background:#f4f0ea;
+  border:1px solid #d8cfc0;
+  color:#6b5f4d;
+  font-size:12px;
+  font-weight:bold;
+  cursor:pointer;
+  user-select:none;
+}
+
+.info-icon:hover,
+.info-icon.open {
+  background:#e9e1d3;
+}
+
+.info-icon:focus-visible {
+  background:#e9e1d3;
+  outline:2px solid #1a1a1a;
+  outline-offset:2px;
+}
+
+.info-tooltip {
+  display:none;
+  position:absolute;
+  bottom:130%;
+  left:0;
+  width:320px;
+  max-width:80vw;
+  background:#1a1a1a;
+  color:#fff7ef;
+  padding:12px 14px;
+  border-radius:6px;
+  font-size:13px;
+  font-weight:normal;
+  line-height:1.6;
+  text-align:left;
+  z-index:1500;
+  box-shadow:0 4px 14px rgba(0,0,0,0.3);
+}
+
+.info-tooltip strong {
+  color:#fff;
+}
+
+.info-tooltip::after {
+  content:"";
+  position:absolute;
+  top:100%;
+  left:16px;
+  border-width:6px;
+  border-style:solid;
+  border-color:#1a1a1a transparent transparent transparent;
+}
+
+.info-icon:hover .info-tooltip,
+.info-icon:focus .info-tooltip,
+.info-icon.open .info-tooltip {
+  display:block;
+}

@@ -51,8 +51,8 @@ Recommended release flow:
 
 1. Open the site root URL and verify redirect to the game page.
 2. Complete one full game playthrough.
-3. Confirm About and FAQ quick-link buttons open expected pages.
-4. Confirm policy and model JSON files load successfully.
+3. Confirm About, FAQ, and Sources buttons open the expected pop-ups.
+4. Confirm no 404s for `css/` and `js/` files in the browser network tab.
 5. Confirm no browser console errors.
 
 ## Troubleshooting
@@ -60,4 +60,4 @@ Recommended release flow:
 - 404 at root: verify `index.html` exists in repository root.
 - Setup Pages fails with `Get Pages site failed` / `Not Found`: the Pages API could not find an accessible site; this occurs before artifact upload and is not a missing `index.html`. Have a repository administrator complete the one-time setup above (or configure `PAGES_SETUP_TOKEN`), then re-run the failed workflow from the Actions tab.
 - Workflow not running: verify Pages source is GitHub Actions.
-- JSON fetch issues: check network paths for `content/` and `scripts/` resources.
+- Unstyled page or missing behaviour: check that `css/` and `js/` were committed and paths match `budget_game_fixed.html`.

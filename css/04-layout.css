@@ -1,0 +1,63 @@
+/* SCREENS */
+.screen {
+  display:none;
+  min-height:calc(100vh - var(--header-h, 115px));
+  justify-content:center;
+  align-items:flex-start;
+  padding:12px 24px 24px;
+  box-sizing:border-box;
+}
+.screen.active { display:flex; }
+
+/* BOX */
+.box {
+  max-width:900px;
+  width:100%;
+  background:white;
+  padding:30px 40px;
+  border-top:6px solid black;
+  max-height:calc(100vh - var(--header-h, 115px) - 40px);
+  overflow-y:auto;
+}
+
+/* TEXT */
+p { line-height:1.6; }
+h2 { font-size:1.45em; }
+h3 { font-size:1.1em; }
+
+/* BUTTONS */
+button {
+  padding:10px 16px;
+  font-size:13px;
+  background:black;
+  color:white;
+  border:none;
+  cursor:pointer;
+}
+
+/* STACK QUESTION BUTTONS */
+.question button {
+  display:block;
+  width:100%;
+  margin:10px 0;
+  text-align:left;
+}
+
+.impact-tag {
+  font-weight:bold;
+  color:#ffd54f;
+  font-size:13px;
+}
+
+/* NAV */
+.nav {
+  margin-top:40px;
+}
+.nav button {
+  margin-right:15px;
+}
+
+/* SELECTED */
+.selected {
+  background:#b71c1c !important;
+}

@@ -9,23 +9,19 @@ This guide explains how to contribute safely and effectively, whether you are a 
 
 ## Core files and ownership
 
-- `budget_game_fixed.html`: game flow, calculations, UI behaviour, and fallback text.
-- `content/policy-content.json`: policy and narrative copy.
-- `content/model-config.json`: model parameters, thresholds, and policy impact mappings.
-- `scripts/policy-content-loader.js`: runtime loader for policy copy.
-- `scripts/model-config-loader.js`: runtime loader for model configuration.
-- `scripts/validate-configs.js`: consistency and structure checks.
-- `about.html`: About page opened from the in-game quick-link button.
-- `faq.html`: FAQ page opened from the in-game quick-link button.
+- `budget_game_fixed.html`: page markup and all on-screen text and tooltips.
+- `css/`: styles, loaded in numbered order.
+- `js/data/`: sector allocations, fiscal history, and About/FAQ/Sources pop-up text.
+- `js/engine/`: player state, fiscal model (`macro`, `targets`, `computeFiscalSnapshot()`), and results explanation.
+- `js/ui/`: navigation, pop-ups, steppers, sliders, taxes, dashboard, and results page.
+- `js/main.js`: start-up.
 
 ## Quick start for all contributors
 
 1. Pull latest changes from the `dev` branch.
-2. Serve the repository over HTTP locally.
-3. Open `budget_game_fixed.html` in a browser and complete one full playthrough.
-4. Make your scoped changes.
-5. Run `node scripts/validate-configs.js`.
-6. Re-test key flows and submit a pull request.
+2. Open `budget_game_fixed.html` in a browser and complete one full playthrough.
+3. Make your scoped changes.
+4. Re-test key flows with the browser console open and submit a pull request.
 
 ## Guide for developers
 
@@ -38,9 +34,9 @@ This guide explains how to contribute safely and effectively, whether you are a 
 
 ### Rules for safe engineering changes
 
-- Keep policy anchor IDs stable unless there is an intentional migration.
-- If an ID changes, update all affected references in HTML and policy JSON.
-- Preserve fallback behaviour when JSON loading fails.
+- Keep element IDs stable; scripts look them up by ID.
+- Keep the `<script>` and `<link>` order in `budget_game_fixed.html`; scripts share globals and later files depend on earlier ones.
+- Keep functions called from inline `onclick`/`oninput` handlers global.
 - Avoid hidden behavioural changes in model calculations unless explicitly planned.
 
 ### Developer validation checklist
@@ -48,8 +44,7 @@ This guide explains how to contribute safely and effectively, whether you are a 
 - No browser console errors after a full journey.
 - Sliders, steppers, and decision buttons work on desktop and mobile.
 - Final results render fiscal rules, smart cards, and summary text correctly.
-- About and FAQ quick-link buttons open the expected pages.
-- Config validation script passes.
+- About, FAQ, and Sources buttons open the expected pop-ups.
 
 ## Guide for policy, budget, and economics contributors
 
@@ -61,8 +56,13 @@ This guide explains how to contribute safely and effectively, whether you are a 
 
 ### Where to edit
 
-- Narrative and policy wording: `content/policy-content.json`.
-- Quantitative assumptions and policy impacts: `content/model-config.json`.
+- Narrative and policy wording: on-screen text in `budget_game_fixed.html`; pop-up text in `js/data/modal-content.js`.
+- Sector allocations: `js/data/sectors.js`.
+- Macro assumptions and fiscal targets: `macro` and `targets` in `js/engine/fiscal-engine.js`.
+
+The ten-year history appears in the FAQ table in `js/data/modal-content.js`.
+
+When you change an assumption, coefficient or Bill figure, update the Excel workbook and *How the model works* in the same change. Then re-run the model regression check in `docs/beta-readiness-checklist.md`.
 
 ### Rules for safe domain changes
 
@@ -78,8 +78,7 @@ This guide explains how to contribute safely and effectively, whether you are a 
   - baseline
   - expansionary/high-spend
   - fiscally conservative
-- Policy keys remain aligned with HTML IDs.
-- Config validation script passes.
+- No browser console errors after the change.
 
 ## Pull request expectations
 
@@ -92,7 +91,7 @@ Include the following in every pull request:
 
 ## Common mistakes to avoid
 
-- Editing narrative text directly in HTML when it belongs in policy-content.json.
+- Changing element IDs without updating the scripts that use them.
+- Reordering `<script>` or `<link>` tags.
 - Mixing unrelated UI refactors with model calibration changes in one pull request.
-- Changing IDs without synchronising policy keys.
-- Skipping the validation script before opening a pull request.
+- Skipping a full browser playthrough before opening a pull request.
