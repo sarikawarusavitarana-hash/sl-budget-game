@@ -45,7 +45,7 @@ document.addEventListener("keydown", function (e) {
   }
   if (e.key !== "Enter" && e.key !== " ") return;
   let trigger = e.target?.closest?.(".info-icon");
-  if (!trigger) return;
+  if (!trigger || !(trigger.getAttribute("onclick") || "").includes("openTip(")) return;
   e.preventDefault();
   trigger.click();
 });
