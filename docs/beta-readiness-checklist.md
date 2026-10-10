@@ -30,15 +30,15 @@
 
 ## Model regression check
 
-These figures come from section 8 of *How the model works*, where the game and the workbook were checked against each other. If a change is not meant to alter the model, the game must still produce them.
+These figures are produced by the current game code (`computeFiscalSnapshot()`). If a change is not meant to alter the model, the game must still produce them.
 
-Example choices: Education +5%, Health +3%, Infrastructure −4%, welfare indexed to inflation, Rs 250 bn emergency reserve, taxes on income, and tax relief.
+Example choices: Education +5%, Health +3%, Infrastructure −4%, welfare indexed to inflation, Rs 250 bn emergency reserve (the smallest non-zero level), taxes on income, and tax relief.
 
 | Result | Start (no choices) | Example |
 | --- | --- | --- |
 | Revenue | Rs 5,920 bn | Rs 6,009 bn |
 | Interest | Rs 2,333 bn | Rs 2,366 bn |
-| Overall balance | −Rs 1,407 bn | −Rs 1,613 bn |
+| Overall balance | −Rs 1,407 bn (−3.6% of GDP) | −Rs 1,613 bn (−4.1% of GDP) |
 | Debt / GDP | 95.7% | 95.9% |
 | Real growth | 3.2% | 3.5% |
 | Inflation | 5.3% | 5.4% |
@@ -46,7 +46,9 @@ Example choices: Education +5%, Health +3%, Infrastructure −4%, welfare indexe
 | Primary balance / GDP | 2.4% | 1.9% |
 | Market confidence | 50.6 | 44.7 |
 | Room under the 13% ceiling | Rs 70 bn | −Rs 193 bn |
-| Targets met | 5 of 5 | 2 of 5 |
+| Targets met | 5 of 5 | 2 of 5 (primary balance, deficit and ceiling missed) |
+
+The same choices without the reserve give revenue Rs 6,006 bn, interest Rs 2,332 bn, overall balance −Rs 1,332 bn, room under the ceiling Rs 57 bn and 5 of 5 targets met.
 
 If an intended model change alters these figures, update the workbook and *How the model works* in the same change.
 
