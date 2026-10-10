@@ -1,22 +1,22 @@
 /* =======================
    NAV + UI
 ======================= */
-function syncHeaderSpace(){
+function syncHeaderSpace() {
   let bar = document.getElementById('budgetBar');
-  if(!bar) return;
+  if (!bar) return;
   document.documentElement.style.setProperty('--header-h', bar.offsetHeight + 'px');
 }
-if(window.ResizeObserver){
+if (window.ResizeObserver) {
   let headerBar = document.getElementById('budgetBar');
-  if(headerBar) new ResizeObserver(syncHeaderSpace).observe(headerBar);
+  if (headerBar) new ResizeObserver(syncHeaderSpace).observe(headerBar);
 }
 window.addEventListener('resize', syncHeaderSpace);
 window.addEventListener('load', syncHeaderSpace);
 
-function go(id){
+function go(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   let next = document.getElementById(id);
-  if(next) next.classList.add('active');
+  if (next) next.classList.add('active');
   updateLiveDashboard();
   updatePageTracker(id);
   syncHeaderSpace();
@@ -28,30 +28,49 @@ const pageTrackerMap = {
   p12: "Infra", p14: "Agri", p15: "Admin", p18: "Digital", p16: "Enviro", p13: "Results"
 };
 
-function updatePageTracker(pageId){
+function updatePageTracker(pageId) {
   let tracker = document.getElementById("pageTracker");
-  if(!tracker) return;
+  if (!tracker) return;
   let currentLabel = pageTrackerMap[pageId];
-  if(!currentLabel){ tracker.style.display = "none"; return; }
+  if (!currentLabel) { tracker.style.display = "none"; return; }
   tracker.style.display = "block";
   let steps = Array.from(tracker.querySelectorAll(".tracker-step"));
   let lines = Array.from(tracker.querySelectorAll(".tracker-line"));
   let currentIndex = steps.findIndex(s => s.dataset.label === currentLabel);
   steps.forEach((s, i) => {
     s.classList.remove("completed", "current");
-    if(i < currentIndex) s.classList.add("completed");
-    else if(i === currentIndex) s.classList.add("current");
+    if (i < currentIndex) s.classList.add("completed");
+    else if (i === currentIndex) s.classList.add("current");
   });
   lines.forEach((l, i) => { l.classList.toggle("completed", i < currentIndex); });
 }
 
-function toggleInfoTooltip(el){
-  event.stopPropagation();
-  let wasOpen = el.classList.contains('open');
+function closeInfoTooltips() {
   document.querySelectorAll('.info-icon.open').forEach(i => i.classList.remove('open'));
-  if(!wasOpen) el.classList.add('open');
 }
-document.addEventListener('click', function(){
-  document.querySelectorAll('.info-icon.open').forEach(i => i.classList.remove('open'));
+
+function toggleInfoTooltip(el, ev) {
+  ev?.stopPropagation?.();
+  let wasOpen = el.classList.contains('open');
+  closeInfoTooltips();
+  if (!wasOpen) el.classList.add('open');
+}
+
+document.addEventListener('click', function (e) {
+  if (e.target.closest('.info-icon')) return;
+  closeInfoTooltips();
+});
+
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') {
+    closeInfoTooltips();
+    return;
+  }
+  if (e.key !== 'Enter' && e.key !== ' ') return;
+  let icon = e.target.closest('.info-icon');
+  if (!icon) return;
+  if ((icon.getAttribute('onclick') || '').includes('openTip(')) return;
+  e.preventDefault();
+  toggleInfoTooltip(icon, e);
 });
 

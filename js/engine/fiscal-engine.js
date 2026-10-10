@@ -24,21 +24,23 @@ const macro = {
 };
 const targets = { revenue: 15.1, primary: 2.3, capital: 4.0, deficit: 3.7 }; // IMF CR 26/111 projections for 2027
 
-function baselineRevenue(){ return macro.gdp2026 * macro.revenue2026Pct / 100 * (1 + nominalBase()); }
-function baselineInterest(){ return macro.interestPct2027 / 100 * macro.gdp2027IMF; }
+function baselineRevenue() { return macro.gdp2026 * macro.revenue2026Pct / 100 * (1 + nominalBase()); }
+function baselineInterest() { return macro.interestPct2027 / 100 * macro.gdp2027IMF; }
 
-function fiscalPosition(revenue, primary, interest){
+function fiscalPosition(revenue, primary, interest) {
   let total = primary + interest;
-  return { revenue, primaryExpenditure: primary, interest, totalExpenditure: total,
-    primaryBalance: revenue - primary, overallBalance: revenue - total, deficit: Math.max(0, total - revenue) };
+  return {
+    revenue, primaryExpenditure: primary, interest, totalExpenditure: total,
+    primaryBalance: revenue - primary, overallBalance: revenue - total, deficit: Math.max(0, total - revenue)
+  };
 }
-function updateDebt(stock0, gdp, nominalGrowth, fiscal){
+function updateDebt(stock0, gdp, nominalGrowth, fiscal) {
   let nominalGDP = gdp * (1 + nominalGrowth);
   let newDebt = stock0 - fiscal.overallBalance;
   return { debtStock: newDebt, nominalGDP, debtToGDP: newDebt / nominalGDP * 100 };
 }
 
-function calculateRevenueEffects(rp){
+function calculateRevenueEffects(rp) {
   const APPROACH_EFFECTS = { income: 80, consumption: 110, compliance: 50, unchanged: 0 };
   const APPROACH_INFLATION = { income: 0.1, consumption: 0.8, compliance: 0, unchanged: 0 };
   const BALANCE_EFFECTS = { revenue: 30, relief: -20, expand: 35 };
@@ -53,7 +55,7 @@ function calculateRevenueEffects(rp){
   };
 }
 
-function evaluateFiscalRules(r){
+function evaluateFiscalRules(r) {
   return {
     revenue: { label: "Revenue / GDP", target: targets.revenue, actual: r.revenueToGDP, met: r.revenueToGDP >= targets.revenue },
     primaryBalance: { label: "Primary Balance / GDP", target: targets.primary, actual: r.primaryBalanceToGDP, met: r.primaryBalanceToGDP >= targets.primary },
@@ -63,7 +65,7 @@ function evaluateFiscalRules(r){
   };
 }
 
-function computeFiscalSnapshot(){
+function computeFiscalSnapshot() {
   const D = sectorDeltas();
   const nomB = nominalBase();
   const gdpB = macro.gdp2026 * (1 + nomB);
@@ -87,8 +89,8 @@ function computeFiscalSnapshot(){
   let marketConfidence = 50 + (pb1 - targets.primary) * 8 - Math.max(0, def1 - targets.deficit) * 4;
   marketConfidence = Math.max(0, Math.min(100, marketConfidence));
 
-  // Macro responses (game assumptions)
-  const dp = D.total / gdpB * 100, dCap = D.capital / gdpB * 100, dSoc = D.social / gdpB * 100;
+  // Macro responses (game assumptions). The emergency reserve is excluded: it is only spent if a disaster occurs.
+  const dp = (D.total - D.by.reserve) / gdpB * 100, dCap = D.capital / gdpB * 100, dSoc = D.social / gdpB * 100;
   let inflation = Math.max(1, Math.min(15, macro.inflation + 0.25 * dp + revenueEffects.taxInflationEffect));
   const crowd = def1 > 6 ? 0.5 : 0;
   let growth = macro.realGrowth + 0.4 * dp + 0.5 * dCap + 0.3 * dSoc + (marketConfidence - 50) * 0.01 - crowd + revenueEffects.taxGrowthEffect;
@@ -107,7 +109,7 @@ function computeFiscalSnapshot(){
   const interest = domestic + foreign;
 
   // Revenue feedbacks: realised nominal GDP vs baseline, and border taxes with the rupee
-  const realisedNominal = (1 + growth/100) * (1 + inflation/100) - 1;
+  const realisedNominal = (1 + growth / 100) * (1 + inflation / 100) - 1;
   const gdpGapEffect = revBase * (realisedNominal - nomB);
   const borderEffect = revBase * macro.borderTaxShare * macro.borderTaxPassThrough * (fxDepreciation - macro.fxDepreciation) / 100;
 
@@ -121,7 +123,8 @@ function computeFiscalSnapshot(){
   const publicInvestmentToGDP = capital / nGDP * 100;
   const deficitToGDP = fiscal.deficit / nGDP * 100;
   const deficitPercent = fiscal.deficit / nGDP * 100;
-  const primaryExpToGDP = fiscal.primaryExpenditure / nGDP * 100;
+  // The ceiling is fixed against GDP projected when the Budget is set, so extra spending cannot loosen it.
+  const primaryExpToGDP = fiscal.primaryExpenditure / gdpB * 100;
   const interestToGDP = interest / nGDP * 100;
 
   const rules = evaluateFiscalRules({ revenueToGDP, primaryBalanceToGDP, publicInvestmentToGDP, deficitToGDP, primaryExpToGDP });

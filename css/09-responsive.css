@@ -4,29 +4,71 @@
 
 /* Tablets and small laptops */
 @media (max-width: 900px) {
-  #budgetBarInner { max-width: 100%; }
-  .box { max-width: 100%; }
+  #budgetBarInner {
+    max-width: 100%;
+  }
+
+  .box {
+    max-width: 100%;
+  }
 }
 
 /* Phones and small tablets */
 @media (max-width: 768px) {
-  .screen { padding: 10px 14px 18px; }
-  .box { padding: 22px 18px; max-height: calc(100vh - var(--header-h, 145px) - 28px); }
+  .screen {
+    padding: 10px 14px 18px;
+  }
 
-  h2 { font-size: 1.3em; }
+  .box {
+    padding: 22px 18px;
+    max-height: calc(100vh - var(--header-h, 145px) - 28px);
+    border-top-width: 5px;
+  }
 
-  #budgetBar { padding: 8px 10px; }
+  h2 {
+    font-size: 1.45rem;
+  }
 
-  /* Fiscal dashboard: 5 columns is too tight on a phone — wrap to 2 per row */
+  #budgetBar {
+    padding: 8px 10px;
+  }
+
+  .budget-scale-title {
+    font-size: 11px;
+  }
+
+  .budget-scale-labels {
+    font-size: 10px;
+  }
+
+  /* Fiscal dashboard: wrap to improve label legibility */
   .fiscal-row {
     flex-wrap: wrap;
   }
+
   .fiscal-cell {
-    flex: 1 1 30%;
-    min-width: 30%;
-    border-bottom: 1px solid #e0d8cc;
+    flex: 1 1 50%;
+    min-width: 50%;
+    border-bottom: 1px solid #d8e0ea;
+    border-right: 1px solid #d8e0ea;
   }
-  .fiscal-cell:nth-last-child(-n+1) { border-bottom: none; }
+
+  .fiscal-cell:nth-child(2n) {
+    border-right: none;
+  }
+
+  .fiscal-cell:nth-last-child(-n+2) {
+    border-bottom: none;
+  }
+
+  .fiscal-value,
+  .fiscal-cell-primary .fiscal-value {
+    font-size: 14px;
+  }
+
+  .fiscal-label {
+    font-size: 10px;
+  }
 
   /* Results page smart cards: stack instead of 2 columns */
   .grid {
@@ -36,54 +78,91 @@
   /* Fiscal rules table: shrink text and tighten columns rather than truncate */
   .rules-row {
     grid-template-columns: 1.6fr 0.8fr 0.8fr 0.9fr;
-    font-size: 11px;
+    font-size: 12px;
     padding: 7px 8px;
   }
-  .rules-header { font-size: 13px; }
+
+  .rules-header {
+    font-size: 13px;
+  }
 
   /* Nav and stepper buttons: let them wrap and stay full touch-target size */
-  .nav, .step-nav {
+  .nav,
+  .step-nav {
     flex-wrap: wrap;
   }
-  .nav button, .step-nav button {
-    flex: 1 1 auto;
-    min-width: 100px;
+
+  .nav button,
+  .step-nav button {
+    flex: 1 1 calc(50% - 6px);
+    min-width: 120px;
   }
 
   /* Slider range end-labels can crowd on narrow screens */
-  .slider-range-labels { font-size: 11px; }
-  .your-budget-marker { font-size: 10px; padding: 2px 6px; }
-  .ref-marker { font-size: 12px; }
-
-  /* Page tracker: allow it to scroll horizontally (already set) but shrink a touch */
-  .tracker-label { font-size: 8px; }
-
-  /* Info tooltips: centre under the icon instead of anchoring left, so they're
-     less likely to run off the edge of a narrow screen */
-  .info-tooltip {
-    left: 50%;
-    transform: translateX(-50%);
-    width: 260px;
+  .slider-range-labels {
+    font-size: 11px;
   }
+
+  .your-budget-marker {
+    font-size: 10px;
+    padding: 2px 6px;
+  }
+
+  .ref-marker {
+    font-size: 12px;
+  }
+
+  /* Page tracker */
+  .tracker-label {
+    font-size: 9px;
+  }
+
+  /* Info tooltips: show as a bottom sheet on touch layouts to avoid clipping
+     within scroll containers and narrow-width overflow */
+  .info-tooltip {
+    position: fixed;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    top: auto;
+    width: auto;
+    max-width: none;
+    max-height: 68vh;
+    overflow-y: auto;
+    transform: none;
+    z-index: 2100;
+  }
+
   .info-tooltip::after {
-    left: 50%;
-    transform: translateX(-50%);
+    display: none;
   }
 }
 
 /* Small phones */
 @media (max-width: 420px) {
-  .box { padding: 18px 14px; }
-  h2 { font-size: 1.15em; }
+  .box {
+    padding: 18px 14px;
+  }
 
-  .fiscal-header-title { font-size: 8px; }
+  h2 {
+    font-size: 1.3rem;
+  }
 
-  button { padding: 10px 14px; font-size: 13px; }
+  .fiscal-header-title {
+    font-size: 10px;
+  }
+
+  .fiscal-header-week {
+    font-size: 10px;
+  }
+
+  button {
+    padding: 10px 14px;
+    font-size: 15px;
+  }
 
   .rules-row {
     grid-template-columns: 1.4fr 0.9fr 0.9fr 1fr;
-    font-size: 10px;
+    font-size: 11px;
   }
 }
-
-

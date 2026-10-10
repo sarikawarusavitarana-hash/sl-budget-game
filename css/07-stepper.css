@@ -1,31 +1,37 @@
 /* STEPPER — one slider/question shown at a time on multi-item pages */
 .stepper-counter {
-  font-size:11px;
-  text-transform:uppercase;
-  letter-spacing:0.6px;
-  color:#8a7f6e;
-  font-weight:bold;
-  margin-bottom:16px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+  font-weight: 700;
+  margin-bottom: 16px;
 }
 
-.step { display:none; }
-.step.active { display:block; }
+.step {
+  display: none;
+}
+
+.step.active {
+  display: block;
+}
 
 .step-nav {
-  margin-top:32px;
-  display:flex;
-  gap:15px;
+  margin-top: 32px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 .step-warning {
-  display:none;
-  margin-top:24px;
-  padding:10px 14px;
-  background:#ffebee;
-  border-left:4px solid #c62828;
-  color:#c62828;
-  font-size:13px;
-  font-weight:bold;
-  border-radius:3px;
+  display: none;
+  margin-top: 20px;
+  padding: 11px 14px;
+  background: #fff5ed;
+  border: 1px solid #f3d6bf;
+  border-left: 5px solid var(--status-warn);
+  color: #723413;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 6px;
 }
-
