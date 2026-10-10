@@ -120,7 +120,7 @@ function computeFiscalSnapshot(){
   const primaryBalanceToGDP = fiscal.primaryBalance / nGDP * 100;
   const publicInvestmentToGDP = capital / nGDP * 100;
   const deficitToGDP = fiscal.deficit / nGDP * 100;
-  const deficitPercent = fiscal.overallBalance / nGDP * 100;
+  const deficitPercent = fiscal.deficit / nGDP * 100;
   const primaryExpToGDP = fiscal.primaryExpenditure / nGDP * 100;
   const interestToGDP = interest / nGDP * 100;
 
@@ -144,4 +144,3 @@ function computeFiscalSnapshot(){
     }
   };
 }
-

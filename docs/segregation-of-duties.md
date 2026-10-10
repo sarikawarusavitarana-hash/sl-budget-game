@@ -9,7 +9,7 @@ The code is split by concern so that policy/economics contributors and developer
 - Policy team owns:
   - on-screen text and tooltips in `budget_game_fixed.html`
   - `js/data/modal-content.js` (About, FAQ, Sources pop-ups)
-  - `js/data/sectors.js` and `js/data/history.js` (allocations and history)
+  - `js/data/sectors.js` (allocations)
   - `macro` and `targets` at the top of `js/engine/fiscal-engine.js`
 - Engineering team owns: `css/`, `js/ui/`, `js/engine/` logic, `js/main.js`, and page structure
 - Shared contract: stable element IDs and global function names used by inline handlers
@@ -18,7 +18,7 @@ The code is split by concern so that policy/economics contributors and developer
 
 1. Edit text or values in the files listed above only.
 2. Keep numeric assumptions aligned with source documents and dates, and with the workbook and *How the model works*.
-3. If you edit the history, update both `js/data/history.js` and the FAQ table in `js/data/modal-content.js`.
+3. If you edit the history, update the FAQ table in `js/data/modal-content.js`.
 4. Run a browser playthrough to confirm text flow, readability, and no console errors.
 
 ## Engineering workflow

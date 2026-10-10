@@ -59,6 +59,5 @@ button {
 
 /* SELECTED */
 .selected {
-  background:red !important;
+  background:#b71c1c !important;
 }
-

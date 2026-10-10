@@ -106,7 +106,6 @@ The game page holds only markup. Styles and scripts live in separate files, grou
 - `budget_game_fixed.html`: page markup for every screen, including all on-screen text and tooltips
 - `css/01-base.css` to `css/10-modal-and-cards.css`: styles, loaded in numbered order (the order matters for the cascade)
 - `js/data/sectors.js`: sector allocations from the 2027 Appropriation Bill (`SECTORS`)
-- `js/data/history.js`: ten-year fiscal history data (`HISTORY`). The table players see is written out in the FAQ text in `js/data/modal-content.js`, so update both together
 - `js/data/modal-content.js`: About, FAQ (including the history table) and Sources pop-up text (`MODAL_CONTENT`)
 - `js/engine/state.js`: player choices and spending changes against the Bill
 - `js/engine/fiscal-engine.js`: macro assumptions (`macro`), fiscal targets (`targets`) and `computeFiscalSnapshot()`

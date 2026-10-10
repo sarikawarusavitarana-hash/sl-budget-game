@@ -57,10 +57,10 @@ This guide explains how to contribute safely and effectively, whether you are a 
 ### Where to edit
 
 - Narrative and policy wording: on-screen text in `budget_game_fixed.html`; pop-up text in `js/data/modal-content.js`.
-- Sector allocations and history: `js/data/sectors.js`, `js/data/history.js`.
+- Sector allocations: `js/data/sectors.js`.
 - Macro assumptions and fiscal targets: `macro` and `targets` in `js/engine/fiscal-engine.js`.
 
-The ten-year history appears twice: as data in `js/data/history.js` and as the table in the FAQ text in `js/data/modal-content.js`. Update both together.
+The ten-year history appears in the FAQ table in `js/data/modal-content.js`.
 
 When you change an assumption, coefficient or Bill figure, update the Excel workbook and *How the model works* in the same change. Then re-run the model regression check in `docs/beta-readiness-checklist.md`.
 
